@@ -9,9 +9,11 @@
 }
 
 .sidebar-container {
+  flex: 1;
   border-right: 1.5px solid #324254;
 }
 
 .content-container {
+  flex: 3;
   border-left: 1.5px solid #324254;
 }
