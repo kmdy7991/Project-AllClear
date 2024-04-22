@@ -9,15 +9,13 @@ import { BarChart } from "@mui/x-charts/BarChart";
 import { axisClasses } from "@mui/x-charts/ChartsAxis";
 import { colors } from "@mui/material";
 
-const valueFormatter = (value) => `${value}mm`;
-
 const chartSetting = {
   yAxis: [
     {
       label: "수확량 (개)",
     },
   ],
-  series: [{ dataKey: "count", label: "수확량", valueFormatter }],
+  series: [{ dataKey: "count", label: "수확량" }],
   height: 350,
   sx: {
     [`& .${axisClasses.directionY} .${axisClasses.label}`]: {
@@ -31,6 +29,7 @@ const chartSetting = {
       fill: "#ffffff", // 축 라벨의 텍스트 색상을 흰색으로 설정
     },
   },
+  // colors: ["#00ff00"],  막대바의 색깔을 일괄적으로 바꿀 수 있음
 };
 
 export default function TickPlacementBars({ dataset, dataType }) {
@@ -45,7 +44,7 @@ export default function TickPlacementBars({ dataset, dataType }) {
   };
 
   return (
-    <div style={{ width: "100%" }}>
+    <div style={{ width: "50%" }}>
       <BarChart
         dataset={dataset}
         xAxis={[
