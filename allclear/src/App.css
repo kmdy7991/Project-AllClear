@@ -9,11 +9,11 @@
 }
 
 .sidebar-container {
-  flex: 1;
+  height: 100%;
   border-right: 1.5px solid #324254;
 }
 
 .content-container {
-  flex: 3;
+  width: 100%;
   border-left: 1.5px solid #324254;
 }
