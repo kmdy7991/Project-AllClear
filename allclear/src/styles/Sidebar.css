@@ -1,0 +1,22 @@
+.sidebar-container {
+  width: 280px;
+  height: 100%;
+}
+
+.menu {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 500;
+  color: #7a8692;
+  height: 60px;
+  padding-left: 25px;
+  /* background-color: red; */
+}
+
+.menu-logo {
+  width: 25px;
+  height: 25px;
+  margin-right: 20px;
+}
