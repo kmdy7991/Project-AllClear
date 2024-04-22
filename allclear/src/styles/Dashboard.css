@@ -31,6 +31,7 @@
 .content4,
 .content5 {
   background-color: #273444;
+  margin-bottom: 30px;
 }
 
 .content1,
@@ -38,7 +39,6 @@
 .content3 {
   width: 460px;
   height: 250px;
-  margin-bottom: 30px;
 }
 
 .content4 {

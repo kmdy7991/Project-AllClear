@@ -7,3 +7,11 @@
   color: #e6e5ea;
   list-style: none;
 }
+
+body {
+  background-color: #212e3e;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-use-select: none;
+  user-select: none;
+}

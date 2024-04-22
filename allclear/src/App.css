@@ -1,11 +1,10 @@
 .container {
-  height: 100vh;
+  height: 100%;
 }
 
 .main-container {
   display: flex;
-  height: calc(100vh - 80px);
-  background-color: #212e3e;
+  height: calc(100% - 80px);
 }
 
 .sidebar-container {
