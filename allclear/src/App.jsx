@@ -47,11 +47,12 @@ const MainContainer = styled.div`
 const SidebarContainer = styled.div`
   width: 18%;
   height: 100%;
-  border-right: 1.5px solid #324254;
+  border-right: 1px solid #324254;
 `;
 
 const ContentContainer = styled.div`
+  overflow: scroll;
   width: 82%;
-  border-left: 1.5px solid #324254;
+  border-left: 1px solid #324254;
 `;
 export default App;

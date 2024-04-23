@@ -1,10 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
+import { PieChart } from "@mui/x-charts/PieChart";
 
 function Dashboard() {
+  const [contentSize, setContentSize] = useState({ width: 0, height: 0 });
+  const contentRef = useRef(null);
+
+  useEffect(() => {
+    if (contentRef.current) {
+      setContentSize({
+        width: contentRef.current.offsetWidth,
+        height: contentRef.current.offsetWidth,
+      });
+    }
+  }, [contentRef.current]);
+
   const data = [
     { label: "정상", value: 4567 },
     { label: "비정상", value: 1398 },
+  ];
+
+  const data2 = [
+    { label: "1단계", value: 1102 },
+    { label: "2단계", value: 2341 },
+    { label: "3단계", value: 891 },
+    { label: "4단계", value: 367 },
   ];
   return (
     <>
@@ -14,11 +34,93 @@ function Dashboard() {
             <Title>대시보드</Title>
           </TitleContainer>
           <DashboardContents>
-            <Content1>농장</Content1>
-            <Content2>재배동수</Content2>
-            <Content3>운영</Content3>
-            <Content4>주기별 동수</Content4>
-            <Content5>주간 생산량</Content5>
+            <Content1 ref={contentRef} height={contentSize.height / 1.9}>
+              <PieChart
+                colors={["#23AEE5", "#FC5F6E"]}
+                width={300}
+                height={170}
+                series={[
+                  {
+                    data: data,
+                    innerRadius: 50,
+                    outerRadius: 80,
+                  },
+                ]}
+                slotProps={{
+                  legend: {
+                    direction: "column",
+                    position: { vertical: "middle", horizontal: "right" },
+                    labelStyle: { fill: `#e6e5ea` },
+                  },
+                }}
+              />
+            </Content1>
+            <Content1 ref={contentRef} height={contentSize.height / 1.9}>
+              <PieChart
+                colors={["#23AEE5", "#FC5F6E"]}
+                width={300}
+                height={170}
+                series={[
+                  {
+                    data: data,
+                    innerRadius: 50,
+                    outerRadius: 80,
+                  },
+                ]}
+                slotProps={{
+                  legend: {
+                    direction: "column",
+                    position: { vertical: "middle", horizontal: "right" },
+                    labelStyle: { fill: `#e6e5ea` },
+                  },
+                }}
+              />
+            </Content1>
+            <Content1 ref={contentRef} height={contentSize.height / 1.9}>
+              <PieChart
+                colors={["#FF9140", "#6674E3"]}
+                width={300}
+                height={170}
+                series={[
+                  {
+                    data: data,
+                    innerRadius: 50,
+                    outerRadius: 80,
+                  },
+                ]}
+                slotProps={{
+                  legend: {
+                    direction: "column",
+                    position: { vertical: "middle", horizontal: "right" },
+                    labelStyle: { fill: `#e6e5ea` },
+                  },
+                }}
+              />
+            </Content1>
+            <Content2 ref={contentRef} height={contentSize.height / 1.3}>
+              <PieChart
+                colors={["#3C4856", "#FF9142", "#23D3B5", "#20AEE3"]}
+                margin={{ top: 10, bottom: 10, left: 10, right: 10 }}
+                height={400}
+                series={[
+                  {
+                    data: data2,
+                    innerRadius: 40,
+                    outerRadius: 130,
+                  },
+                ]}
+                slotProps={{
+                  legend: {
+                    direction: "row",
+                    position: { vertical: "bottom", horizontal: "middle" },
+                    labelStyle: { fill: `#e6e5ea` },
+                  },
+                }}
+              />
+            </Content2>
+            <Content3 ref={contentRef} height={contentSize.height / 1.3}>
+              주간 생산량
+            </Content3>
           </DashboardContents>
         </DashboardBox>
       </DashboardContainer>
@@ -64,43 +166,24 @@ const Content1 = styled.div`
   background-color: #273444;
   margin-bottom: 30px;
   width: 32%;
-  height: 31%;
+  height: ${(props) => props.height}px;
 `;
+
 const Content2 = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #273444;
-  margin-bottom: 30px;
-  width: 32%;
-  height: 31%;
+  width: 42%;
+  height: ${(props) => props.height}px;
 `;
 const Content3 = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #273444;
-  margin-bottom: 30px;
-  width: 32%;
-  height: 31%;
-`;
-const Content4 = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #273444;
-  margin-bottom: 30px;
-  width: 42%;
-  height: 61%;
-`;
-const Content5 = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #273444;
-  margin-bottom: 30px;
   width: 56%;
-  height: 61%;
+  height: ${(props) => props.height}px;
 `;
 
 export default Dashboard;
