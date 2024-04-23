@@ -15,6 +15,18 @@ function Dashboard() {
     }
   }, [contentRef.current]);
 
+  const [contentSize2, setContentSize2] = useState({ width: 0, height: 0 });
+  const contentRef2 = useRef(null);
+
+  useEffect(() => {
+    if (contentRef2.current) {
+      setContentSize2({
+        width: contentRef2.current.offsetWidth,
+        height: contentRef2.current.offsetWidth,
+      });
+    }
+  }, [contentRef2.current]);
+
   const data = [
     { label: "정상", value: 4567 },
     { label: "비정상", value: 1398 },
@@ -34,7 +46,8 @@ function Dashboard() {
             <Title>대시보드</Title>
           </TitleContainer>
           <DashboardContents>
-            <Content1 ref={contentRef} height={contentSize.height / 2.5}>
+            <Content1 ref={contentRef} height={contentSize.height * 0.8}>
+              <ContentTitle1>농장</ContentTitle1>
               <PieChart
                 colors={["#23AEE5", "#FC5F6E"]}
                 width={300}
@@ -55,7 +68,8 @@ function Dashboard() {
                 }}
               />
             </Content1>
-            <Content1 ref={contentRef} height={contentSize.height / 2.5}>
+            <Content1 ref={contentRef} height={contentSize.height * 0.8}>
+              <ContentTitle1>재배동수</ContentTitle1>
               <PieChart
                 colors={["#23AEE5", "#FC5F6E"]}
                 width={300}
@@ -76,7 +90,8 @@ function Dashboard() {
                 }}
               />
             </Content1>
-            <Content1 ref={contentRef} height={contentSize.height / 2.5}>
+            <Content1 ref={contentRef} height={contentSize.height * 0.8}>
+              <ContentTitle1>농장</ContentTitle1>
               <PieChart
                 colors={["#FF9140", "#6674E3"]}
                 width={300}
@@ -97,10 +112,11 @@ function Dashboard() {
                 }}
               />
             </Content1>
-            <Content2 ref={contentRef} height={contentSize.height / 1.3}>
+            <Content2 ref={contentRef2} height={contentSize2.height / 1.3}>
+              <ContentTitle2>생육 단계</ContentTitle2>
               <PieChart
                 colors={["#3C4856", "#FF9142", "#23D3B5", "#20AEE3"]}
-                margin={{ top: 10, bottom: 10, left: 10, right: 10 }}
+                margin={{ top: 30, bottom: 10, left: 10, right: 10 }}
                 height={400}
                 series={[
                   {
@@ -118,7 +134,7 @@ function Dashboard() {
                 }}
               />
             </Content2>
-            <Content3 ref={contentRef} height={contentSize.height / 1.3}>
+            <Content3 ref={contentRef2} height={contentSize2.height / 1.3}>
               주간 생산량
             </Content3>
           </DashboardContents>
@@ -134,6 +150,7 @@ const DashboardContainer = styled.div`
 `;
 
 const DashboardBox = styled.div`
+  overflow: auto;
   width: calc(100% - 70px);
   height: 100%;
   margin: 0 35px;
@@ -161,6 +178,7 @@ const DashboardContents = styled.div`
 
 const Content1 = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #273444;
@@ -169,20 +187,38 @@ const Content1 = styled.div`
   height: ${(props) => props.height}px;
 `;
 
+const ContentTitle1 = styled.div`
+  font-size: 32px;
+  font-weight: 600;
+  margin: 25px 0 0px;
+`;
+
 const Content2 = styled.div`
   display: flex;
-  justify-content: center;
+  position: relative;
+  flex-direction: column;
   align-items: center;
   background-color: #273444;
   width: 42%;
+  margin-bottom: 30px;
   height: ${(props) => props.height}px;
 `;
+
+const ContentTitle2 = styled.div`
+  font-size: 32px;
+  font-weight: 600;
+  position: absolute;
+  top: 40px;
+  z-index: 3;
+`;
+
 const Content3 = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #273444;
   width: 56%;
+  margin-bottom: 30px;
   height: ${(props) => props.height}px;
 `;
 

@@ -55,7 +55,6 @@ const SidebarContainer = styled.div`
 `;
 
 const ContentContainer = styled.div`
-  overflow: scroll;
   width: 82%;
   border-left: 1px solid #324254;
 `;
