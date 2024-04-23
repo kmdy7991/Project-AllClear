@@ -5,7 +5,7 @@ import Dashboard from "./components/Dashboard.jsx";
 import Monitoring from "./components/Monitoring.jsx";
 import Statistics from "./components/Statistics.jsx";
 import { RecoilRoot } from "recoil";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import styled from "styled-components";
 
 function App() {
@@ -21,9 +21,13 @@ function App() {
               </SidebarContainer>
               <ContentContainer>
                 <Routes>
-                  <Route path="/dashboard" element={<Dashboard />}></Route>
-                  <Route path="/monitoring" element={<Monitoring />}></Route>
-                  <Route path="/statistics" element={<Statistics />}></Route>
+                  <Route
+                    path="/"
+                    element={<Navigate to="/dashboard" replace />}
+                  />
+                  <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/monitoring" element={<Monitoring />} />
+                  <Route path="/statistics" element={<Statistics />} />
                 </Routes>
               </ContentContainer>
             </MainContainer>
@@ -55,4 +59,5 @@ const ContentContainer = styled.div`
   width: 82%;
   border-left: 1px solid #324254;
 `;
+
 export default App;
