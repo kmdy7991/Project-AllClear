@@ -34,7 +34,7 @@ function Dashboard() {
             <Title>대시보드</Title>
           </TitleContainer>
           <DashboardContents>
-            <Content1 ref={contentRef} height={contentSize.height / 1.9}>
+            <Content1 ref={contentRef} height={contentSize.height / 2.5}>
               <PieChart
                 colors={["#23AEE5", "#FC5F6E"]}
                 width={300}
@@ -55,7 +55,7 @@ function Dashboard() {
                 }}
               />
             </Content1>
-            <Content1 ref={contentRef} height={contentSize.height / 1.9}>
+            <Content1 ref={contentRef} height={contentSize.height / 2.5}>
               <PieChart
                 colors={["#23AEE5", "#FC5F6E"]}
                 width={300}
@@ -76,7 +76,7 @@ function Dashboard() {
                 }}
               />
             </Content1>
-            <Content1 ref={contentRef} height={contentSize.height / 1.9}>
+            <Content1 ref={contentRef} height={contentSize.height / 2.5}>
               <PieChart
                 colors={["#FF9140", "#6674E3"]}
                 width={300}
