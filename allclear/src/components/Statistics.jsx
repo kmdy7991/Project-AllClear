@@ -27,7 +27,7 @@ function Statistics() {
           fontStyle: "inherit",
         }}
       >
-        Statistics
+        통계
       </div>
       <div style={{ padding: "0 5%" }}>
         <Pane height={120}>

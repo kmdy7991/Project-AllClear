@@ -10,25 +10,26 @@ import { axisClasses } from "@mui/x-charts/ChartsAxis";
 import { colors } from "@mui/material";
 
 const chartSetting = {
-  yAxis: [
-    {
-      label: "수확량 (개)",
-    },
-  ],
-  series: [{ dataKey: "count", label: "수확량" }],
+  // yAxis: [
+  //   {
+  //     label: "수확량 (개)",
+  //   },
+  // ],
+  series: [{ dataKey: "count" }], // label이 필요하다면 label: "string"
   height: 350,
   sx: {
     [`& .${axisClasses.directionY} .${axisClasses.label}`]: {
       transform: "translateX(-10px)",
-      fill: "#ffffff",
+      fill: "#e6e5ea",
     },
     [`& .${axisClasses.directionX} .${axisClasses.tickLabel}`]: {
-      fill: "#ffffff", // 텍스트 색상을 흰색으로 설정
+      fill: "#e6e5ea", // 텍스트 색상을 흰색으로 설정
     },
     [`& .${axisClasses.directionY} .${axisClasses.tickLabel}`]: {
-      fill: "#ffffff", // 축 라벨의 텍스트 색상을 흰색으로 설정
+      fill: "#e6e5ea", // 축 라벨의 텍스트 색상을 흰색으로 설정
     },
   },
+  slotProps: { legend: { labelStyle: { fill: "#e6e5ea" } } },
   // colors: ["#00ff00"],  막대바의 색깔을 일괄적으로 바꿀 수 있음
 };
 
