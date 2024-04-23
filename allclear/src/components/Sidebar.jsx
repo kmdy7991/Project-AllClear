@@ -1,37 +1,62 @@
 import { useState } from "react";
-import "../styles/Sidebar.css";
 import { Link } from "react-router-dom";
 import dashboard from "../assets/dashboard.png";
 import monitoring from "../assets/monitoring.png";
 import statistics from "../assets/statistics.png";
+import styled from "styled-components";
 
 function Sidebar() {
   return (
     <>
-      <div className="sidebar-container">
-        <ul className="menu-list">
+      <SidebarContainer>
+        <MenuList>
           <Link to="/dashboard">
-            <li className="menu">
-              <img className="menu-logo" src={dashboard} />
+            <Menu>
+              <MenuLogo src={dashboard} />
               대시보드
-            </li>
+            </Menu>
           </Link>
           <Link to="/monitoring">
-            <li className="menu">
-              <img className="menu-logo" src={monitoring} />
+            <Menu>
+              <MenuLogo src={monitoring} />
               모니터링
-            </li>
+            </Menu>
           </Link>
           <Link to="/statistics">
-            <li className="menu">
-              <img className="menu-logo" src={statistics} />
+            <Menu>
+              <MenuLogo src={statistics} />
               통계
-            </li>
+            </Menu>
           </Link>
-        </ul>
-      </div>
+        </MenuList>
+      </SidebarContainer>
     </>
   );
 }
 
+const SidebarContainer = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+
+const MenuList = styled.ul`
+  width: 100%;
+`;
+
+const Menu = styled.li`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 500;
+  color: #7a8692;
+  height: 60px;
+  padding-left: 25px;
+`;
+
+const MenuLogo = styled.img`
+  width: 25px;
+  height: 25px;
+  margin-right: 20px;
+`;
 export default Sidebar;
