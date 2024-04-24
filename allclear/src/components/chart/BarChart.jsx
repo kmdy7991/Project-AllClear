@@ -1,27 +1,11 @@
 import * as React from "react";
-import Stack from "@mui/material/Stack";
-import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Radio from "@mui/material/Radio";
 import { BarChart } from "@mui/x-charts/BarChart";
 import { axisClasses } from "@mui/x-charts/ChartsAxis";
-import { colors } from "@mui/material";
 
 const chartSetting = {
-  // yAxis: [
-  //   {
-  //     label: "수확량 (개)",
-  //   },
-  // ],
   series: [{ dataKey: "count" }], // label이 필요하다면 label: "string"
   height: 350,
   sx: {
-    [`& .${axisClasses.directionY} .${axisClasses.label}`]: {
-      transform: "translateX(-10px)",
-      fill: "#e6e5ea",
-    },
     [`& .${axisClasses.directionX} .${axisClasses.tickLabel}`]: {
       fill: "#e6e5ea", // 텍스트 색상을 흰색으로 설정
     },
