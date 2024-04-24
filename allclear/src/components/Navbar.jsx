@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { isLoggedInAtom } from "../stores/atoms";
+import allclear from "../assets/allclear.png";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   const isLoggedIn = useRecoilValue(isLoggedInAtom);
@@ -11,7 +13,11 @@ function Navbar() {
   return (
     <>
       <NavbarContainer>
-        <LogoContainer>LOGO</LogoContainer>
+        <LogoContainer>
+          <Link to="/">
+            <Logo src={allclear} />
+          </Link>
+        </LogoContainer>
         {!isLoggedIn ? (
           <NavbarContent>
             <LoginLogoutButton onClick={setIsLoggedIn}>
@@ -60,6 +66,11 @@ const NavbarContent = styled.div`
   align-items: center;
   justify-content: flex-end;
   font-size: 16px;
+`;
+
+const Logo = styled.img`
+  cursor: pointer;
+  width: 100%;
 `;
 
 export default Navbar;
