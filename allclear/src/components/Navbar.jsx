@@ -14,7 +14,14 @@ function Navbar() {
     <>
       <NavbarContainer>
         <LogoContainer>
-          <Link to="/">
+          <Link
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            to="/"
+          >
             <Logo src={allclear} />
           </Link>
         </LogoContainer>
@@ -70,7 +77,7 @@ const NavbarContent = styled.div`
 
 const Logo = styled.img`
   cursor: pointer;
-  width: 100%;
+  width: 80%;
 `;
 
 export default Navbar;

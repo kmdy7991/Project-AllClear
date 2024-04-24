@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { PieChart } from "@mui/x-charts/PieChart";
+import { BarChart } from "@mui/x-charts/BarChart";
+import { axisClasses } from "@mui/x-charts/ChartsAxis";
 
 function Dashboard() {
   const [contentSize, setContentSize] = useState({ width: 0, height: 0 });
@@ -38,6 +40,17 @@ function Dashboard() {
     { label: "3단계", value: 891 },
     { label: "4단계", value: 367 },
   ];
+
+  const data3 = [
+    { day: "월", value: 205 },
+    { day: "화", value: 5411 },
+    { day: "수", value: 2840 },
+    { day: "목", value: 728 },
+    { day: "금", value: 623 },
+    { day: "토", value: 4910 },
+    { day: "일", value: 3214 },
+  ];
+
   return (
     <>
       <DashboardContainer>
@@ -135,7 +148,49 @@ function Dashboard() {
               />
             </Content2>
             <Content3 ref={contentRef2} height={contentSize2.height / 1.3}>
-              주간 생산량
+              <ContentTitle3>주간 생산량</ContentTitle3>
+              <BarChart
+                width={500}
+                height={350}
+                series={[
+                  {
+                    data: data3.map((item) => item.value),
+                    label: "수확량",
+                    id: "pvId",
+                  },
+                ]}
+                xAxis={[
+                  {
+                    data: data3.map((item) => item.day),
+                    scaleType: "band",
+                  },
+                ]}
+                slotProps={{
+                  legend: {
+                    hidden: true,
+                  },
+                }}
+                sx={{
+                  [`& .${axisClasses.directionX} .${axisClasses.tickLabel}`]: {
+                    fill: "#e6e5ea", // 텍스트 색상을 흰색으로 설정
+                  },
+                  [`& .${axisClasses.directionY} .${axisClasses.tickLabel}`]: {
+                    fill: "#e6e5ea", // 축 라벨의 텍스트 색상을 흰색으로 설정
+                  },
+                  [`& .${axisClasses.directionX} .${axisClasses.line}`]: {
+                    stroke: "#e6e5ea", // x축 선의 색상을 빨간색으로 설정
+                  },
+                  [`& .${axisClasses.directionY} .${axisClasses.line}`]: {
+                    stroke: "#e6e5ea", // y축 선의 색상을 빨간색으로 설정
+                  },
+                  [`& .${axisClasses.directionX} .${axisClasses.tick}`]: {
+                    stroke: "#e6e5ea", // x축 눈금의 색상을 빨간색으로 설정
+                  },
+                  [`& .${axisClasses.directionY} .${axisClasses.tick}`]: {
+                    stroke: "#e6e5ea", // y축 눈금의 색상을 빨간색으로 설정
+                  },
+                }}
+              />
             </Content3>
           </DashboardContents>
         </DashboardBox>
@@ -185,6 +240,7 @@ const Content1 = styled.div`
   margin-bottom: 30px;
   width: 32%;
   height: ${(props) => props.height}px;
+  overflow: hidden;
 `;
 
 const ContentTitle1 = styled.div`
@@ -202,6 +258,7 @@ const Content2 = styled.div`
   width: 42%;
   margin-bottom: 30px;
   height: ${(props) => props.height}px;
+  overflow: hidden;
 `;
 
 const ContentTitle2 = styled.div`
@@ -214,12 +271,20 @@ const ContentTitle2 = styled.div`
 
 const Content3 = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #273444;
   width: 56%;
   margin-bottom: 30px;
   height: ${(props) => props.height}px;
+  overflow: hidden;
+`;
+
+const ContentTitle3 = styled.div`
+  font-size: 32px;
+  font-weight: 600;
+  margin: 40px 0 0px;
 `;
 
 export default Dashboard;
