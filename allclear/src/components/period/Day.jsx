@@ -99,6 +99,7 @@ function Day() {
         <BarChart dataset={dataset1} dataType={"daily"} />
         <PieChart data={data} />
       </DashboardContents>
+      <DashboardContents>123</DashboardContents>
     </div>
   );
 }
@@ -111,4 +112,12 @@ const DashboardContents = styled.div`
   width: 100%;
   height: calc(100% - 100px);
   justify-content: space-between;
+`;
+
+const ContentTitle2 = styled.div`
+  font-size: 32px;
+  font-weight: 600;
+  position: absolute;
+  top: 40px;
+  z-index: 3;
 `;

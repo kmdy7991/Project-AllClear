@@ -18,10 +18,10 @@ const chartSetting = {
   series: [{ dataKey: "count" }], // label이 필요하다면 label: "string"
   height: 350,
   sx: {
-    [`& .${axisClasses.directionY} .${axisClasses.label}`]: {
-      transform: "translateX(-10px)",
-      fill: "#e6e5ea",
-    },
+    // [`& .${axisClasses.directionY} .${axisClasses.label}`]: {
+    //   transform: "translateX(-10px)",
+    //   fill: "#e6e5ea",
+    // },
     [`& .${axisClasses.directionX} .${axisClasses.tickLabel}`]: {
       fill: "#e6e5ea", // 텍스트 색상을 흰색으로 설정
     },

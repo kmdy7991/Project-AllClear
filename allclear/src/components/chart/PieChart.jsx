@@ -11,11 +11,11 @@ export default function BasicPie({ data }) {
           outerRadius: 100,
           // cornerRadius: 9,
           cx: 70,
-          cy: 150,
+          cy: 170, // 도넛 상하 위치
         },
       ]}
-      width={340}
-      height={300}
+      width={340} // 도넛과 범례 사이
+      height={350} // 범례 상하 위치
       slotProps={{
         legend: { labelStyle: { fill: "#e6e5ea" } },
       }}
