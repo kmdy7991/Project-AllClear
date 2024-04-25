@@ -51,6 +51,35 @@ function Dashboard() {
     { day: "일", value: 3214 },
   ];
 
+  const [tempHumidData, setTempHumidData] = useState({});
+
+  const fetchSSE = () => {
+    const eventSource = new EventSource(
+      "http://192.168.31.206:8080/api/connection/connect"
+    );
+
+    eventSource.onopen = () => {
+      console.log("sse OPENED");
+    };
+
+    eventSource.onmessage = async (e) => {
+      console.log(e.data);
+    }
+
+    eventSource.onerror = (e) => {
+      eventSource.close();
+
+      if (e.target.readyState === EventSource.CLOSED) {
+        console.log("sse CLOSED");
+      }
+    };
+  };
+
+  // useEffect(() => {
+  //   fetchSSE();
+  //   console.log(tempHumidData);
+  // }, []);
+
   return (
     <>
       <DashboardContainer>
