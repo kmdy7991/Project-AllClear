@@ -20,16 +20,17 @@ function Login() {
   const setIsLoggedIn = () => setIsLoggedInAtom((prev) => !prev);
   const navigate = useNavigate();
 
-  const login = () => {
+  const login = (e) => {
     setIsLoggedIn();
     navigate("/dashboard");
+    e.preventDefault();
   };
 
   return (
     <LoginContainer>
       <LoginBox>
         <Logo src={allclear} />
-        <InputForm>
+        <InputForm onSubmit={login}>
           <IdInput
             type="text"
             value={id}
@@ -42,7 +43,7 @@ function Login() {
             onChange={handlePasswordChange}
             placeholder="비밀번호"
           />
-          <LoginButton onClick={login}>로그인</LoginButton>
+          <LoginButton>로그인</LoginButton>
         </InputForm>
       </LoginBox>
     </LoginContainer>
