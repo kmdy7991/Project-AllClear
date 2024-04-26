@@ -1,12 +1,8 @@
 import { useState } from "react";
 import {
-  Button,
   Pane,
-  Text,
-  majorScale,
   Tab,
   Tablist,
-  Paragraph,
 } from "evergreen-ui";
 import React from "react";
 import Day from "./period/Day";

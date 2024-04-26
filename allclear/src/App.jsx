@@ -4,15 +4,18 @@ import Sidebar from "./components/Sidebar.jsx";
 import Dashboard from "./components/Dashboard.jsx";
 import Monitoring from "./components/Monitoring.jsx";
 import Statistics from "./components/Statistics.jsx";
-import { RecoilRoot } from "recoil";
+import Login from "./components/Login.jsx";
+import { isLoggedInAtom } from "./stores/atoms";
+import { RecoilRoot, useRecoilValue } from "recoil";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import styled from "styled-components";
 
 function App() {
+  const isLoggedIn = useRecoilValue(isLoggedInAtom);
   return (
     <>
-      <RecoilRoot>
-        <BrowserRouter>
+      <BrowserRouter>
+        {isLoggedIn ? (
           <Container>
             <Navbar />
             <MainContainer>
@@ -21,10 +24,6 @@ function App() {
               </SidebarContainer>
               <ContentContainer>
                 <Routes>
-                  <Route
-                    path="/"
-                    element={<Navigate to="/dashboard" replace />}
-                  />
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/monitoring" element={<Monitoring />} />
                   <Route path="/statistics" element={<Statistics />} />
@@ -32,8 +31,16 @@ function App() {
               </ContentContainer>
             </MainContainer>
           </Container>
-        </BrowserRouter>
-      </RecoilRoot>
+        ) : (
+          <Container>
+            <Routes>
+              <Route path="/" element={<Navigate to="/login" replace />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="*" element={<Navigate to="/" />} />
+            </Routes>
+          </Container>
+        )}
+      </BrowserRouter>
     </>
   );
 }

@@ -3,12 +3,18 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { isLoggedInAtom } from "../stores/atoms";
 import allclear from "../assets/allclear.png";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Navbar() {
   const isLoggedIn = useRecoilValue(isLoggedInAtom);
   const setIsLoggedInAtom = useSetRecoilState(isLoggedInAtom);
   const setIsLoggedIn = () => setIsLoggedInAtom((prev) => !prev);
+  const navigate = useNavigate();
+
+  const logout = () => {
+    setIsLoggedIn();
+    navigate("/");
+  };
 
   return (
     <>
@@ -20,23 +26,15 @@ function Navbar() {
               justifyContent: "center",
               alignItems: "center",
             }}
-            to="/"
+            to="/dashboard"
           >
             <Logo src={allclear} />
           </Link>
         </LogoContainer>
-        {!isLoggedIn ? (
-          <NavbarContent>
-            <LoginLogoutButton onClick={setIsLoggedIn}>
-              로그인
-            </LoginLogoutButton>
-          </NavbarContent>
-        ) : (
+        {isLoggedIn && (
           <NavbarContent>
             <div style={{ fontWeight: 600 }}>Super Admin</div>
-            <LoginLogoutButton onClick={setIsLoggedIn}>
-              로그아웃
-            </LoginLogoutButton>
+            <LoginLogoutButton onClick={logout}>로그아웃</LoginLogoutButton>
           </NavbarContent>
         )}
       </NavbarContainer>
