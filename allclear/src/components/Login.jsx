@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { useSetRecoilState } from "recoil";
-import { isLoggedInAtom } from "../stores/atoms";
+import { isLoggedInAtom } from "../recoil/login/login";
 import { useNavigate } from "react-router-dom";
 import allclear from "../assets/allclear.png";
 

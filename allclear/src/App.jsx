@@ -5,7 +5,7 @@ import Dashboard from "./components/Dashboard.jsx";
 import Monitoring from "./components/Monitoring.jsx";
 import Statistics from "./components/Statistics.jsx";
 import Login from "./components/Login.jsx";
-import { isLoggedInAtom } from "./stores/atoms";
+import { isLoggedInAtom } from "./recoil/login/login";
 import { RecoilRoot, useRecoilValue } from "recoil";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import styled from "styled-components";

@@ -15,6 +15,7 @@
     "@mui/material": "^5.15.15",
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
     "@mui/x-charts": "^7.3.0",
+    "axios": "^1.6.8",
     "evergreen-ui": "^7.1.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
