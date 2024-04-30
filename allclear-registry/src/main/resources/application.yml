@@ -7,3 +7,6 @@ eureka:
   client:
     register-with-eureka: false
     fetch-registry: false
+    # eureka server port 변경시 defaultURL 명시
+    service-url:
+      defaultZone: http://localhost:${server.port}/eureka/
