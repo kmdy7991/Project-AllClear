@@ -51,8 +51,6 @@ function Dashboard() {
     { day: "일", value: 3214 },
   ];
 
-  const [tempHumidData, setTempHumidData] = useState({});
-
   const fetchSSE = () => {
     const eventSource = new EventSource(
       "http://192.168.31.206:3022/api/connection/connect"
@@ -62,9 +60,13 @@ function Dashboard() {
       console.log("sse OPENED");
     };
 
-    eventSource.onmessage = async (e) => {
+    eventSource.addEventListener("secondmessage", (e) => {
       console.log(e.data);
-    };
+    });
+
+    eventSource.addEventListener("hourmessage", (e) => {
+      console.log(e.data);
+    });
 
     eventSource.onerror = (e) => {
       eventSource.close();
@@ -77,7 +79,6 @@ function Dashboard() {
 
   // useEffect(() => {
   //   fetchSSE();
-  //   console.log(tempHumidData);
   // }, []);
 
   return (

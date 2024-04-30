@@ -5,8 +5,9 @@ import Dashboard from "./components/Dashboard.jsx";
 import Monitoring from "./components/Monitoring.jsx";
 import Statistics from "./components/Statistics.jsx";
 import Login from "./components/Login.jsx";
+import Join from "./components/Join.jsx";
 import { isLoggedInAtom } from "./recoil/login/login";
-import { RecoilRoot, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -36,6 +37,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Navigate to="/login" replace />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/join" element={<Join />} />
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </Container>

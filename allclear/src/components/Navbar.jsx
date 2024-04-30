@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 function Navbar() {
   const isLoggedIn = useRecoilValue(isLoggedInAtom);
+  const farmName = useRecoilValue(loggedInUserAtom);
   const setIsLoggedInAtom = useSetRecoilState(isLoggedInAtom);
   const setLoggedInUserAtom = useSetRecoilState(loggedInUserAtom);
   const setIsLoggedIn = () => setIsLoggedInAtom((prev) => !prev);
@@ -36,7 +37,7 @@ function Navbar() {
         </LogoContainer>
         {isLoggedIn && (
           <NavbarContent>
-            <div style={{ fontWeight: 600 }}>Super Admin</div>
+            <div style={{ fontWeight: 600 }}>{farmName}</div>
             <LoginLogoutButton onClick={logout}>로그아웃</LoginLogoutButton>
           </NavbarContent>
         )}
