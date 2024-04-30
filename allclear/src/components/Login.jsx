@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { useSetRecoilState } from "recoil";
-import { isLoggedInAtom } from "../recoil/login/login";
+import { isLoggedInAtom, loggedInUserAtom } from "../recoil/login/login";
 import { useNavigate } from "react-router-dom";
 import allclear from "../assets/allclear.png";
 
@@ -17,11 +17,14 @@ function Login() {
   };
 
   const setIsLoggedInAtom = useSetRecoilState(isLoggedInAtom);
+  const setLoggedInUserAtom = useSetRecoilState(loggedInUserAtom);
   const setIsLoggedIn = () => setIsLoggedInAtom((prev) => !prev);
+  const setLoggedInUser = () => setLoggedInUserAtom(id);
   const navigate = useNavigate();
 
   const login = (e) => {
     setIsLoggedIn();
+    setLoggedInUser();
     navigate("/dashboard");
     e.preventDefault();
   };

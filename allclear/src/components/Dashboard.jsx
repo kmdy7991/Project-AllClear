@@ -55,7 +55,7 @@ function Dashboard() {
 
   const fetchSSE = () => {
     const eventSource = new EventSource(
-      "http://192.168.31.206:8080/api/connection/connect"
+      "http://192.168.31.206:3022/api/connection/connect"
     );
 
     eventSource.onopen = () => {
@@ -64,7 +64,7 @@ function Dashboard() {
 
     eventSource.onmessage = async (e) => {
       console.log(e.data);
-    }
+    };
 
     eventSource.onerror = (e) => {
       eventSource.close();

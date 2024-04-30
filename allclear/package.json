@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "start": "set HTTPS=true start",
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
@@ -17,12 +18,14 @@
     "@mui/x-charts": "^7.3.0",
     "axios": "^1.6.8",
     "evergreen-ui": "^7.1.9",
+    "openvidu-browser": "^2.20.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.3",
     "recoil": "^0.7.7",
     "recoil-persist": "^5.1.0",
-    "styled-components": "^6.1.8"
+    "styled-components": "^6.1.8",
+    "vite-plugin-mkcert": "^1.17.5"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { isLoggedInAtom } from "../recoil/login/login";
+import { isLoggedInAtom, loggedInUserAtom } from "../recoil/login/login";
 import allclear from "../assets/allclear.png";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,11 +8,14 @@ import { Link, useNavigate } from "react-router-dom";
 function Navbar() {
   const isLoggedIn = useRecoilValue(isLoggedInAtom);
   const setIsLoggedInAtom = useSetRecoilState(isLoggedInAtom);
+  const setLoggedInUserAtom = useSetRecoilState(loggedInUserAtom);
   const setIsLoggedIn = () => setIsLoggedInAtom((prev) => !prev);
+  const setLoggedInUser = () => setLoggedInUserAtom("");
   const navigate = useNavigate();
 
   const logout = () => {
     setIsLoggedIn();
+    setLoggedInUser();
     navigate("/");
   };
 
