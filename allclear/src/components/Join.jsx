@@ -100,7 +100,6 @@ const InputForm = styled.form`
 const Logo = styled.img`
   width: 80%;
   object-fit: contain;
-  margin: 10px 0;
 `;
 
 const Input = styled.input`
@@ -109,10 +108,10 @@ const Input = styled.input`
   border: 0;
   border-radius: 5px;
   outline: none;
-  margin: 10px 0;
   padding-left: 8px;
   font-size: 14px;
   color: #121212;
+  margin-bottom: 10px;
 `;
 
 const JoinButton = styled.button`
@@ -122,13 +121,13 @@ const JoinButton = styled.button`
   border: 0;
   outline: none;
   border-radius: 5px;
-  width: 22%;
-  height: 35px;
+  width: 25%;
   background-color: #20ade4;
-  margin: 10px 0 20px;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
+  margin-bottom: 10px;
+  padding: 5px;
 `;
 
 export default Login;

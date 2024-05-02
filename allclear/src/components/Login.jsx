@@ -30,18 +30,19 @@ function Login() {
   const navigate = useNavigate();
 
   const doLogin = (e) => {
-    login(
-      loginData,
-      ({ data }) => {
-        setIsLoggedIn();
-        setLoggedInUser(data.name);
-        navigate("/dashboard");
-      },
-      (error) => {}
-    );
+    // login(
+    //   loginData,
+    //   ({ data }) => {
+    //     setIsLoggedIn();
+    //     setLoggedInUser(data.name);
+    //     navigate("/dashboard");
+    //   },
+    //   (error) => {}
+    // );
 
-    // setIsLoggedIn();
-    // navigate("/dashboard");
+    setIsLoggedIn();
+    setLoggedInUser(loginData.id);
+    navigate("/dashboard");
     e.preventDefault();
   };
 
@@ -113,7 +114,6 @@ const InputForm = styled.form`
 const Logo = styled.img`
   width: 80%;
   object-fit: contain;
-  margin: 10px 0;
 `;
 
 const IdInput = styled.input`
@@ -122,10 +122,10 @@ const IdInput = styled.input`
   border: 0;
   border-radius: 5px;
   outline: none;
-  margin: 10px 0;
   padding-left: 8px;
   font-size: 14px;
   color: #121212;
+  margin-bottom: 10px;
 `;
 
 const PasswordInput = styled.input`
@@ -134,10 +134,10 @@ const PasswordInput = styled.input`
   border: 0;
   border-radius: 5px;
   outline: none;
-  margin: 10px 0;
   padding-left: 8px;
   font-size: 14px;
   color: #121212;
+  margin-bottom: 10px;
 `;
 
 const LoginButton = styled.button`
@@ -147,13 +147,13 @@ const LoginButton = styled.button`
   border: 0;
   outline: none;
   border-radius: 5px;
-  width: 22%;
-  height: 35px;
+  width: 25%;
   background-color: #20ade4;
-  margin: 10px 0 0;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
+  padding: 5px;
+  margin-bottom: 10px;
 `;
 
 const JoinButton = styled.div`
@@ -163,13 +163,12 @@ const JoinButton = styled.div`
   border: 0;
   outline: none;
   border-radius: 5px;
-  width: 22%;
-  height: 35px;
+  width: 25%;
   background-color: #20ade4;
-  margin: 10px 0 0;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
+  padding: 5px;
 `;
 
 export default Login;
