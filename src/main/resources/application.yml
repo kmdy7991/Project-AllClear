@@ -1,0 +1,32 @@
+server:
+  port: 3024
+
+spring:
+  application:
+    name: state-service
+
+ #JPA hibernate
+  h2:
+    console:
+      enabled: true
+
+  jpa:
+    show_sql: true
+    hibernate:
+      ddl-auto: update #none
+    properties:
+      dialect: dialect=org.hibernate.dialect.MySQL8Dialect
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/allclear
+    username: root
+    password: root
+
+#eureka
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://192.168.31.42:3020/eureka
