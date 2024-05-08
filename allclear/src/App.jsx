@@ -4,6 +4,7 @@ import Sidebar from "./components/Sidebar.jsx";
 import Dashboard from "./components/Dashboard.jsx";
 import Monitoring from "./components/Monitoring.jsx";
 import Statistics from "./components/Statistics.jsx";
+import Simulator from "./components/Simulator.jsx";
 import Login from "./components/Login.jsx";
 import Join from "./components/Join.jsx";
 import { isLoggedInAtom } from "./recoil/login/login";
@@ -28,6 +29,7 @@ function App() {
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/monitoring" element={<Monitoring />} />
                   <Route path="/statistics" element={<Statistics />} />
+                  <Route path="/simulator" element={<Simulator />} />
                 </Routes>
               </ContentContainer>
             </MainContainer>
