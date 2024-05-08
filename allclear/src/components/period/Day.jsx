@@ -56,6 +56,7 @@ function Day() {
             [`& .${axisClasses.directionY} .${axisClasses.tick}`]: {
               stroke: "#e6e5ea", // y축 눈금의 색상을 흰색으로 설정
             },
+            "& path": { strokeWidth: "5px", stroke: "#E03F69" },
           }}
           slotProps={{ legend: { labelStyle: { fill: `#e6e5ea` } } }}
         />
@@ -88,6 +89,7 @@ function Day() {
             [`& .${axisClasses.directionY} .${axisClasses.tick}`]: {
               stroke: "#e6e5ea", // y축 눈금의 색상을 흰색으로 설정
             },
+            "& path": { strokeWidth: "5px", stroke: "#4A5ED8" },
           }}
           slotProps={{ legend: { labelStyle: { fill: `#e6e5ea` } } }}
         />
@@ -120,8 +122,11 @@ function Day() {
             [`& .${axisClasses.directionY} .${axisClasses.tick}`]: {
               stroke: "#e6e5ea", // y축 눈금의 색상을 흰색으로 설정
             },
+            "& path": { strokeWidth: "5px", stroke: "#F6C863" },
           }}
-          slotProps={{ legend: { labelStyle: { fill: `#e6e5ea` } } }}
+          slotProps={{
+            legend: { labelStyle: { fill: `#e6e5ea` } },
+          }}
         />
       </DashboardContents>
     </div>
