@@ -10,11 +10,11 @@ import lombok.ToString;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 public class SensorResponseDto {
-    String temperature;
-    String humidity;
-    String light;
-    String duration;
-    String distance;
+    private String temperature;
+    private String humidity;
+    private String light;
+    private String duration;
+    private String distance;
 
     @Builder
     SensorResponseDto(String temperature, String humidity, String light, String duration, String distance){

@@ -41,10 +41,11 @@ public class DailyEnv {
   private Farm farm;
 
   @Builder
-  public DailyEnv(LocalDateTime checkAt, String temperature, String humidity, String light) {
+  public DailyEnv(LocalDateTime checkAt, String temperature, String humidity, String light, Farm farm) {
     this.checkAt = checkAt;
     this.temperature = temperature;
     this.humidity = humidity;
     this.light = light;
+    this.farm = farm;
   }
 }
