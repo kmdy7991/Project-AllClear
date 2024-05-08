@@ -1,9 +1,5 @@
 import { useState } from "react";
-import {
-  Pane,
-  Tab,
-  Tablist,
-} from "evergreen-ui";
+import { Pane, Tab, Tablist } from "evergreen-ui";
 import React from "react";
 import Day from "./period/Day";
 import Week from "./period/Week";
@@ -25,13 +21,20 @@ function Statistics() {
         </div>
         <div>
           <Pane height={120}>
-            <Tablist marginBottom={16} flexBasis={240} marginRight={24}>
+            <Tablist
+              marginBottom={16}
+              flexBasis={240}
+              marginRight={24}
+              marginLeft={10}
+            >
               {tabs.map((tab, index) => (
                 <Tab
                   aria-controls={`panel-${tab}`}
                   isSelected={index === selectedIndex}
                   key={tab}
                   onSelect={() => setSelectedIndex(index)}
+                  color={"#e6e5ea"}
+                  fontSize={"16px"}
                 >
                   {tab}
                 </Tab>

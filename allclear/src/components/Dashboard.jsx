@@ -193,16 +193,16 @@ function Dashboard() {
                     fill: "#e6e5ea", // 축 라벨의 텍스트 색상을 흰색으로 설정
                   },
                   [`& .${axisClasses.directionX} .${axisClasses.line}`]: {
-                    stroke: "#e6e5ea", // x축 선의 색상을 빨간색으로 설정
+                    stroke: "#e6e5ea", // x축 선의 색상을 흰색으로 설정
                   },
                   [`& .${axisClasses.directionY} .${axisClasses.line}`]: {
-                    stroke: "#e6e5ea", // y축 선의 색상을 빨간색으로 설정
+                    stroke: "#e6e5ea", // y축 선의 색상을 흰색으로 설정
                   },
                   [`& .${axisClasses.directionX} .${axisClasses.tick}`]: {
-                    stroke: "#e6e5ea", // x축 눈금의 색상을 빨간색으로 설정
+                    stroke: "#e6e5ea", // x축 눈금의 색상을 흰색으로 설정
                   },
                   [`& .${axisClasses.directionY} .${axisClasses.tick}`]: {
-                    stroke: "#e6e5ea", // y축 눈금의 색상을 빨간색으로 설정
+                    stroke: "#e6e5ea", // y축 눈금의 색상을 흰색으로 설정
                   },
                 }}
               />
