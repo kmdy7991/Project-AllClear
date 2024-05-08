@@ -8,7 +8,7 @@ function Login() {
   const [joinData, setJoinData] = useState({
     id: "",
     pw: "",
-    farmName: "",
+    name: "",
   });
 
   const handleIdChange = (e) => {
@@ -24,13 +24,14 @@ function Login() {
 
   const handleFarmNameChange = (e) => {
     setJoinData((prevState) => {
-      return { ...prevState, farmName: e.target.value };
+      return { ...prevState, name: e.target.value };
     });
   };
 
   const navigate = useNavigate();
 
   const doJoin = (e) => {
+    console.log(joinData);
     join(
       joinData,
       () => {
@@ -60,7 +61,7 @@ function Login() {
           />
           <Input
             type="text"
-            value={joinData.farmName}
+            value={joinData.name}
             onChange={handleFarmNameChange}
             placeholder="농장이름"
           />

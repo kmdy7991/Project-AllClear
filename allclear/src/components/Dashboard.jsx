@@ -3,6 +3,9 @@ import styled from "styled-components";
 import { PieChart } from "@mui/x-charts/PieChart";
 import { BarChart } from "@mui/x-charts/BarChart";
 import { axisClasses } from "@mui/x-charts/ChartsAxis";
+import temperature from "../assets/temperature.png";
+import humidity from "../assets/humidity.png";
+import light from "../assets/light.png";
 
 function Dashboard() {
   const [contentSize, setContentSize] = useState({ width: 0, height: 0 });
@@ -29,10 +32,9 @@ function Dashboard() {
     }
   }, [contentRef2.current]);
 
-  const data = [
-    { label: "정상", value: 4567 },
-    { label: "비정상", value: 1398 },
-  ];
+  const [temperatureData, setTemperatureData] = useState("");
+  const [humidityData, setHumidityData] = useState("");
+  const [lightData, setLightData] = useState("");
 
   const data2 = [
     { label: "1단계", value: 1102 },
@@ -51,7 +53,7 @@ function Dashboard() {
     { day: "일", value: 3214 },
   ];
 
-  const fetchSSE = () => {
+  const fetchSSE = async () => {
     const eventSource = new EventSource(
       "http://192.168.31.206:3022/api/connection/connect"
     );
@@ -62,13 +64,17 @@ function Dashboard() {
 
     eventSource.addEventListener("secondmessage", (e) => {
       console.log(e.data);
+      setTemperatureData(JSON.parse(e.data).temperature);
+      setHumidityData(JSON.parse(e.data).humidity);
+      setLightData(JSON.parse(e.data).light);
     });
 
     eventSource.addEventListener("hourmessage", (e) => {
-      console.log(e.data);
+      // console.log(e.data);
     });
 
     eventSource.onerror = (e) => {
+      console.log(e);
       eventSource.close();
 
       if (e.target.readyState === EventSource.CLOSED) {
@@ -77,9 +83,9 @@ function Dashboard() {
     };
   };
 
-  // useEffect(() => {
-  //   fetchSSE();
-  // }, []);
+  useEffect(() => {
+    fetchSSE();
+  }, []);
 
   return (
     <>
@@ -90,70 +96,49 @@ function Dashboard() {
           </TitleContainer>
           <DashboardContents>
             <Content1 ref={contentRef} height={contentSize.height * 0.8}>
-              <ContentTitle1>농장</ContentTitle1>
-              <PieChart
-                colors={["#23AEE5", "#FC5F6E"]}
-                width={300}
-                height={170}
-                series={[
-                  {
-                    data: data,
-                    innerRadius: 50,
-                    outerRadius: 80,
-                  },
-                ]}
-                slotProps={{
-                  legend: {
-                    direction: "column",
-                    position: { vertical: "middle", horizontal: "right" },
-                    labelStyle: { fill: `#e6e5ea` },
-                  },
+              <ContentTitle1>온도</ContentTitle1>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "80%",
                 }}
-              />
+              >
+                <TemperatureImg src={temperature} />
+                <Temperature>{temperatureData}</Temperature>
+                <Celsius>℃</Celsius>
+              </div>
             </Content1>
             <Content1 ref={contentRef} height={contentSize.height * 0.8}>
-              <ContentTitle1>재배동수</ContentTitle1>
-              <PieChart
-                colors={["#23AEE5", "#FC5F6E"]}
-                width={300}
-                height={170}
-                series={[
-                  {
-                    data: data,
-                    innerRadius: 50,
-                    outerRadius: 80,
-                  },
-                ]}
-                slotProps={{
-                  legend: {
-                    direction: "column",
-                    position: { vertical: "middle", horizontal: "right" },
-                    labelStyle: { fill: `#e6e5ea` },
-                  },
+              <ContentTitle1>습도</ContentTitle1>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "80%",
                 }}
-              />
+              >
+                <HumidityImg src={humidity} />
+                <Temperature>{humidityData}</Temperature>
+                <Celsius>%</Celsius>
+              </div>
             </Content1>
             <Content1 ref={contentRef} height={contentSize.height * 0.8}>
-              <ContentTitle1>농장</ContentTitle1>
-              <PieChart
-                colors={["#FF9140", "#6674E3"]}
-                width={300}
-                height={170}
-                series={[
-                  {
-                    data: data,
-                    innerRadius: 50,
-                    outerRadius: 80,
-                  },
-                ]}
-                slotProps={{
-                  legend: {
-                    direction: "column",
-                    position: { vertical: "middle", horizontal: "right" },
-                    labelStyle: { fill: `#e6e5ea` },
-                  },
+              <ContentTitle1>조도</ContentTitle1>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "80%",
                 }}
-              />
+              >
+                <LightImg src={light} />
+                <Temperature>{lightData}</Temperature>
+                <Celsius>lux</Celsius>
+              </div>
             </Content1>
             <Content2 ref={contentRef2} height={contentSize2.height / 1.3}>
               <ContentTitle2>생육 단계</ContentTitle2>
@@ -277,6 +262,29 @@ const ContentTitle1 = styled.div`
   font-size: 32px;
   font-weight: 600;
   margin: 25px 0 0px;
+`;
+
+const TemperatureImg = styled.img`
+  height: 50%;
+`;
+
+const Temperature = styled.div`
+  font-size: 100px;
+  font-weight: 600;
+  margin-left: 40px;
+`;
+
+const Celsius = styled.div`
+  font-size: 70px;
+  font-weight: 400;
+`;
+
+const LightImg = styled.img`
+  height: 45%;
+`;
+
+const HumidityImg = styled.img`
+  height: 50%;
 `;
 
 const Content2 = styled.div`
