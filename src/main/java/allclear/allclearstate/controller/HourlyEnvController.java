@@ -1,10 +1,7 @@
 package allclear.allclearstate.controller;
 
-import allclear.allclearstate.dto.HourlyResponseDto;
-import allclear.allclearstate.dto.SensorResponseDto;
-import allclear.allclearstate.service.DailyEnvService;
+import allclear.allclearstate.dto.HourlyGraphResponseDto;
 import allclear.allclearstate.service.HourlyEnvService;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +20,15 @@ public class HourlyEnvController {
     private final HourlyEnvService hourlyEnvService;
 
     @GetMapping
-    public ResponseEntity<List<HourlyResponseDto>> getHourlyData () {
-        return ResponseEntity.ok(hourlyEnvService.getHourlyData());
+    public ResponseEntity<HourlyGraphResponseDto> getHourlyData () {
+        return ResponseEntity.ok(hourlyEnvService.getHourlyDataRecentTwentyFourHour());
     }
+
+    @GetMapping(value = "/test")
+    public ResponseEntity<String> testDailyGetMapping () {
+        hourlyEnvService.setInfoHourly();
+        return ResponseEntity.ok().body("success");
+    }
+
 
 }

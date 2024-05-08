@@ -1,8 +1,7 @@
 package allclear.allclearstate.controller;
 
-import allclear.allclearstate.dto.DailyResponseDto;
+import allclear.allclearstate.dto.DailyGraphResponseDto;
 import allclear.allclearstate.service.DailyEnvService;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -21,14 +20,14 @@ public class DailyEnvController {
   private final DailyEnvService dailyEnvService;
 
   @GetMapping
-  public ResponseEntity<List<DailyResponseDto>> getDailyData () {
+  public ResponseEntity<DailyGraphResponseDto> getDailyData () {
     return ResponseEntity.ok(dailyEnvService.getDailyDataRecentThirtyDays());
   }
 
-//  @GetMapping(value = "/test")
-//  public ResponseEntity<String> testDailyGetMapping () {
-//    dailyEnvService.setInfoDaily();
-//    return ResponseEntity.ok().body("success");
-//  }
+  @GetMapping(value = "/test")
+  public ResponseEntity<String> testDailyGetMapping () {
+    dailyEnvService.setInfoDaily();
+    return ResponseEntity.ok().body("success");
+  }
 
 }

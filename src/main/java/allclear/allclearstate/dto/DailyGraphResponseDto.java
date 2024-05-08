@@ -10,7 +10,7 @@ import lombok.ToString;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
-public class HourlyGraphResponseDto {
+public class DailyGraphResponseDto {
 
   private List<String> checkAtList;
   private List<Double> temperatureList;
@@ -18,7 +18,7 @@ public class HourlyGraphResponseDto {
   private List<Double> lightList;
 
   @Builder
-  HourlyGraphResponseDto(
+  DailyGraphResponseDto(
       List<String> checkAtList,
       List<Double> temperatureList,
       List<Double> humidityList,

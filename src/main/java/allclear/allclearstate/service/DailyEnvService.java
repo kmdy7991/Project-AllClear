@@ -3,12 +3,13 @@ package allclear.allclearstate.service;
 import allclear.allclearstate.domain.DailyEnv;
 import allclear.allclearstate.domain.Farm;
 import allclear.allclearstate.domain.HourlyEnv;
-import allclear.allclearstate.dto.DailyResponseDto;
+import allclear.allclearstate.dto.DailyGraphResponseDto;
 import allclear.allclearstate.repository.DailyEnvRepository;
 import allclear.allclearstate.repository.FarmRepository;
 import allclear.allclearstate.repository.HourlyEnvRepository;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -92,12 +93,8 @@ public class DailyEnvService {
     }
   }
 
-
-
   /** get 일별 데이터 : 최근 30일 **/
-  public List<DailyResponseDto> getDailyDataRecentThirtyDays() {
-    List<DailyResponseDto> dailyResponseDtoList = new ArrayList<>();
-
+  public DailyGraphResponseDto getDailyDataRecentThirtyDays() {
     // Farm 이 존재 하지 않는다면 에러로 작동하지 않는게 옳다.
     Optional<Farm> optionalFarm = farmRepository.findById(1L);
     if (optionalFarm.isEmpty()) {
@@ -112,17 +109,26 @@ public class DailyEnvService {
 
     List<DailyEnv> dailyEnvList = dailyEnvRepository.findByCheckAtBetweenAndFarmPk(startDate, endOfDay, farm.getPk());
 
-     for (DailyEnv dailyEnv : dailyEnvList) {
-       dailyResponseDtoList.add(DailyResponseDto.builder()
-           .checkAt(dailyEnv.getCheckAt())
-           .temperature(dailyEnv.getTemperature())
-           .humidity(dailyEnv.getHumidity())
-           .light(dailyEnv.getLight())
-           .build()
-       );
-     }
+    List<String> checkAtList = new ArrayList<>();
+    List<Double> temperatureList = new ArrayList<>();
+    List<Double> humidityList = new ArrayList<>();
+    List<Double> lightList = new ArrayList<>();
 
-    return dailyResponseDtoList;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd");
+
+    for (DailyEnv dailyEnv : dailyEnvList) {
+      checkAtList.add(dailyEnv.getCheckAt().format(formatter));
+      temperatureList.add(Double.parseDouble(dailyEnv.getTemperature()));
+      humidityList.add(Double.parseDouble(dailyEnv.getHumidity()));
+      lightList.add(Double.parseDouble(dailyEnv.getLight()));
+    }
+
+    return DailyGraphResponseDto.builder()
+        .checkAtList(checkAtList)
+        .temperatureList(temperatureList)
+        .humidityList(humidityList)
+        .lightList(lightList)
+        .build();
   }
 
 
