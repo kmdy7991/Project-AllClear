@@ -3,7 +3,6 @@ import dashboard from "../assets/dashboard.png";
 import monitoring from "../assets/monitoring.png";
 import statistics from "../assets/statistics.png";
 import styled from "styled-components";
-import simulator from "../assets/simulation.png";
 
 function Sidebar() {
   return (
@@ -26,12 +25,6 @@ function Sidebar() {
             <Menu>
               <MenuLogo src={statistics} />
               통계
-            </Menu>
-          </Link>
-          <Link to="/simulator">
-            <Menu>
-              <MenuLogo src={simulator} />
-              시뮬레이션
             </Menu>
           </Link>
         </MenuList>
