@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequiredArgsConstructor
 @CrossOrigin("*")
-@RequestMapping(value = "/api/state/hourly")
+@RequestMapping(value = "/api/state-service/hourly")
 public class HourlyEnvController {
 
     private final HourlyEnvService hourlyEnvService;

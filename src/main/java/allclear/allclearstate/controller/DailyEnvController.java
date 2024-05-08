@@ -1,8 +1,6 @@
 package allclear.allclearstate.controller;
 
 import allclear.allclearstate.dto.DailyResponseDto;
-import allclear.allclearstate.dto.HourlyResponseDto;
-import allclear.allclearstate.dto.SensorResponseDto;
 import allclear.allclearstate.service.DailyEnvService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -17,20 +15,20 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequiredArgsConstructor
 @CrossOrigin("*")
-@RequestMapping(value = "/api/state/daily")
+@RequestMapping(value = "/api/state-service/daily")
 public class DailyEnvController {
 
   private final DailyEnvService dailyEnvService;
 
   @GetMapping
   public ResponseEntity<List<DailyResponseDto>> getDailyData () {
-    return ResponseEntity.ok(dailyEnvService.getDailyData());
+    return ResponseEntity.ok(dailyEnvService.getDailyDataRecentThirtyDays());
   }
 
-  @GetMapping(value = "/test")
-  public ResponseEntity<String> testDailyGetMapping () {
-    dailyEnvService.setInfoDaily();
-    return ResponseEntity.ok().body("success");
-  }
+//  @GetMapping(value = "/test")
+//  public ResponseEntity<String> testDailyGetMapping () {
+//    dailyEnvService.setInfoDaily();
+//    return ResponseEntity.ok().body("success");
+//  }
 
 }

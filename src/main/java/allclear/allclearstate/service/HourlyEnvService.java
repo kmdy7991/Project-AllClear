@@ -32,8 +32,8 @@ public class HourlyEnvService {
 
   /** HourlyEnv : 매 정각 3,6,9,12 마다 입력 후 저장 **/
   @Transactional
-  @Scheduled(cron = "0 0 0,3,6,9,11,12,15,18,21 * * ?")
-  public void setInfoHourly() throws Exception {
+  @Scheduled(cron = "0 0 0,3,6,9,12,15,18,21 * * ?")
+  public void setInfoHourly() {
 
     log.info("#################################################################################################### 3시간별 정각 : 환경데이터 저장 in");
 
@@ -51,7 +51,7 @@ public class HourlyEnvService {
     // Farm 이 존재 하지 않는다면 에러로 작동하지 않는게 옳다.
     Optional<Farm> optionalFarm = farmRepository.findById(1L);
     if (optionalFarm.isEmpty()) {
-      throw new Exception("no Farm Exist by pk 1");
+      throw new RuntimeException("no Farm Exist by pk 1");
     }
     Farm farm = optionalFarm.get();
 
@@ -83,24 +83,29 @@ public class HourlyEnvService {
     Farm farm = optionalFarm.get();
 
     // 오늘 날짜 정보 가져와서 갱신.
-    LocalDate today = LocalDate.now();
     LocalDateTime nowTime = LocalDateTime.now();
+    LocalDateTime startOfDay = nowTime.minusHours(24);
 
     // 해당 날짜의 hourly 데이터를 조회
-    LocalDateTime startOfDay = today.atStartOfDay();
-    LocalDateTime endOfDay = today.atStartOfDay().plusDays(1).minusNanos(1);
+    List<HourlyEnv> hourlyDataList = hourlyEnvRepository.findByCheckAtBetweenAndFarmPk(startOfDay, nowTime, farm.getPk());
 
-    List<HourlyEnv> hourlyDataList = hourlyEnvRepository.findByCheckAtBetweenAndFarmPk(startOfDay, endOfDay, farm.getPk());
+    /** 아래 데이터 수정 되어야한다 JSON 객체 checkAt, temperature, 모두 배열, double형과 String 형으로 넣어야함 **/
 
     for (HourlyEnv hourlyEnv : hourlyDataList) {
-      hourlyResponseDtoList.add(HourlyResponseDto.builder()
-          .checkAt(hourlyEnv.getCheckAt())
-          .temperature(hourlyEnv.getTemperature())
-          .humidity(hourlyEnv.getHumidity())
-          .light(hourlyEnv.getLight())
-          .build()
-      );
+
+
+
     }
+
+
+    /** 리스트로 전달이 아니라 JSON 내부에 리스트넣은다음 보낸다.  **/
+//    hourlyResponseDtoList.add(HourlyResponseDto.builder()
+//        .checkAt(hourlyEnv.getCheckAt())
+//        .temperature(hourlyEnv.getTemperature())
+//        .humidity(hourlyEnv.getHumidity())
+//        .light(hourlyEnv.getLight())
+//        .build()
+//    );
 
     return hourlyResponseDtoList;
   }

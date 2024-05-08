@@ -1,12 +1,9 @@
 package allclear.allclearstate.service;
 
-import allclear.allclearstate.client.SensorServiceClient;
 import allclear.allclearstate.domain.DailyEnv;
 import allclear.allclearstate.domain.Farm;
 import allclear.allclearstate.domain.HourlyEnv;
 import allclear.allclearstate.dto.DailyResponseDto;
-import allclear.allclearstate.dto.HourlyResponseDto;
-import allclear.allclearstate.dto.SensorResponseDto;
 import allclear.allclearstate.repository.DailyEnvRepository;
 import allclear.allclearstate.repository.FarmRepository;
 import allclear.allclearstate.repository.HourlyEnvRepository;
@@ -17,8 +14,6 @@ import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cloud.client.circuitbreaker.CircuitBreaker;
-import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,23 +32,19 @@ public class DailyEnvService {
   @Transactional
   @Scheduled(cron = "0 0 23 * * ?")
   public void setInfoDaily() {
-
     log.info("#################################################################################################### 데일리 평균 데이터 저장 시작!");
-
-
     // Farm 이 존재 하지 않는다면 에러로 작동하지 않는게 옳다.
     Optional<Farm> optionalFarm = farmRepository.findById(1L);
     if (optionalFarm.isEmpty()) {
-      throw new RuntimeException();
+      throw new RuntimeException("no Farm Exist by pk 1");
     }
-
     Farm farm = optionalFarm.get();
 
     // 오늘 날짜 정보 가져와서 갱신.
     LocalDate today = LocalDate.now();
     LocalDateTime nowTime = LocalDateTime.now();
 
-    // 해당 날짜의 hourly 데이터를 조회
+    // 해당 날짜의 hourly 데이터를 조회 : 하루 전체 조회후 통계 계산에 이용
     LocalDateTime startOfDay = today.atStartOfDay();
     LocalDateTime endOfDay = today.atStartOfDay().plusDays(1).minusNanos(1);
     List<HourlyEnv> hourlyDataList = hourlyEnvRepository.findByCheckAtBetweenAndFarmPk(startOfDay, endOfDay, farm.getPk());
@@ -101,11 +92,38 @@ public class DailyEnvService {
     }
   }
 
-  public List<DailyResponseDto> getDailyData() {
+
+
+  /** get 일별 데이터 : 최근 30일 **/
+  public List<DailyResponseDto> getDailyDataRecentThirtyDays() {
     List<DailyResponseDto> dailyResponseDtoList = new ArrayList<>();
 
+    // Farm 이 존재 하지 않는다면 에러로 작동하지 않는게 옳다.
+    Optional<Farm> optionalFarm = farmRepository.findById(1L);
+    if (optionalFarm.isEmpty()) {
+      throw new RuntimeException();
+    }
+    Farm farm = optionalFarm.get();
 
+    // 오늘 날짜 정보 가져와서 갱신.
+    LocalDate today = LocalDate.now();
+    LocalDateTime startDate = today.atStartOfDay().minusDays(30);
+    LocalDateTime endOfDay = today.atStartOfDay().plusDays(1).minusNanos(1);
+
+    List<DailyEnv> dailyEnvList = dailyEnvRepository.findByCheckAtBetweenAndFarmPk(startDate, endOfDay, farm.getPk());
+
+     for (DailyEnv dailyEnv : dailyEnvList) {
+       dailyResponseDtoList.add(DailyResponseDto.builder()
+           .checkAt(dailyEnv.getCheckAt())
+           .temperature(dailyEnv.getTemperature())
+           .humidity(dailyEnv.getHumidity())
+           .light(dailyEnv.getLight())
+           .build()
+       );
+     }
 
     return dailyResponseDtoList;
   }
+
+
 }
