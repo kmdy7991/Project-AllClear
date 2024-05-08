@@ -1,12 +1,12 @@
 import React from "react";
 import { Unity, useUnityContext } from "react-unity-webgl";
-
+import { useEffect } from "react";
 function Simulator() {
-  const { unityProvider } = useUnityContext({
+  const { unityProvider, isLoaded } = useUnityContext({
     loaderUrl: "Build/Downloads.loader.js",
-    dataUrl: "Build/webgl.data",
-    frameworkUrl: "Build/build.framework.js",
-    codeUrl: "Build/build.wasm",
+    dataUrl: "Build/Downloads.data",
+    frameworkUrl: "Build/Downloads.framework.js",
+    codeUrl: "Build/Downloads.wasm",
   });
 
   return (
