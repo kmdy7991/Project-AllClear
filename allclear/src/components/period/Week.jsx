@@ -32,7 +32,7 @@ function Week() {
           height={400}
           colors={["#E03F69"]}
           series={[
-            { data: dailyTemperature, label: "온도" },
+            { data: dailyTemperature, label: "온도(℃)" },
             // { data: dailyHumidity, label: "습도" },
             // { data: dailyLight, label: "조도" },
           ]}
@@ -66,7 +66,7 @@ function Week() {
           colors={["#4A5ED8"]}
           series={[
             // { data: dailyTemperature, label: "온도" },
-            { data: dailyHumidity, label: "습도" },
+            { data: dailyHumidity, label: "습도(％)" },
             // { data: dailyLight, label: "조도" },
           ]}
           xAxis={[{ scaleType: "point", data: dailyCheckAt }]}
@@ -100,7 +100,7 @@ function Week() {
           series={[
             // { data: dailyTemperature, label: "온도" },
             // { data: dailyHumidity, label: "습도" },
-            { data: dailyLight, label: "조도" },
+            { data: dailyLight, label: "조도(㏓)" },
           ]}
           xAxis={[{ scaleType: "point", data: dailyCheckAt }]}
           sx={{

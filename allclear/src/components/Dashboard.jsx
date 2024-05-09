@@ -35,6 +35,7 @@ function Dashboard() {
   const [temperatureData, setTemperatureData] = useState("");
   const [humidityData, setHumidityData] = useState("");
   const [lightData, setLightData] = useState("");
+  const [airQualityData, setAirQualityData] = useState([]);
 
   const data2 = [
     { label: "1단계", value: 1102 },
@@ -67,20 +68,29 @@ function Dashboard() {
       setTemperatureData(JSON.parse(e.data).temperature);
       setHumidityData(JSON.parse(e.data).humidity);
       setLightData(JSON.parse(e.data).light);
+      const airQuality = [
+        { label: "CO", value: JSON.parse(e.data).co },
+        { label: "CO2", value: JSON.parse(e.data).co2 },
+        { label: "Alcohol", value: JSON.parse(e.data).alcohol },
+        { label: "Venzene", value: JSON.parse(e.data).venzene },
+        { label: "NH4", value: JSON.parse(e.data).nh4 },
+        { label: "Aceton", value: JSON.parse(e.data).aceton },
+      ];
+      setAirQualityData(airQuality);
     });
 
     eventSource.addEventListener("hourmessage", (e) => {
       // console.log(e.data);
     });
 
-    eventSource.onerror = (e) => {
-      console.log(e);
-      eventSource.close();
+    // eventSource.onerror = (e) => {
+    //   console.log(e);
+    //   eventSource.close();
 
-      if (e.target.readyState === EventSource.CLOSED) {
-        console.log("sse CLOSED");
-      }
-    };
+    //   if (e.target.readyState === EventSource.CLOSED) {
+    //     console.log("sse CLOSED");
+    //   }
+    // };
   };
 
   useEffect(() => {
@@ -107,7 +117,7 @@ function Dashboard() {
               >
                 <TemperatureImg src={temperature} />
                 <Temperature>{temperatureData}</Temperature>
-                <Celsius>℃</Celsius>
+                <Celsius>(℃)</Celsius>
               </div>
             </Content1>
             <Content1 ref={contentRef} height={contentSize.height * 0.8}>
@@ -122,7 +132,7 @@ function Dashboard() {
               >
                 <HumidityImg src={humidity} />
                 <Temperature>{humidityData}</Temperature>
-                <Celsius>%</Celsius>
+                <Celsius>(％)</Celsius>
               </div>
             </Content1>
             <Content1 ref={contentRef} height={contentSize.height * 0.8}>
@@ -137,18 +147,25 @@ function Dashboard() {
               >
                 <LightImg src={light} />
                 <Temperature>{lightData}</Temperature>
-                <Celsius>lux</Celsius>
+                <Celsius>(㏓)</Celsius>
               </div>
             </Content1>
             <Content2 ref={contentRef2} height={contentSize2.height / 1.3}>
-              <ContentTitle2>생육 단계</ContentTitle2>
+              <ContentTitle2>공기 질 현황표</ContentTitle2>
               <PieChart
-                colors={["#3C4856", "#FF9142", "#23D3B5", "#20AEE3"]}
+                colors={[
+                  "#FF5B72",
+                  "#23ADE5",
+                  "#FF9142",
+                  "#23D3B5",
+                  "#3C4856",
+                  "#6872E1",
+                ]}
                 margin={{ top: 30, bottom: 10, left: 10, right: 10 }}
-                height={400}
+                height={500}
                 series={[
                   {
-                    data: data2,
+                    data: airQualityData,
                     innerRadius: 40,
                     outerRadius: 130,
                   },
@@ -269,9 +286,9 @@ const TemperatureImg = styled.img`
 `;
 
 const Temperature = styled.div`
-  font-size: 100px;
+  font-size: 80px;
   font-weight: 600;
-  margin-left: 40px;
+  margin-left: 20px;
 `;
 
 const Celsius = styled.div`

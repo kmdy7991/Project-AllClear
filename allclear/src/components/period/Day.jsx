@@ -32,10 +32,11 @@ function Day() {
           height={400}
           colors={["#E03F69"]}
           series={[
-            { data: hourlyTemperature, label: "온도" },
+            { data: hourlyTemperature, label: "온도(℃)" },
             // { data: hourlyHumidity, label: "습도" },
             // { data: hourlyLight, label: "조도" },
           ]}
+          yAxis={[{ min: 0, max: 30 }]}
           xAxis={[{ scaleType: "point", data: hourlyCheckAt }]}
           sx={{
             [`& .${axisClasses.directionX} .${axisClasses.tickLabel}`]: {
@@ -56,7 +57,8 @@ function Day() {
             [`& .${axisClasses.directionY} .${axisClasses.tick}`]: {
               stroke: "#e6e5ea", // y축 눈금의 색상을 흰색으로 설정
             },
-            "& path": { strokeWidth: "5px", stroke: "#E03F69" },
+            ["& path"]: { strokeWidth: "5px", stroke: "#E03F69" },
+            ["& .MuiChartsTooltip-root"]: { fill: "#000" },
           }}
           slotProps={{ legend: { labelStyle: { fill: `#e6e5ea` } } }}
         />
@@ -64,11 +66,13 @@ function Day() {
           width={700}
           height={400}
           colors={["#4A5ED8"]}
+          // tooltip={}
           series={[
             // { data: hourlyTemperature, label: "온도" },
-            { data: hourlyHumidity, label: "습도" },
+            { data: hourlyHumidity, label: "습도(％)" },
             // { data: hourlyLight, label: "조도" },
           ]}
+          yAxis={[{ min: 0, max: 100 }]}
           xAxis={[{ scaleType: "point", data: hourlyCheckAt }]}
           sx={{
             [`& .${axisClasses.directionX} .${axisClasses.tickLabel}`]: {
@@ -100,8 +104,9 @@ function Day() {
           series={[
             // { data: hourlyTemperature, label: "온도" },
             // { data: hourlyHumidity, label: "습도" },
-            { data: hourlyLight, label: "조도" },
+            { data: hourlyLight, label: "조도(㏓)" },
           ]}
+          yAxis={[{ min: 0, max: 1000 }]}
           xAxis={[{ scaleType: "point", data: hourlyCheckAt }]}
           sx={{
             [`& .${axisClasses.directionX} .${axisClasses.tickLabel}`]: {
