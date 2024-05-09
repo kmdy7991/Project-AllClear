@@ -6,6 +6,7 @@ import { axisClasses } from "@mui/x-charts/ChartsAxis";
 import temperature from "../assets/temperature.png";
 import humidity from "../assets/humidity.png";
 import light from "../assets/light.png";
+import { useDrawingArea } from "@mui/x-charts/hooks";
 
 function Dashboard() {
   const [contentSize, setContentSize] = useState({ width: 0, height: 0 });
@@ -37,13 +38,6 @@ function Dashboard() {
   const [lightData, setLightData] = useState("");
   const [airQualityData, setAirQualityData] = useState([]);
 
-  const data2 = [
-    { label: "1단계", value: 1102 },
-    { label: "2단계", value: 2341 },
-    { label: "3단계", value: 891 },
-    { label: "4단계", value: 367 },
-  ];
-
   const data3 = [
     { day: "월", value: 205 },
     { day: "화", value: 5411 },
@@ -54,14 +48,19 @@ function Dashboard() {
     { day: "일", value: 3214 },
   ];
 
-  const fetchSSE = async () => {
+  const fetchSSE = () => {
+    console.log("fetchSSE 실행");
     const eventSource = new EventSource(
       "http://192.168.31.206:3022/api/connection/connect"
     );
 
-    eventSource.onopen = () => {
+    // eventSource.onopen = () => {
+    //   console.log("sse OPENED");
+    // };
+
+    eventSource.addEventListener("open", () => {
       console.log("sse OPENED");
-    };
+    });
 
     eventSource.addEventListener("secondmessage", (e) => {
       console.log(e.data);
@@ -84,9 +83,8 @@ function Dashboard() {
     });
 
     // eventSource.onerror = (e) => {
-    //   console.log(e);
+    //   console.log(e.target.readyState);
     //   eventSource.close();
-
     //   if (e.target.readyState === EventSource.CLOSED) {
     //     console.log("sse CLOSED");
     //   }
@@ -166,7 +164,7 @@ function Dashboard() {
                 series={[
                   {
                     data: airQualityData,
-                    innerRadius: 40,
+                    innerRadius: 70,
                     outerRadius: 130,
                   },
                 ]}
@@ -314,6 +312,13 @@ const Content2 = styled.div`
   margin-bottom: 30px;
   height: ${(props) => props.height}px;
   overflow: hidden;
+`;
+
+const CenterLabel = styled.div`
+  position: absolute;
+  font-size: 20px;
+  top: 50%;
+  right: 50%;
 `;
 
 const ContentTitle2 = styled.div`
