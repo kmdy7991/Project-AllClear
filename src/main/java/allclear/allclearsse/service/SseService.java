@@ -1,11 +1,7 @@
 package allclear.allclearsse.service;
 
 import allclear.allclearsse.client.SensorServiceClient;
-import allclear.allclearsse.domain.HourlyEnv;
-import allclear.allclearsse.dto.FarmRequestDto;
 import allclear.allclearsse.dto.SensorResponseDto;
-import allclear.allclearsse.dto.SensorResponseDto2;
-import allclear.allclearsse.repository.SseHourlyEnvRepository;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -42,7 +38,7 @@ public class SseService {
       log.info("onCompletion callback");
       this.emitters.remove(emitter);    // 만료되면 리스트에서 삭제
     });
-    emitter.onTimeout(() -> {
+    emitter.onTimeout(() -> { //  확인필요
       log.info("onTimeout callback");
       emitter.complete();
     });
@@ -51,18 +47,23 @@ public class SseService {
 
   /** 화재, 가스, 조도 센서 정보 : 실시간 전달  정보 추가 필요 **/
   /** 온도 습도 조도 센서 정보 : 실시간 전달 **/
-  @Scheduled(fixedRate = 3000L) // 30초에 한번
+  @Scheduled(fixedRate = 60000L) // 5분에 한번
   public SensorResponseDto getModuleInfoSecond() {
     log.info("Sse Service In");
-
     CircuitBreaker circuitbreaker = circuitBreakerFactory.create("circuitbreaker");
     SensorResponseDto sensorInfo = circuitbreaker.run(sensorServiceClient::getInfo,
         throwable -> SensorResponseDto.builder()
-            .temperature("1")
-            .humidity("2")
-            .light("3")
-            .duration("4")
-            .distance("5")
+            .detect("none-detect")
+            .temperature("26")
+            .humidity("68.8")
+            .light("1124")
+            .air("435")
+            .co("122")
+            .alcohol("12")
+            .co2("13")
+            .venzene("42")
+            .nh4("51")
+            .aceton("66")
             .build()
     );
 
@@ -89,6 +90,21 @@ public class SseService {
         emitter.send(SseEmitter.event()
             .name("message")
             .data(count));
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+    });
+  }
+
+  public void transfer(SensorResponseDto sensorResponseDto) {
+    log.info("##################################################################################################### DTO IN WHAT = {}", sensorResponseDto);
+    log.info("##################################################################################################### Call Time = {}", LocalDateTime.now());
+
+    emitters.forEach(emitter -> {
+      try {
+        emitter.send(SseEmitter.event()
+            .name("secondmessage")
+            .data(sensorResponseDto));
       } catch (IOException e) {
         throw new RuntimeException(e);
       }

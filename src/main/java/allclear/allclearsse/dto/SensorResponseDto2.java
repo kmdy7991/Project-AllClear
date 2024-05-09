@@ -10,9 +10,9 @@ import lombok.ToString;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 public class SensorResponseDto2 {
-  Boolean isFire;
-  String gasUnit;
-  String co2Unit;
+  private Boolean isFire;
+  private String gasUnit;
+  private String co2Unit;
 
   @Builder
   SensorResponseDto2(Boolean isFire, String gasUnit, String co2Unit) {

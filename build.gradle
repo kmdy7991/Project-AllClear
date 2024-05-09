@@ -8,7 +8,6 @@ ext {
 	springCloudVersion = "2023.0.1"
 }
 
-
 group = 'allclear.allclearsse'
 version = '0.0.1-SNAPSHOT'
 
@@ -31,7 +30,6 @@ dependencies {
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 
-
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 	implementation 'io.github.openfeign:feign-micrometer'
 	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
@@ -46,10 +44,3 @@ dependencyManagement {
 tasks.named('test') {
 	useJUnitPlatform()
 }
-
-
-
-
-
-
-
