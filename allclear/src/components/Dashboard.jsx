@@ -6,7 +6,8 @@ import { axisClasses } from "@mui/x-charts/ChartsAxis";
 import temperature from "../assets/temperature.png";
 import humidity from "../assets/humidity.png";
 import light from "../assets/light.png";
-import { useDrawingArea } from "@mui/x-charts/hooks";
+import { dashboardDataAtom } from "../recoil/dashboard/dashboard";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 function Dashboard() {
   const [contentSize, setContentSize] = useState({ width: 0, height: 0 });
@@ -33,10 +34,9 @@ function Dashboard() {
     }
   }, [contentRef2.current]);
 
-  const [temperatureData, setTemperatureData] = useState("");
-  const [humidityData, setHumidityData] = useState("");
-  const [lightData, setLightData] = useState("");
-  const [airQualityData, setAirQualityData] = useState([]);
+  const setDashboardDataAtom = useSetRecoilState(dashboardDataAtom);
+  const setDashboardData = (data) => setDashboardDataAtom(data);
+  const dashboardData = useRecoilValue(dashboardDataAtom);
 
   const data3 = [
     { day: "월", value: 205 },
@@ -64,18 +64,7 @@ function Dashboard() {
 
     eventSource.addEventListener("secondmessage", (e) => {
       console.log(e.data);
-      setTemperatureData(JSON.parse(e.data).temperature);
-      setHumidityData(JSON.parse(e.data).humidity);
-      setLightData(JSON.parse(e.data).light);
-      const airQuality = [
-        { label: "CO", value: JSON.parse(e.data).co },
-        { label: "CO2", value: JSON.parse(e.data).co2 },
-        { label: "Alcohol", value: JSON.parse(e.data).alcohol },
-        { label: "Venzene", value: JSON.parse(e.data).venzene },
-        { label: "NH4", value: JSON.parse(e.data).nh4 },
-        { label: "Aceton", value: JSON.parse(e.data).aceton },
-      ];
-      setAirQualityData(airQuality);
+      setDashboardData(JSON.parse(e.data));
     });
 
     eventSource.addEventListener("hourmessage", (e) => {
@@ -114,7 +103,7 @@ function Dashboard() {
                 }}
               >
                 <TemperatureImg src={temperature} />
-                <Temperature>{temperatureData}</Temperature>
+                <Temperature>{dashboardData.temperature}</Temperature>
                 <Celsius>(℃)</Celsius>
               </div>
             </Content1>
@@ -129,7 +118,7 @@ function Dashboard() {
                 }}
               >
                 <HumidityImg src={humidity} />
-                <Temperature>{humidityData}</Temperature>
+                <Temperature>{dashboardData.humidity}</Temperature>
                 <Celsius>(％)</Celsius>
               </div>
             </Content1>
@@ -144,7 +133,7 @@ function Dashboard() {
                 }}
               >
                 <LightImg src={light} />
-                <Temperature>{lightData}</Temperature>
+                <Temperature>{dashboardData.light}</Temperature>
                 <Celsius>(㏓)</Celsius>
               </div>
             </Content1>
@@ -163,7 +152,14 @@ function Dashboard() {
                 height={500}
                 series={[
                   {
-                    data: airQualityData,
+                    data: [
+                      { label: "CO", value: dashboardData.co },
+                      { label: "CO2", value: dashboardData.co2 },
+                      { label: "Alcohol", value: dashboardData.alcohol },
+                      { label: "Venzene", value: dashboardData.venzene },
+                      { label: "NH4", value: dashboardData.nh4 },
+                      { label: "Aceton", value: dashboardData.aceton },
+                    ],
                     innerRadius: 70,
                     outerRadius: 130,
                   },
