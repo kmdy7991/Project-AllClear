@@ -252,7 +252,6 @@ const DashboardContents = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  height: calc(100% - 100px);
   justify-content: space-between;
 `;
 
