@@ -1,0 +1,7 @@
+train: C:/SSAFY/ssafyPJT-final/yolo/datasets/train/images
+val: C:/SSAFY/ssafyPJT-final/yolo/datasets/valid/images
+test: C:/SSAFY/ssafyPJT-final/yolo/datasets/test/images
+
+nc: 2
+#names: ['pap_fruit_color_poly', 'pap_fruit_green_poly']
+names: ['착색 후(수확 가능)', '착색 전(수확 불가능)']

@@ -1,0 +1,13 @@
+train: C:/SSAFY/ssafyPJT-final/yolo/datasets/train/images
+val: C:/SSAFY/ssafyPJT-final/yolo/datasets/valid/images
+test: C:/SSAFY/ssafyPJT-final/yolo/datasets/test/images
+
+nc: 7
+names:
+  ['stem',
+  'leaf',
+  'flower',
+  'paprika',
+  'paprika(unharvest)',
+  'paprika(harvest)',
+  'none']
