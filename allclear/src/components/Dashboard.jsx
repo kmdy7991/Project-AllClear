@@ -87,7 +87,24 @@ function Dashboard() {
   }, []);
 
   const detectFire = () => {
-    if (dashboardData.detect == "OFF") {
+    if (dashboardData.detect == "1") {
+      return (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-evenly",
+            width: "100%",
+            height: "75%",
+          }}
+        >
+          <FireImg src={onfire} />
+          <div style={{ fontSize: 70, fontWeight: 600, color: "#FF3E03" }}>
+            화재 발생
+          </div>
+        </div>
+      );
+    } else {
       return (
         <div
           style={{
@@ -100,24 +117,7 @@ function Dashboard() {
         >
           <FireImg src={nofire} />
           <div style={{ fontSize: 70, fontWeight: 600, color: "#ADAAAB" }}>
-            화재 없음
-          </div>
-        </div>
-      );
-    } else if (dashboardData.detect == "ON") {
-      return (
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-evenly",
-            width: "100%",
-            height: "75%",
-          }}
-        >
-          <FireImg src={onfire} />
-          <div style={{ fontSize: 70, fontWeight: 600, color: "#FF0000" }}>
-            화재 발생
+            이상 없음
           </div>
         </div>
       );

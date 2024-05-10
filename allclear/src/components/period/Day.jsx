@@ -58,7 +58,6 @@ function Day() {
               stroke: "#e6e5ea", // y축 눈금의 색상을 흰색으로 설정
             },
             ["& path"]: { strokeWidth: "5px", stroke: "#E03F69" },
-            ["& .MuiChartsTooltip-root"]: { fill: "#000" },
           }}
           slotProps={{ legend: { labelStyle: { fill: `#e6e5ea` } } }}
         />
