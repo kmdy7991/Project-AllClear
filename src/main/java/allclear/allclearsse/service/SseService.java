@@ -9,9 +9,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicLong;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cloud.client.circuitbreaker.CircuitBreaker;
 import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
@@ -21,7 +19,6 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class SseService {
-
   private final SensorServiceClient sensorServiceClient;
   private final CircuitBreakerFactory circuitBreakerFactory;
   private final TestUserService testUserService;
@@ -45,41 +42,20 @@ public class SseService {
     return emitter;
   }
 
-  /** 화재, 가스, 조도 센서 정보 : 실시간 전달  정보 추가 필요 **/
-  /** 온도 습도 조도 센서 정보 : 실시간 전달 **/
-  @Scheduled(fixedRate = 60000L) // 5분에 한번
-  public SensorResponseDto getModuleInfoSecond() {
-    log.info("Sse Service In");
-    CircuitBreaker circuitbreaker = circuitBreakerFactory.create("circuitbreaker");
-    SensorResponseDto sensorInfo = circuitbreaker.run(sensorServiceClient::getInfo,
-        throwable -> SensorResponseDto.builder()
-            .detect("none-detect")
-            .temperature("26")
-            .humidity("68.8")
-            .light("1124")
-            .air("435")
-            .co("122")
-            .alcohol("12")
-            .co2("13")
-            .venzene("42")
-            .nh4("51")
-            .aceton("66")
-            .build()
-    );
-
-    log.info("##################################################################################################### DTO IN WHAT = {}", sensorInfo);
+  /** 온도 습도 조도 화재, 가스 센서 정보 : 실시간 전달 : 현재코드  **/
+  public void transfer(SensorResponseDto sensorResponseDto) {
+    log.info("##################################################################################################### transfer-method : DTO IN WHAT = {}", sensorResponseDto);
     log.info("##################################################################################################### Call Time = {}", LocalDateTime.now());
 
     emitters.forEach(emitter -> {
       try {
         emitter.send(SseEmitter.event()
             .name("secondmessage")
-            .data(sensorInfo));
+            .data(sensorResponseDto));
       } catch (IOException e) {
         throw new RuntimeException(e);
       }
     });
-    return sensorInfo;
   }
 
   /** SSE 테스트용 **/
@@ -96,20 +72,41 @@ public class SseService {
     });
   }
 
-  public void transfer(SensorResponseDto sensorResponseDto) {
-    log.info("##################################################################################################### DTO IN WHAT = {}", sensorResponseDto);
-    log.info("##################################################################################################### Call Time = {}", LocalDateTime.now());
-
-    emitters.forEach(emitter -> {
-      try {
-        emitter.send(SseEmitter.event()
-            .name("secondmessage")
-            .data(sensorResponseDto));
-      } catch (IOException e) {
-        throw new RuntimeException(e);
-      }
-    });
-  }
+  /** 온도 습도 조도 화재, 가스 센서 정보 : 실시간 전달 : 이전코드**/
+//  @Scheduled(fixedRate = 60000L) // 5분에 한번
+//  public SensorResponseDto getModuleInfoSecond() {
+//    log.info("Sse Service In");
+//    CircuitBreaker circuitbreaker = circuitBreakerFactory.create("circuitbreaker");
+//    SensorResponseDto sensorInfo = circuitbreaker.run(sensorServiceClient::getInfo,
+//        throwable -> SensorResponseDto.builder()
+//            .detect("none-detect")
+//            .temperature("26")
+//            .humidity("68.8")
+//            .light("1124")
+//            .air("435")
+//            .co("122")
+//            .alcohol("12")
+//            .co2("13")
+//            .venzene("42")
+//            .nh4("51")
+//            .aceton("66")
+//            .build()
+//    );
+//
+//    log.info("##################################################################################################### DTO IN WHAT = {}", sensorInfo);
+//    log.info("##################################################################################################### Call Time = {}", LocalDateTime.now());
+//
+//    emitters.forEach(emitter -> {
+//      try {
+//        emitter.send(SseEmitter.event()
+//            .name("secondmessage")
+//            .data(sensorInfo));
+//      } catch (IOException e) {
+//        throw new RuntimeException(e);
+//      }
+//    });
+//    return sensorInfo;
+//  }
 
 }
 
