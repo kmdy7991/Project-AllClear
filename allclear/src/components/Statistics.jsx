@@ -48,11 +48,6 @@ function Statistics() {
   );
 }
 
-const DashboardContainer = styled.div`
-  width: 100%;
-  height: 100%;
-`;
-
 const DashboardBox = styled.div`
   overflow: auto;
   width: calc(100% - 70px);

@@ -1,8 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { PieChart } from "@mui/x-charts/PieChart";
-import { BarChart } from "@mui/x-charts/BarChart";
-import { axisClasses } from "@mui/x-charts/ChartsAxis";
 import temperature from "../assets/temperature.png";
 import humidity from "../assets/humidity.png";
 import light from "../assets/light.png";

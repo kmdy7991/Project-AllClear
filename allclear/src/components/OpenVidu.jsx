@@ -60,7 +60,7 @@ function OpenVidu() {
           await session.connect(token);
           const publisher = OV.initPublisher(undefined, {
             audioSource: undefined,
-            videoSource: undefined,
+            videoSource: "screen",
             publishAudio: false,
             publishVideo: true,
             mirror: true,

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { LineChart } from "@mui/x-charts/LineChart";
+import { BarChart } from "@mui/x-charts/BarChart";
 import { getHourlyData } from "../../apis/statistic/statisticData";
 import { axisClasses } from "@mui/x-charts/ChartsAxis";
 
@@ -24,13 +25,25 @@ function Day() {
     );
   }, []);
 
+  const uData = [4000, 3000, 2000, 2780, 1890, 2390, 3490];
+  const pData = [2400, 1398, 9800, 3908, 4800, 3800, 4300];
+  const xLabels = [
+    "Page A",
+    "Page B",
+    "Page C",
+    "Page D",
+    "Page E",
+    "Page F",
+    "Page G",
+  ];
+
   return (
     <div>
       <DashboardContents>
         <div style={{ backgroundColor: "#273444", marginBottom: 30 }}>
           <LineChart
-            width={690}
-            height={400}
+            width={460}
+            height={300}
             colors={["#E03F69"]}
             series={[
               { data: hourlyTemperature, label: "온도(℃)" },
@@ -65,8 +78,8 @@ function Day() {
         </div>
         <div style={{ backgroundColor: "#273444", marginBottom: 30 }}>
           <LineChart
-            width={690}
-            height={400}
+            width={460}
+            height={300}
             colors={["#4A5ED8"]}
             // tooltip={}
             series={[
@@ -102,8 +115,8 @@ function Day() {
         </div>
         <div style={{ backgroundColor: "#273444", marginBottom: 30 }}>
           <LineChart
-            width={690}
-            height={400}
+            width={460}
+            height={300}
             colors={["#F6C863"]}
             series={[
               // { data: hourlyTemperature, label: "온도" },
@@ -132,6 +145,40 @@ function Day() {
                 stroke: "#e6e5ea", // y축 눈금의 색상을 흰색으로 설정
               },
               "& path": { strokeWidth: "5px", stroke: "#F6C863" },
+            }}
+            slotProps={{
+              legend: { labelStyle: { fill: `#e6e5ea` } },
+            }}
+          />
+        </div>
+        <div style={{ backgroundColor: "#273444", marginBottom: 30 }}>
+          <BarChart
+            width={690}
+            height={400}
+            series={[
+              { data: pData, label: "pv", id: "pvId" },
+              { data: uData, label: "uv", id: "uvId" },
+            ]}
+            xAxis={[{ data: xLabels, scaleType: "band" }]}
+            sx={{
+              [`& .${axisClasses.directionX} .${axisClasses.tickLabel}`]: {
+                fill: "#e6e5ea", // 텍스트 색상을 흰색으로 설정
+              },
+              [`& .${axisClasses.directionY} .${axisClasses.tickLabel}`]: {
+                fill: "#e6e5ea", // 축 라벨의 텍스트 색상을 흰색으로 설정
+              },
+              [`& .${axisClasses.directionX} .${axisClasses.line}`]: {
+                stroke: "#e6e5ea", // x축 선의 색상을 흰색으로 설정
+              },
+              [`& .${axisClasses.directionY} .${axisClasses.line}`]: {
+                stroke: "#e6e5ea", // y축 선의 색상을 흰색으로 설정
+              },
+              [`& .${axisClasses.directionX} .${axisClasses.tick}`]: {
+                stroke: "#e6e5ea", // x축 눈금의 색상을 흰색으로 설정
+              },
+              [`& .${axisClasses.directionY} .${axisClasses.tick}`]: {
+                stroke: "#e6e5ea", // y축 눈금의 색상을 흰색으로 설정
+              },
             }}
             slotProps={{
               legend: { labelStyle: { fill: `#e6e5ea` } },
