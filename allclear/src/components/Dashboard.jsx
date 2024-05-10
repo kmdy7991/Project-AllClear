@@ -6,6 +6,8 @@ import { axisClasses } from "@mui/x-charts/ChartsAxis";
 import temperature from "../assets/temperature.png";
 import humidity from "../assets/humidity.png";
 import light from "../assets/light.png";
+import onfire from "../assets/onfire.png";
+import nofire from "../assets/nofire.png";
 import { dashboardDataAtom } from "../recoil/dashboard/dashboard";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
@@ -83,6 +85,44 @@ function Dashboard() {
   useEffect(() => {
     fetchSSE();
   }, []);
+
+  const detectFire = () => {
+    if (dashboardData.detect == "OFF") {
+      return (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-evenly",
+            width: "100%",
+            height: "75%",
+          }}
+        >
+          <FireImg src={nofire} />
+          <div style={{ fontSize: 70, fontWeight: 600, color: "#ADAAAB" }}>
+            화재 없음
+          </div>
+        </div>
+      );
+    } else if (dashboardData.detect == "ON") {
+      return (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-evenly",
+            width: "100%",
+            height: "75%",
+          }}
+        >
+          <FireImg src={onfire} />
+          <div style={{ fontSize: 70, fontWeight: 600, color: "#FF0000" }}>
+            화재 발생
+          </div>
+        </div>
+      );
+    }
+  };
 
   return (
     <>
@@ -174,49 +214,8 @@ function Dashboard() {
               />
             </Content2>
             <Content3 ref={contentRef2} height={contentSize2.height / 1.3}>
-              <ContentTitle3>주간 생산량</ContentTitle3>
-              <BarChart
-                width={500}
-                height={350}
-                series={[
-                  {
-                    data: data3.map((item) => item.value),
-                    label: "수확량",
-                    id: "pvId",
-                  },
-                ]}
-                xAxis={[
-                  {
-                    data: data3.map((item) => item.day),
-                    scaleType: "band",
-                  },
-                ]}
-                slotProps={{
-                  legend: {
-                    hidden: true,
-                  },
-                }}
-                sx={{
-                  [`& .${axisClasses.directionX} .${axisClasses.tickLabel}`]: {
-                    fill: "#e6e5ea", // 텍스트 색상을 흰색으로 설정
-                  },
-                  [`& .${axisClasses.directionY} .${axisClasses.tickLabel}`]: {
-                    fill: "#e6e5ea", // 축 라벨의 텍스트 색상을 흰색으로 설정
-                  },
-                  [`& .${axisClasses.directionX} .${axisClasses.line}`]: {
-                    stroke: "#e6e5ea", // x축 선의 색상을 흰색으로 설정
-                  },
-                  [`& .${axisClasses.directionY} .${axisClasses.line}`]: {
-                    stroke: "#e6e5ea", // y축 선의 색상을 흰색으로 설정
-                  },
-                  [`& .${axisClasses.directionX} .${axisClasses.tick}`]: {
-                    stroke: "#e6e5ea", // x축 눈금의 색상을 흰색으로 설정
-                  },
-                  [`& .${axisClasses.directionY} .${axisClasses.tick}`]: {
-                    stroke: "#e6e5ea", // y축 눈금의 색상을 흰색으로 설정
-                  },
-                }}
-              />
+              <ContentTitle3>화재 감지</ContentTitle3>
+              {detectFire()}
             </Content3>
           </DashboardContents>
         </DashboardBox>
@@ -304,17 +303,10 @@ const Content2 = styled.div`
   flex-direction: column;
   align-items: center;
   background-color: #273444;
-  width: 42%;
+  width: 49%;
   margin-bottom: 30px;
   height: ${(props) => props.height}px;
   overflow: hidden;
-`;
-
-const CenterLabel = styled.div`
-  position: absolute;
-  font-size: 20px;
-  top: 50%;
-  right: 50%;
 `;
 
 const ContentTitle2 = styled.div`
@@ -328,10 +320,9 @@ const ContentTitle2 = styled.div`
 const Content3 = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   background-color: #273444;
-  width: 56%;
+  width: 49%;
   margin-bottom: 30px;
   height: ${(props) => props.height}px;
   overflow: hidden;
@@ -341,6 +332,10 @@ const ContentTitle3 = styled.div`
   font-size: 32px;
   font-weight: 600;
   margin: 40px 0 0px;
+`;
+
+const FireImg = styled.img`
+  height: 65%;
 `;
 
 export default Dashboard;
