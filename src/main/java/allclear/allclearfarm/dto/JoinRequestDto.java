@@ -6,8 +6,8 @@ import lombok.Data;
 @Data
 public class JoinRequestDto {
 
-  String id;
-  String pw;
-  String name;
+  private String id;
+  private String pw;
+  private String name;
 
 }

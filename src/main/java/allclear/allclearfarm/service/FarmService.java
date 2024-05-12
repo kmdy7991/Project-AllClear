@@ -52,15 +52,13 @@ public class FarmService {
   /** 로그인 **/
   public LoginResponseDto login(LoginRequestDto loginRequestDto) {
     Optional<Farm> optionalFarm = farmRepository.findByUserIdAndUserPw(loginRequestDto.getId(), loginRequestDto.getPw());
-
     if (optionalFarm.isEmpty()) {
       throw new CustomException(FarmErrorCode.FarmIsNotFound.getCode(), FarmErrorCode.FarmIsNotFound.getDescription());
     }
-
     Farm farm = optionalFarm.get();
-//    log.info("########################################################################################### farmPK = {}", farm.getPk());
 
     return LoginResponseDto.builder()
+        .pk(farm.getPk())
         .id(farm.getUserId())
         .name(farm.getName())
         .build();
@@ -73,7 +71,6 @@ public class FarmService {
     if (optionalFarm.isEmpty()) {
       throw new CustomException(FarmErrorCode.FarmIsNotFound.getCode(), FarmErrorCode.FarmIsNotFound.getDescription());
     }
-
     Farm farm = optionalFarm.get();
     return farm;
   }
