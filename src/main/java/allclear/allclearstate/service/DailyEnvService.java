@@ -31,7 +31,7 @@ public class DailyEnvService {
 
   /** Daily_env : 매일 23시 hourly 데이터를 모두 평균내서 저장. **/
   @Transactional
-  @Scheduled(cron = "0 0 23 * * ?")
+  @Scheduled(cron = "0 0 15 * * ?")
   public void setInfoDaily() {
     log.info("#################################################################################################### 데일리 평균 데이터 저장 시작!");
     // Farm 이 존재 하지 않는다면 에러로 작동하지 않는게 옳다.

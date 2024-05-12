@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin("*")
 @RequestMapping(value = "/api/state-service/daily")
 public class DailyEnvController {
-
   private final DailyEnvService dailyEnvService;
 
   @GetMapping
