@@ -38,10 +38,9 @@ public class SseController {
   }
 
   @PostMapping("/transfer")
-  public ResponseEntity<SensorResponseDto> transfer(@RequestBody SensorResponseDto body) {
+  public void transfer(@RequestBody SensorResponseDto body) {
     log.info("in = {} ", body);
     sseService.transfer(body);
-    return ResponseEntity.ok(body);
   }
 
 //  @GetMapping("/info")
