@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { LineChart } from "@mui/x-charts/LineChart";
-import { BarChart } from "@mui/x-charts/BarChart";
 import { getDailyData } from "../../apis/statistic/statisticData";
 import { axisClasses } from "@mui/x-charts/ChartsAxis";
+import { ChartsReferenceLine } from "@mui/x-charts/ChartsReferenceLine";
 
 function Week() {
   const [dailyTemperature, setDailyTemperature] = useState([]);
@@ -25,17 +25,6 @@ function Week() {
     );
   }, []);
 
-  const uData = [4000, 3000, 2000, 2780, 1890, 2390, 3490];
-  const xLabels = [
-    "Page A",
-    "Page B",
-    "Page C",
-    "Page D",
-    "Page E",
-    "Page F",
-    "Page G",
-  ];
-
   return (
     <div>
       <DashboardContents>
@@ -49,6 +38,7 @@ function Week() {
               // { data: dailyHumidity, label: "습도" },
               // { data: dailyLight, label: "조도" },
             ]}
+            yAxis={[{ min: 0, max: 30 }]}
             xAxis={[{ scaleType: "point", data: dailyCheckAt }]}
             sx={{
               [`& .${axisClasses.directionX} .${axisClasses.tickLabel}`]: {
@@ -72,7 +62,12 @@ function Week() {
               "& path": { strokeWidth: "5px", stroke: "#E03F69" },
             }}
             slotProps={{ legend: { labelStyle: { fill: `#e6e5ea` } } }}
-          />
+          >
+            <ChartsReferenceLine
+              y={24}
+              lineStyle={{ stroke: "#e6e5ea", strokeWidth: 1 }}
+            />
+          </LineChart>
         </div>
         <div style={{ backgroundColor: "#273444", marginBottom: 30 }}>
           <LineChart
@@ -84,6 +79,7 @@ function Week() {
               { data: dailyHumidity, label: "습도(％)" },
               // { data: dailyLight, label: "조도" },
             ]}
+            yAxis={[{ min: 0, max: 100 }]}
             xAxis={[{ scaleType: "point", data: dailyCheckAt }]}
             sx={{
               [`& .${axisClasses.directionX} .${axisClasses.tickLabel}`]: {
@@ -107,7 +103,12 @@ function Week() {
               "& path": { strokeWidth: "5px", stroke: "#4A5ED8" },
             }}
             slotProps={{ legend: { labelStyle: { fill: `#e6e5ea` } } }}
-          />
+          >
+            <ChartsReferenceLine
+              y={33}
+              lineStyle={{ stroke: "#e6e5ea", strokeWidth: 1.5 }}
+            />
+          </LineChart>
         </div>
         <div style={{ backgroundColor: "#273444", marginBottom: 30 }}>
           <LineChart
@@ -142,9 +143,14 @@ function Week() {
               "& path": { strokeWidth: "5px", stroke: "#F6C863" },
             }}
             slotProps={{ legend: { labelStyle: { fill: `#e6e5ea` } } }}
-          />
+          >
+            <ChartsReferenceLine
+              y={500}
+              lineStyle={{ stroke: "#e6e5ea", strokeWidth: 1.5 }}
+            />
+          </LineChart>
         </div>
-        <div style={{ backgroundColor: "#273444", marginBottom: 30 }}>
+        {/* <div style={{ backgroundColor: "#273444", marginBottom: 30 }}>
           <BarChart
             width={690}
             height={400}
@@ -174,7 +180,7 @@ function Week() {
               legend: { labelStyle: { fill: `#e6e5ea` } },
             }}
           />
-        </div>
+        </div> */}
       </DashboardContents>
     </div>
   );
