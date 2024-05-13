@@ -4,6 +4,7 @@ import Sidebar from "./components/Sidebar.jsx";
 import Dashboard from "./components/Dashboard.jsx";
 import Monitoring from "./components/Monitoring.jsx";
 import Statistics from "./components/Statistics.jsx";
+import Test from "./components/Test.jsx";
 
 import Login from "./components/Login.jsx";
 import Join from "./components/Join.jsx";
@@ -29,6 +30,7 @@ function App() {
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/monitoring" element={<Monitoring />} />
                   <Route path="/statistics" element={<Statistics />} />
+                  <Route path="/test" element={<Test />} />
                 </Routes>
               </ContentContainer>
             </MainContainer>

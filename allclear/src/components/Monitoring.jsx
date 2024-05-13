@@ -35,8 +35,8 @@ function Monitoring() {
 
   const fetchSSE = async () => {
     const eventSource = new EventSource(
-      // "http://192.168.31.213:8081/api/unity/connect"
-      "http://192.168.219.92:8081/api/unity/connect"
+      "http://192.168.31.213:8081/api/unity/connect"
+      // "http://192.168.219.92:8081/api/unity/connect"
     );
     eventSource.onopen = () => {
       console.log("sse OPENED");
