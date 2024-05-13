@@ -1,15 +1,134 @@
-import { useState } from "react";
-import { Pane, Tab, Tablist } from "evergreen-ui";
+import { useState, useEffect } from "react";
+import { Tab, Tablist } from "evergreen-ui";
 import React from "react";
 import Day from "./period/Day";
 import Week from "./period/Week";
-import Month from "./period/Month";
 import styled from "styled-components";
+import Line from "./line/Line";
+import { useSetRecoilState, useRecoilValue } from "recoil";
+import { selectedLineAtom } from "../recoil/statistics/statistics";
+import { getTreeData } from "../apis/statistic/statisticData";
 
 function Statistics() {
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [tabs] = useState(["일간", "주간", "월간"]);
-  const components = [<Day />, <Week />, <Month />];
+  const [selectedPeriodIndex, setSelectedPeriodIndex] = useState(0);
+  const [periodTabs] = useState(["일간", "주간"]);
+  const [lineTabs] = useState(["라인1", "라인2", "라인3", "라인4"]);
+  const periodComponents = [<Day />, <Week />];
+  const lineComponent = <Line />;
+  const setSelectedLineAtom = useSetRecoilState(selectedLineAtom);
+  const selectedLine = useRecoilValue(selectedLineAtom);
+  const setSelectedLine = (lineNumber) => setSelectedLineAtom(lineNumber);
+  // const [treeData, setTreeData] = useState([]);
+
+  // 더미데이터
+  const treeData = [
+    {
+      lineNumber: 1,
+      tree: [
+        { treeNumber: 1, yield: 44 },
+        { treeNumber: 2, yield: 52 },
+        { treeNumber: 3, yield: 54 },
+        { treeNumber: 4, yield: 48 },
+        { treeNumber: 5, yield: 62 },
+        { treeNumber: 6, yield: 67 },
+        { treeNumber: 7, yield: 56 },
+        { treeNumber: 8, yield: 52 },
+      ],
+    },
+    {
+      lineNumber: 2,
+      tree: [
+        { treeNumber: 1, yield: 44 },
+        { treeNumber: 2, yield: 52 },
+        { treeNumber: 3, yield: 54 },
+        { treeNumber: 4, yield: 48 },
+        { treeNumber: 5, yield: 62 },
+        { treeNumber: 6, yield: 67 },
+        { treeNumber: 7, yield: 56 },
+        { treeNumber: 8, yield: 52 },
+      ],
+    },
+    {
+      lineNumber: 3,
+      tree: [
+        { treeNumber: 1, yield: 44 },
+        { treeNumber: 2, yield: 52 },
+        { treeNumber: 3, yield: 54 },
+        { treeNumber: 4, yield: 48 },
+        { treeNumber: 5, yield: 62 },
+        { treeNumber: 6, yield: 67 },
+        { treeNumber: 7, yield: 56 },
+        { treeNumber: 8, yield: 52 },
+      ],
+    },
+    {
+      lineNumber: 4,
+      tree: [
+        { treeNumber: 1, yield: 44 },
+        { treeNumber: 2, yield: 52 },
+        { treeNumber: 3, yield: 54 },
+        { treeNumber: 4, yield: 48 },
+        { treeNumber: 5, yield: 62 },
+        { treeNumber: 6, yield: 67 },
+        { treeNumber: 7, yield: 56 },
+        { treeNumber: 8, yield: 52 },
+      ],
+    },
+  ];
+
+  const changeTreeColor = (yieldAmount) => {
+    if (yieldAmount == undefined || yieldAmount == null) {
+      return "#D1180B";
+    } else if (yieldAmount < 45) {
+      return "#D1180B";
+    } else if (yieldAmount < 55) {
+      return "#FFBF00";
+    } else {
+      return "#2DB400";
+    }
+  };
+
+  useEffect(() => {}, []);
+
+  const fetchSSE = () => {
+    console.log("fetchSSE 실행");
+    const eventSource = new EventSource(
+      "http://192.168.31.206:3022/api/connection/connect"
+    );
+
+    eventSource.addEventListener("open", () => {
+      console.log("sse OPENED");
+    });
+
+    eventSource.addEventListener("tree", (e) => {
+      console.log(e.data);
+      setTreeData(JSON.parse(e.data));
+    });
+
+    eventSource.addEventListener("hourmessage", (e) => {
+      // console.log(e.data);
+    });
+
+    // eventSource.onerror = (e) => {
+    //   console.log(e.target.readyState);
+    //   eventSource.close();
+    //   if (e.target.readyState === EventSource.CLOSED) {
+    //     console.log("sse CLOSED");
+    //   }
+    // };
+  };
+
+  useEffect(() => {
+    setSelectedLine(1);
+    getTreeData(
+      ({ data }) => {
+        setTreeData(data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }, []);
 
   return (
     <>
@@ -20,38 +139,135 @@ function Statistics() {
           </TitleContainer>
         </div>
         <div>
-          <Pane height={120}>
-            <Tablist
-              marginBottom={16}
-              flexBasis={240}
-              marginRight={24}
-              marginLeft={10}
-            >
-              {tabs.map((tab, index) => (
-                <Tab
-                  aria-controls={`panel-${tab}`}
-                  isSelected={index === selectedIndex}
-                  key={tab}
-                  onSelect={() => setSelectedIndex(index)}
-                  color={"#e6e5ea"}
-                  fontSize={"16px"}
+          <div
+            style={{
+              fontSize: "24px",
+              fontWeight: 600,
+              marginBottom: "16px",
+              backgroundColor: "#384351",
+              display: "inline-block",
+              padding: "10px 20px",
+              borderRadius: "10px",
+            }}
+          >
+            스마트팜 환경
+          </div>
+          <Tablist
+            marginBottom={16}
+            flexBasis={240}
+            marginRight={24}
+            marginLeft={3}
+          >
+            {periodTabs.map((tab, index) => (
+              <Tab
+                aria-controls={`panel-${tab}`}
+                isSelected={index === selectedPeriodIndex}
+                key={tab}
+                onSelect={() => {
+                  setSelectedPeriodIndex(index);
+                }}
+                color={"#e6e5ea"}
+                fontSize={"16px"}
+              >
+                {tab}
+              </Tab>
+            ))}
+          </Tablist>
+          {periodComponents[selectedPeriodIndex]}
+          <div
+            style={{
+              fontSize: "24px",
+              fontWeight: 600,
+              marginBottom: "16px",
+              backgroundColor: "#384351",
+              display: "inline-block",
+              padding: "10px 20px",
+              borderRadius: "10px",
+            }}
+          >
+            라인별 환경
+          </div>
+          <Tablist
+            marginBottom={16}
+            flexBasis={240}
+            marginRight={24}
+            marginLeft={3}
+          >
+            {lineTabs.map((tab, index) => (
+              <Tab
+                aria-controls={`panel-${tab}`}
+                isSelected={index + 1 == selectedLine}
+                key={tab}
+                onSelect={() => {
+                  setSelectedLine(index + 1);
+                }}
+                color={"#e6e5ea"}
+                fontSize={"16px"}
+              >
+                {tab}
+              </Tab>
+            ))}
+          </Tablist>
+          {lineComponent}
+          <div
+            style={{
+              fontSize: "24px",
+              fontWeight: 600,
+              marginBottom: "16px",
+              backgroundColor: "#384351",
+              display: "inline-block",
+              padding: "10px 20px",
+              borderRadius: "10px",
+            }}
+          >
+            라인별 수확량
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              width: "100%",
+            }}
+          >
+            {treeData.map((line, index) => (
+              <div key={index}>
+                <div
+                  style={{
+                    fontSize: "22px",
+                    fontWeight: 600,
+                    margin: "5px 5px 5px 10px",
+                  }}
                 >
-                  {tab}
-                </Tab>
-              ))}
-            </Tablist>
-            {components[selectedIndex]}
-          </Pane>
+                  라인{line.lineNumber}
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    width: "100%",
+                    overflow: "hidden",
+                  }}
+                >
+                  {line.tree.map((tree, index) => (
+                    <Tree
+                      key={index}
+                      style={{
+                        backgroundColor:
+                          changeTreeColor(tree.yield) || "#D1180B",
+                      }}
+                    >
+                      {tree.yield}
+                    </Tree>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </DashboardBox>
     </>
   );
 }
-
-const DashboardContainer = styled.div`
-  width: 100%;
-  height: 100%;
-`;
 
 const DashboardBox = styled.div`
   overflow: auto;
@@ -62,14 +278,22 @@ const DashboardBox = styled.div`
 
 const TitleContainer = styled.div`
   display: flex;
-  height: 100px;
   padding: 25px 0;
 `;
 
 const Title = styled.div`
-  height: 50px;
   font-size: 32px;
   font-weight: 600;
 `;
 
+const Tree = styled.div`
+  line-height: 120px;
+  text-align: center;
+  width: 120px;
+  height: 120px;
+  margin: 10px;
+  border-radius: 5px;
+  font-size: 24px;
+  font-weight: 600;
+`;
 export default Statistics;

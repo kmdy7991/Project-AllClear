@@ -152,8 +152,9 @@ const LoginButton = styled.button`
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-  padding: 5px;
+  padding: 8px;
   margin-bottom: 10px;
+  color: #e6e5ea;
 `;
 
 const JoinButton = styled.div`
@@ -168,7 +169,7 @@ const JoinButton = styled.div`
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-  padding: 5px;
+  padding: 8px;
 `;
 
 export default Login;

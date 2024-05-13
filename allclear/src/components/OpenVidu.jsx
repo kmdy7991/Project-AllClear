@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useOpenVidu } from "../modules/useOpenVidu";
 
 function OpenVidu() {
@@ -60,7 +60,7 @@ function OpenVidu() {
           await session.connect(token);
           const publisher = OV.initPublisher(undefined, {
             audioSource: undefined,
-            videoSource: undefined,
+            videoSource: "screen",
             publishAudio: false,
             publishVideo: true,
             mirror: true,

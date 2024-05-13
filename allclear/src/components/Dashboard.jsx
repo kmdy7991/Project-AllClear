@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { PieChart } from "@mui/x-charts/PieChart";
-import { BarChart } from "@mui/x-charts/BarChart";
-import { axisClasses } from "@mui/x-charts/ChartsAxis";
 import temperature from "../assets/temperature.png";
 import humidity from "../assets/humidity.png";
 import light from "../assets/light.png";
+import onfire from "../assets/onfire.png";
+import nofire from "../assets/nofire.png";
+import { dashboardDataAtom } from "../recoil/dashboard/dashboard";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 function Dashboard() {
   const [contentSize, setContentSize] = useState({ width: 0, height: 0 });
@@ -32,16 +34,9 @@ function Dashboard() {
     }
   }, [contentRef2.current]);
 
-  const [temperatureData, setTemperatureData] = useState("");
-  const [humidityData, setHumidityData] = useState("");
-  const [lightData, setLightData] = useState("");
-
-  const data2 = [
-    { label: "1단계", value: 1102 },
-    { label: "2단계", value: 2341 },
-    { label: "3단계", value: 891 },
-    { label: "4단계", value: 367 },
-  ];
+  const setDashboardDataAtom = useSetRecoilState(dashboardDataAtom);
+  const setDashboardData = (data) => setDashboardDataAtom(data);
+  const dashboardData = useRecoilValue(dashboardDataAtom);
 
   const data3 = [
     { day: "월", value: 205 },
@@ -53,39 +48,79 @@ function Dashboard() {
     { day: "일", value: 3214 },
   ];
 
-  const fetchSSE = async () => {
+  const fetchSSE = () => {
+    console.log("fetchSSE 실행");
     const eventSource = new EventSource(
       "http://192.168.31.206:3022/api/connection/connect"
     );
 
-    eventSource.onopen = () => {
+    // eventSource.onopen = () => {
+    //   console.log("sse OPENED");
+    // };
+
+    eventSource.addEventListener("open", () => {
       console.log("sse OPENED");
-    };
+    });
 
     eventSource.addEventListener("secondmessage", (e) => {
       console.log(e.data);
-      setTemperatureData(JSON.parse(e.data).temperature);
-      setHumidityData(JSON.parse(e.data).humidity);
-      setLightData(JSON.parse(e.data).light);
+      setDashboardData(JSON.parse(e.data));
     });
 
     eventSource.addEventListener("hourmessage", (e) => {
       // console.log(e.data);
     });
 
-    eventSource.onerror = (e) => {
-      console.log(e);
-      eventSource.close();
-
-      if (e.target.readyState === EventSource.CLOSED) {
-        console.log("sse CLOSED");
-      }
-    };
+    // eventSource.onerror = (e) => {
+    //   console.log(e.target.readyState);
+    //   eventSource.close();
+    //   if (e.target.readyState === EventSource.CLOSED) {
+    //     console.log("sse CLOSED");
+    //   }
+    // };
   };
 
   useEffect(() => {
     fetchSSE();
   }, []);
+
+  const detectFire = () => {
+    if (dashboardData.detect == "1") {
+      return (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-evenly",
+            width: "100%",
+            height: "75%",
+          }}
+        >
+          <FireImg src={onfire} />
+          <div style={{ fontSize: 70, fontWeight: 600, color: "#FF3E03" }}>
+            화재 발생
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-evenly",
+            width: "100%",
+            height: "75%",
+          }}
+        >
+          <FireImg src={nofire} />
+          <div style={{ fontSize: 70, fontWeight: 600, color: "#ADAAAB" }}>
+            이상 없음
+          </div>
+        </div>
+      );
+    }
+  };
 
   return (
     <>
@@ -106,8 +141,8 @@ function Dashboard() {
                 }}
               >
                 <TemperatureImg src={temperature} />
-                <Temperature>{temperatureData}</Temperature>
-                <Celsius>℃</Celsius>
+                <Temperature>{dashboardData.temperature}</Temperature>
+                <Celsius>(℃)</Celsius>
               </div>
             </Content1>
             <Content1 ref={contentRef} height={contentSize.height * 0.8}>
@@ -121,8 +156,8 @@ function Dashboard() {
                 }}
               >
                 <HumidityImg src={humidity} />
-                <Temperature>{humidityData}</Temperature>
-                <Celsius>%</Celsius>
+                <Temperature>{dashboardData.humidity}</Temperature>
+                <Celsius>(％)</Celsius>
               </div>
             </Content1>
             <Content1 ref={contentRef} height={contentSize.height * 0.8}>
@@ -136,20 +171,34 @@ function Dashboard() {
                 }}
               >
                 <LightImg src={light} />
-                <Temperature>{lightData}</Temperature>
-                <Celsius>lux</Celsius>
+                <Temperature>{dashboardData.light}</Temperature>
+                <Celsius>(㏓)</Celsius>
               </div>
             </Content1>
             <Content2 ref={contentRef2} height={contentSize2.height / 1.3}>
-              <ContentTitle2>생육 단계</ContentTitle2>
+              <ContentTitle2>공기 질 현황표</ContentTitle2>
               <PieChart
-                colors={["#3C4856", "#FF9142", "#23D3B5", "#20AEE3"]}
+                colors={[
+                  "#FF5B72",
+                  "#23ADE5",
+                  "#FF9142",
+                  "#23D3B5",
+                  "#3C4856",
+                  "#6872E1",
+                ]}
                 margin={{ top: 30, bottom: 10, left: 10, right: 10 }}
-                height={400}
+                height={500}
                 series={[
                   {
-                    data: data2,
-                    innerRadius: 40,
+                    data: [
+                      { label: "CO", value: dashboardData.co },
+                      { label: "CO2", value: dashboardData.co2 },
+                      { label: "Alcohol", value: dashboardData.alcohol },
+                      { label: "Venzene", value: dashboardData.venzene },
+                      { label: "NH4", value: dashboardData.nh4 },
+                      { label: "Aceton", value: dashboardData.aceton },
+                    ],
+                    innerRadius: 70,
                     outerRadius: 130,
                   },
                 ]}
@@ -163,49 +212,8 @@ function Dashboard() {
               />
             </Content2>
             <Content3 ref={contentRef2} height={contentSize2.height / 1.3}>
-              <ContentTitle3>주간 생산량</ContentTitle3>
-              <BarChart
-                width={500}
-                height={350}
-                series={[
-                  {
-                    data: data3.map((item) => item.value),
-                    label: "수확량",
-                    id: "pvId",
-                  },
-                ]}
-                xAxis={[
-                  {
-                    data: data3.map((item) => item.day),
-                    scaleType: "band",
-                  },
-                ]}
-                slotProps={{
-                  legend: {
-                    hidden: true,
-                  },
-                }}
-                sx={{
-                  [`& .${axisClasses.directionX} .${axisClasses.tickLabel}`]: {
-                    fill: "#e6e5ea", // 텍스트 색상을 흰색으로 설정
-                  },
-                  [`& .${axisClasses.directionY} .${axisClasses.tickLabel}`]: {
-                    fill: "#e6e5ea", // 축 라벨의 텍스트 색상을 흰색으로 설정
-                  },
-                  [`& .${axisClasses.directionX} .${axisClasses.line}`]: {
-                    stroke: "#e6e5ea", // x축 선의 색상을 흰색으로 설정
-                  },
-                  [`& .${axisClasses.directionY} .${axisClasses.line}`]: {
-                    stroke: "#e6e5ea", // y축 선의 색상을 흰색으로 설정
-                  },
-                  [`& .${axisClasses.directionX} .${axisClasses.tick}`]: {
-                    stroke: "#e6e5ea", // x축 눈금의 색상을 흰색으로 설정
-                  },
-                  [`& .${axisClasses.directionY} .${axisClasses.tick}`]: {
-                    stroke: "#e6e5ea", // y축 눈금의 색상을 흰색으로 설정
-                  },
-                }}
-              />
+              <ContentTitle3>화재 감지</ContentTitle3>
+              {detectFire()}
             </Content3>
           </DashboardContents>
         </DashboardBox>
@@ -242,7 +250,6 @@ const DashboardContents = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  height: calc(100% - 100px);
   justify-content: space-between;
 `;
 
@@ -269,9 +276,9 @@ const TemperatureImg = styled.img`
 `;
 
 const Temperature = styled.div`
-  font-size: 100px;
+  font-size: 80px;
   font-weight: 600;
-  margin-left: 40px;
+  margin-left: 20px;
 `;
 
 const Celsius = styled.div`
@@ -293,7 +300,7 @@ const Content2 = styled.div`
   flex-direction: column;
   align-items: center;
   background-color: #273444;
-  width: 42%;
+  width: 49%;
   margin-bottom: 30px;
   height: ${(props) => props.height}px;
   overflow: hidden;
@@ -310,10 +317,9 @@ const ContentTitle2 = styled.div`
 const Content3 = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   background-color: #273444;
-  width: 56%;
+  width: 49%;
   margin-bottom: 30px;
   height: ${(props) => props.height}px;
   overflow: hidden;
@@ -323,6 +329,10 @@ const ContentTitle3 = styled.div`
   font-size: 32px;
   font-weight: 600;
   margin: 40px 0 0px;
+`;
+
+const FireImg = styled.img`
+  height: 65%;
 `;
 
 export default Dashboard;

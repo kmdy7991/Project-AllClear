@@ -7,6 +7,7 @@ import Statistics from "./components/Statistics.jsx";
 
 import Login from "./components/Login.jsx";
 import Join from "./components/Join.jsx";
+import OpenVidu from "./components/OpenVidu.jsx";
 import { isLoggedInAtom } from "./recoil/login/login";
 import { useRecoilValue } from "recoil";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -39,6 +40,7 @@ function App() {
               <Route path="/" element={<Navigate to="/login" replace />} />
               <Route path="/login" element={<Login />} />
               <Route path="/join" element={<Join />} />
+              <Route path="/openvidu" element={<OpenVidu />} />
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </Container>
@@ -51,6 +53,7 @@ function App() {
 const Container = styled.div`
   width: 100%;
   height: 100vh;
+  color: #e6e5ea;
 `;
 
 const MainContainer = styled.div`
