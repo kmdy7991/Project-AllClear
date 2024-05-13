@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { LineChart } from "@mui/x-charts/LineChart";
 import { getHourlyData } from "../../apis/statistic/statisticData";
 import { axisClasses } from "@mui/x-charts/ChartsAxis";
+import { ChartsReferenceLine } from "@mui/x-charts/ChartsReferenceLine";
 
 function Day() {
   const [hourlyTemperature, setHourlyTemperature] = useState([]);
@@ -61,7 +62,12 @@ function Day() {
               ["& path"]: { strokeWidth: "5px", stroke: "#E03F69" },
             }}
             slotProps={{ legend: { labelStyle: { fill: `#e6e5ea` } } }}
-          />
+          >
+            <ChartsReferenceLine
+              y={24}
+              lineStyle={{ stroke: "#e6e5ea", strokeWidth: 1 }}
+            />
+          </LineChart>
         </div>
         <div style={{ backgroundColor: "#273444", marginBottom: 30 }}>
           <LineChart
@@ -98,7 +104,12 @@ function Day() {
               "& path": { strokeWidth: "5px", stroke: "#4A5ED8" },
             }}
             slotProps={{ legend: { labelStyle: { fill: `#e6e5ea` } } }}
-          />
+          >
+            <ChartsReferenceLine
+              y={33}
+              lineStyle={{ stroke: "#e6e5ea", strokeWidth: 1.5 }}
+            />
+          </LineChart>
         </div>
         <div style={{ backgroundColor: "#273444", marginBottom: 30 }}>
           <LineChart
@@ -136,42 +147,13 @@ function Day() {
             slotProps={{
               legend: { labelStyle: { fill: `#e6e5ea` } },
             }}
-          />
+          >
+            <ChartsReferenceLine
+              y={500}
+              lineStyle={{ stroke: "#e6e5ea", strokeWidth: 1.5 }}
+            />
+          </LineChart>
         </div>
-        {/* <div style={{ backgroundColor: "#273444", marginBottom: 30 }}>
-          <BarChart
-            width={690}
-            height={400}
-            series={[
-              { data: pData, label: "pv", id: "pvId" },
-              { data: uData, label: "uv", id: "uvId" },
-            ]}
-            xAxis={[{ data: xLabels, scaleType: "band" }]}
-            sx={{
-              [`& .${axisClasses.directionX} .${axisClasses.tickLabel}`]: {
-                fill: "#e6e5ea", // 텍스트 색상을 흰색으로 설정
-              },
-              [`& .${axisClasses.directionY} .${axisClasses.tickLabel}`]: {
-                fill: "#e6e5ea", // 축 라벨의 텍스트 색상을 흰색으로 설정
-              },
-              [`& .${axisClasses.directionX} .${axisClasses.line}`]: {
-                stroke: "#e6e5ea", // x축 선의 색상을 흰색으로 설정
-              },
-              [`& .${axisClasses.directionY} .${axisClasses.line}`]: {
-                stroke: "#e6e5ea", // y축 선의 색상을 흰색으로 설정
-              },
-              [`& .${axisClasses.directionX} .${axisClasses.tick}`]: {
-                stroke: "#e6e5ea", // x축 눈금의 색상을 흰색으로 설정
-              },
-              [`& .${axisClasses.directionY} .${axisClasses.tick}`]: {
-                stroke: "#e6e5ea", // y축 눈금의 색상을 흰색으로 설정
-              },
-            }}
-            slotProps={{
-              legend: { labelStyle: { fill: `#e6e5ea` } },
-            }}
-          />
-        </div> */}
       </DashboardContents>
     </div>
   );

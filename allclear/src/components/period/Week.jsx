@@ -120,6 +120,7 @@ function Week() {
               // { data: dailyHumidity, label: "습도" },
               { data: dailyLight, label: "조도(㏓)" },
             ]}
+            yAxis={[{ min: 0, max: 1000}]}
             xAxis={[{ scaleType: "point", data: dailyCheckAt }]}
             sx={{
               [`& .${axisClasses.directionX} .${axisClasses.tickLabel}`]: {
@@ -150,37 +151,6 @@ function Week() {
             />
           </LineChart>
         </div>
-        {/* <div style={{ backgroundColor: "#273444", marginBottom: 30 }}>
-          <BarChart
-            width={690}
-            height={400}
-            series={[{ data: uData, label: "수확량" }]}
-            xAxis={[{ data: xLabels, scaleType: "band" }]}
-            sx={{
-              [`& .${axisClasses.directionX} .${axisClasses.tickLabel}`]: {
-                fill: "#e6e5ea", // 텍스트 색상을 흰색으로 설정
-              },
-              [`& .${axisClasses.directionY} .${axisClasses.tickLabel}`]: {
-                fill: "#e6e5ea", // 축 라벨의 텍스트 색상을 흰색으로 설정
-              },
-              [`& .${axisClasses.directionX} .${axisClasses.line}`]: {
-                stroke: "#e6e5ea", // x축 선의 색상을 흰색으로 설정
-              },
-              [`& .${axisClasses.directionY} .${axisClasses.line}`]: {
-                stroke: "#e6e5ea", // y축 선의 색상을 흰색으로 설정
-              },
-              [`& .${axisClasses.directionX} .${axisClasses.tick}`]: {
-                stroke: "#e6e5ea", // x축 눈금의 색상을 흰색으로 설정
-              },
-              [`& .${axisClasses.directionY} .${axisClasses.tick}`]: {
-                stroke: "#e6e5ea", // y축 눈금의 색상을 흰색으로 설정
-              },
-            }}
-            slotProps={{
-              legend: { labelStyle: { fill: `#e6e5ea` } },
-            }}
-          />
-        </div> */}
       </DashboardContents>
     </div>
   );

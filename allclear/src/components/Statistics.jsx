@@ -18,6 +18,8 @@ function Statistics() {
   const setSelectedLineAtom = useSetRecoilState(selectedLineAtom);
   const selectedLine = useRecoilValue(selectedLineAtom);
   const setSelectedLine = (lineNumber) => setSelectedLineAtom(lineNumber);
+
+  // API 연동 데이터
   // const [treeData, setTreeData] = useState([]);
 
   // 더미데이터
@@ -209,18 +211,20 @@ function Statistics() {
             ))}
           </Tablist>
           {lineComponent}
-          <div
-            style={{
-              fontSize: "24px",
-              fontWeight: 600,
-              marginBottom: "16px",
-              backgroundColor: "#384351",
-              display: "inline-block",
-              padding: "10px 20px",
-              borderRadius: "10px",
-            }}
-          >
-            라인별 수확량
+          <div style={{display: 'flex', }}>
+            <div
+              style={{
+                fontSize: "24px",
+                fontWeight: 600,
+                marginBottom: "16px",
+                backgroundColor: "#384351",
+                display: "inline-block",
+                padding: "10px 20px",
+                borderRadius: "10px",
+              }}
+            >
+              라인별 수확량
+            </div>
           </div>
           <div
             style={{
