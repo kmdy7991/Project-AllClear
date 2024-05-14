@@ -11,20 +11,20 @@ function Line() {
   const selectedLine = useRecoilValue(selectedLineAtom);
 
   // API 연동 데이터
-  // const [water, setWater] = useState([]);
-  // const [ph, setPh] = useState([]);
-  // const [date, setDate] = useState([]);
+  const [ec, setEc] = useState([]);
+  const [ph, setPh] = useState([]);
+  const [date, setDate] = useState([]);
 
   // 더미데이터
-  const water = ["64", "42", "53", "55", "59", "62", "68"];
-  const ph = ["24.1", "23.9", "24.0", "24.3", "24.6", "25.1", "24.7"];
-  const date = ["05-01", "05-02", "05-03", "05-04", "05-05", "05-06", "05-07"];
+  // const water = ["64", "42", "53", "55", "59", "62", "68"];
+  // const ph = ["24.1", "23.9", "24.0", "24.3", "24.6", "25.1", "24.7"];
+  // const date = ["05-01", "05-02", "05-03", "05-04", "05-05", "05-06", "05-07"];
 
   useEffect(() => {
     getLineData(
       selectedLine,
       ({ data }) => {
-        setWater(data.waterList);
+        setEc(data.ecList);
         setPh(data.phList);
         setDate(data.dateList);
       },
@@ -32,7 +32,7 @@ function Line() {
         console.log(error);
       }
     );
-  }, []);
+  }, [selectedLine]);
 
   return (
     <div>
@@ -42,8 +42,8 @@ function Line() {
             width={690}
             height={400}
             colors={["#2699E6"]}
-            series={[{ data: water, label: "물" }]}
-            yAxis={[{ min: 0, max: 100 }]}
+            series={[{ data: ec, label: "양액 EC" }]}
+            yAxis={[{ min: 0, max: 5 }]}
             xAxis={[{ scaleType: "point", data: date }]}
             sx={{
               [`& .${axisClasses.directionX} .${axisClasses.tickLabel}`]: {
@@ -69,7 +69,7 @@ function Line() {
             slotProps={{ legend: { labelStyle: { fill: `#e6e5ea` } } }}
           >
             <ChartsReferenceLine
-              y={50}
+              y={2.5}
               lineStyle={{ stroke: "#e6e5ea", strokeWidth: 1 }}
             />
           </LineChart>
@@ -79,8 +79,8 @@ function Line() {
             width={690}
             height={400}
             colors={["#03C04A"]}
-            series={[{ data: ph, label: "PH농도" }]}
-            yAxis={[{ min: 0, max: 60 }]}
+            series={[{ data: ph, label: "양액 pH" }]}
+            yAxis={[{ min: 0, max: 10 }]}
             xAxis={[{ scaleType: "point", data: date }]}
             sx={{
               [`& .${axisClasses.directionX} .${axisClasses.tickLabel}`]: {
@@ -106,7 +106,7 @@ function Line() {
             slotProps={{ legend: { labelStyle: { fill: `#e6e5ea` } } }}
           >
             <ChartsReferenceLine
-              y={30}
+              y={5.5}
               lineStyle={{ stroke: "#e6e5ea", strokeWidth: 1 }}
             />
           </LineChart>

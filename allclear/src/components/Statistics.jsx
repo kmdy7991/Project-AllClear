@@ -98,7 +98,7 @@ function Statistics() {
   const fetchSSE = () => {
     console.log("fetchSSE 실행");
     const eventSource = new EventSource(
-      "http://192.168.31.206:3022/api/connection/connect"
+      "http://192.168.31.169:3024/api/connection/connect/tree"
     );
 
     eventSource.addEventListener("open", () => {
@@ -281,7 +281,12 @@ function Statistics() {
             <SimulationModalOverlay>
               <SimulationModal>
                 <SimulationStartButton>시작</SimulationStartButton>
-                <CloseButton src={close} onClick={() => {setIsSimulationModalVisible(false)}} />
+                <CloseButton
+                  src={close}
+                  onClick={() => {
+                    setIsSimulationModalVisible(false);
+                  }}
+                />
               </SimulationModal>
             </SimulationModalOverlay>
           )}
