@@ -105,7 +105,7 @@ function Week() {
             slotProps={{ legend: { labelStyle: { fill: `#e6e5ea` } } }}
           >
             <ChartsReferenceLine
-              y={33}
+              y={65}
               lineStyle={{ stroke: "#e6e5ea", strokeWidth: 1.5 }}
             />
           </LineChart>
