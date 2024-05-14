@@ -1,29 +1,65 @@
 package allclear.lineservice.controller;
 
+import allclear.lineservice.dto.TreeAllResponseDto;
+import allclear.lineservice.dto.TreeInsertRequestDto;
 import allclear.lineservice.dto.TreeResponseDto;
 import allclear.lineservice.service.TreeService;
+import feign.Response;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @Slf4j
 @RequiredArgsConstructor
 @CrossOrigin("*")
-@RequestMapping(value = "/api/state-service/tree")
+//@RequestMapping(value = "/api/state-service/tree")
 public class TreeController {
 
     private final TreeService treeService;
 
-    @GetMapping
-    public ResponseEntity<List<TreeResponseDto>> getTreeData() {
+    // 모든 나무 수확량 가져오기
+    @GetMapping("/api/state-service/tree")
+    public ResponseEntity<TreeAllResponseDto> getTreeData() {
         return ResponseEntity.ok(treeService.getAllTreeData());
+    }
+
+    // 나무 수확량 데이터 추가
+    @PostMapping("/api/state-service/tree/add")
+    public ResponseEntity<String> postTreeData(@RequestBody TreeInsertRequestDto treeInsertRequestDto) {
+        return ResponseEntity.ok(treeService.postTreeData(treeInsertRequestDto));
+    }
+
+    // 시뮬레이션 결과 저장
+    @PostMapping("/api/state-service/tree/simulation")
+    public ResponseEntity<String> postTreeDataSimulation(@RequestBody Map<String, Object> map) {
+        String result = treeService.postTreeDataSimulation(map);
+
+        // sse 이벤트 호출
+        treeService.getAllTreeData();
+        return ResponseEntity.ok(result);
+    }
+
+    // sse 연결
+    @GetMapping(value = "/api/connection/connect/tree", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public ResponseEntity<SseEmitter> sseConnect() {
+        SseEmitter emitter = new SseEmitter();
+        treeService.sseAdd(emitter);
+        try {
+            emitter.send(SseEmitter.event()
+                    .name("treeConnect")
+                    .data("connected!"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return ResponseEntity.ok(emitter);
     }
 
 }

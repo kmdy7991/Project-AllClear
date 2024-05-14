@@ -9,8 +9,7 @@ import java.util.ArrayList;
 @Setter
 public class LineResponseDto {
     private int lineNumber;
-    private ArrayList<String> waterValue;
-    private ArrayList<String> phValue;
-    private ArrayList<String> waterList;
+    private ArrayList<String> phList;
+    private ArrayList<String> ecList;
     private ArrayList<String> dateList;
 }

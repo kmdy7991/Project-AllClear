@@ -1,14 +1,14 @@
 package allclear.lineservice.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class LineEnv {
 
@@ -18,7 +18,7 @@ public class LineEnv {
     private Long lineEnvPk;
 
     @Column
-    private String water;
+    private String ec;
 
     @Column
     private String ph;

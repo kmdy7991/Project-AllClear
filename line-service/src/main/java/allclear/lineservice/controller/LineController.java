@@ -1,5 +1,7 @@
 package allclear.lineservice.controller;
 
+import allclear.lineservice.dto.LineEnvInsertRequestDto;
+import allclear.lineservice.dto.LineInsertRequestDto;
 import allclear.lineservice.dto.LineResponseDto;
 import allclear.lineservice.service.LineService;
 import lombok.RequiredArgsConstructor;
@@ -20,5 +22,17 @@ public class LineController {
     @GetMapping("/{lineNumber}")
     public ResponseEntity<LineResponseDto> getLineData(@PathVariable int lineNumber) {
         return ResponseEntity.ok(lineService.getOneLineData(lineNumber));
+    }
+
+    // 라인 추가
+    @PostMapping("/add")
+    public ResponseEntity<String> postLineData(@RequestBody LineInsertRequestDto lineInsertRequestDto) {
+        return ResponseEntity.ok(lineService.postLineData(lineInsertRequestDto));
+    }
+
+    // 라인 환경 변수 추가
+    @PostMapping("/env/add")
+    public ResponseEntity<String> postLineEnvData(@RequestBody LineEnvInsertRequestDto lineEnvInsertRequestDto) {
+        return ResponseEntity.ok(lineService.postLineEnvData(lineEnvInsertRequestDto));
     }
 }
