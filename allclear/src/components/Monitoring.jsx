@@ -16,6 +16,7 @@ function Monitoring() {
 
   useEffect(() => {
     fetchSSE();
+    fetchSSE2();
   }, []);
 
   useEffect(() => {
@@ -33,6 +34,19 @@ function Monitoring() {
     }
   }, [alarmData]);
 
+  // 용준 SSE
+  const fetchSSE2 = async () => {
+    const eventSource = new EventSource(
+      "http://192.168.31.206:3022/api/connection/connect"
+    );
+
+    eventSource.addEventListener("secondmessage", (e) => {
+      console.log(e.data);
+      setAlarmData(JSON.parse(e.data));
+    });
+  };
+
+  // 재식 SSE
   const fetchSSE = async () => {
     const eventSource = new EventSource(
       "http://192.168.31.213:8081/api/unity/connect"
@@ -42,26 +56,11 @@ function Monitoring() {
       console.log("sse OPENED");
     };
 
-    // 수확
-    eventSource.addEventListener("secondmessage", (e) => {
+    // 수확(이름 바꿔야 됨 secondmessage)
+    eventSource.addEventListener("harvesting", (e) => {
       console.log(e.data);
       setActiveData(JSON.parse(e.data));
     });
-
-    // 경보 알람
-    eventSource.addEventListener("fireAlarm", (e) => {
-      console.log(e.data);
-      setAlarmData(JSON.parse(e.data));
-    });
-  };
-
-  const testfunction = () => {
-    const activationData = JSON.stringify({
-      doActive: true,
-      doHarvesting: true,
-    });
-    console.log("Sending message to Unity:", activationData);
-    sendMessage("Machine", "ActivateHarvesting", activationData);
   };
 
   return (
