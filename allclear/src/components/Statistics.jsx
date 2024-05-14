@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Tab, Tablist } from "evergreen-ui";
 import React from "react";
+import { Unity, useUnityContext } from "react-unity-webgl";
 import Day from "./period/Day";
 import Week from "./period/Week";
 import styled from "styled-components";
@@ -22,6 +23,12 @@ function Statistics() {
   const [isSimulationModalVisible, setIsSimulationModalVisible] =
     useState(false);
 
+  const { unityProvider, sendMessage } = useUnityContext({
+    loaderUrl: "Simul/Downloads.loader.js",
+    dataUrl: "Simul/webgl.data",
+    frameworkUrl: "Simul/build.framework.js",
+    codeUrl: "Simul/build.wasm",
+  });
   // API 연동 데이터
   // const [treeData, setTreeData] = useState([]);
 
@@ -81,6 +88,10 @@ function Statistics() {
     },
   ];
 
+  const StartButton = () => {
+    sendMessage("SimulationManager", "StartAllSimulations");
+  };
+
   const changeTreeColor = (yieldAmount) => {
     if (yieldAmount == undefined || yieldAmount == null) {
       return "#D1180B";
@@ -98,7 +109,7 @@ function Statistics() {
   const fetchSSE = () => {
     console.log("fetchSSE 실행");
     const eventSource = new EventSource(
-      "http://192.168.31.169:3024/api/connection/connect/tree"
+      "http://192.168.31.206:3022/api/connection/connect"
     );
 
     eventSource.addEventListener("open", () => {
@@ -277,10 +288,28 @@ function Statistics() {
               </div>
             ))}
           </div>
+
           {isSimulationModalVisible && (
             <SimulationModalOverlay>
               <SimulationModal>
-                <SimulationStartButton>시작</SimulationStartButton>
+                <SimulationStartButton
+                  onClick={() => {
+                    StartButton();
+                  }}
+                >
+                  시작
+                </SimulationStartButton>
+                <div>
+                  <Unity
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      width: "100%", // 너비 70%
+                      height: "100%", // 높이 70%
+                    }}
+                    unityProvider={unityProvider}
+                  />
+                </div>
                 <CloseButton
                   src={close}
                   onClick={() => {
