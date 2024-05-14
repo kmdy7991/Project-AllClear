@@ -115,7 +115,7 @@ const Input = styled.input`
   margin-bottom: 10px;
 `;
 
-const JoinButton = styled.button`
+const JoinButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -129,6 +129,14 @@ const JoinButton = styled.button`
   cursor: pointer;
   margin-bottom: 10px;
   padding: 5px;
+
+  &:hover {
+    background-color: #1b94c7;
+  }
+
+  &:active {
+    background-color: #176b94;
+  }
 `;
 
 export default Login;

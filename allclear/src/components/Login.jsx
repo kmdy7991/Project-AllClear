@@ -155,6 +155,14 @@ const LoginButton = styled.button`
   padding: 8px;
   margin-bottom: 10px;
   color: #e6e5ea;
+
+  &:hover {
+    background-color: #1b94c7;
+  }
+
+  &:active {
+    background-color: #176b94;
+  }
 `;
 
 const JoinButton = styled.div`
@@ -170,6 +178,14 @@ const JoinButton = styled.div`
   font-weight: 500;
   cursor: pointer;
   padding: 8px;
+
+  &:hover {
+    background-color: #1b94c7;
+  }
+
+  &:active {
+    background-color: #176b94;
+  }
 `;
 
 export default Login;

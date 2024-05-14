@@ -8,6 +8,7 @@ import Line from "./line/Line";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { selectedLineAtom } from "../recoil/statistics/statistics";
 import { getTreeData } from "../apis/statistic/statisticData";
+import close from "../assets/close.png";
 
 function Statistics() {
   const [selectedPeriodIndex, setSelectedPeriodIndex] = useState(0);
@@ -18,6 +19,8 @@ function Statistics() {
   const setSelectedLineAtom = useSetRecoilState(selectedLineAtom);
   const selectedLine = useRecoilValue(selectedLineAtom);
   const setSelectedLine = (lineNumber) => setSelectedLineAtom(lineNumber);
+  const [isSimulationModalVisible, setIsSimulationModalVisible] =
+    useState(false);
 
   // API 연동 데이터
   // const [treeData, setTreeData] = useState([]);
@@ -133,85 +136,85 @@ function Statistics() {
   }, []);
 
   return (
-    <>
-      <DashboardBox>
-        <div>
-          <TitleContainer>
-            <Title>통계</Title>
-          </TitleContainer>
+    <StatisticsBox>
+      <div>
+        <TitleContainer>
+          <Title>통계</Title>
+        </TitleContainer>
+      </div>
+      <div>
+        <div
+          style={{
+            fontSize: "24px",
+            fontWeight: 600,
+            marginBottom: "16px",
+            backgroundColor: "#384351",
+            display: "inline-block",
+            padding: "10px 20px",
+            borderRadius: "10px",
+          }}
+        >
+          스마트팜 환경
         </div>
-        <div>
-          <div
-            style={{
-              fontSize: "24px",
-              fontWeight: 600,
-              marginBottom: "16px",
-              backgroundColor: "#384351",
-              display: "inline-block",
-              padding: "10px 20px",
-              borderRadius: "10px",
-            }}
-          >
-            스마트팜 환경
-          </div>
-          <Tablist
-            marginBottom={16}
-            flexBasis={240}
-            marginRight={24}
-            marginLeft={3}
-          >
-            {periodTabs.map((tab, index) => (
-              <Tab
-                aria-controls={`panel-${tab}`}
-                isSelected={index === selectedPeriodIndex}
-                key={tab}
-                onSelect={() => {
-                  setSelectedPeriodIndex(index);
-                }}
-                color={"#e6e5ea"}
-                fontSize={"16px"}
-              >
-                {tab}
-              </Tab>
-            ))}
-          </Tablist>
-          {periodComponents[selectedPeriodIndex]}
-          <div
-            style={{
-              fontSize: "24px",
-              fontWeight: 600,
-              marginBottom: "16px",
-              backgroundColor: "#384351",
-              display: "inline-block",
-              padding: "10px 20px",
-              borderRadius: "10px",
-            }}
-          >
-            라인별 환경
-          </div>
-          <Tablist
-            marginBottom={16}
-            flexBasis={240}
-            marginRight={24}
-            marginLeft={3}
-          >
-            {lineTabs.map((tab, index) => (
-              <Tab
-                aria-controls={`panel-${tab}`}
-                isSelected={index + 1 == selectedLine}
-                key={tab}
-                onSelect={() => {
-                  setSelectedLine(index + 1);
-                }}
-                color={"#e6e5ea"}
-                fontSize={"16px"}
-              >
-                {tab}
-              </Tab>
-            ))}
-          </Tablist>
-          {lineComponent}
-          <div style={{display: 'flex', }}>
+        <Tablist
+          marginBottom={16}
+          flexBasis={240}
+          marginRight={24}
+          marginLeft={3}
+        >
+          {periodTabs.map((tab, index) => (
+            <Tab
+              aria-controls={`panel-${tab}`}
+              isSelected={index === selectedPeriodIndex}
+              key={tab}
+              onSelect={() => {
+                setSelectedPeriodIndex(index);
+              }}
+              color={"#e6e5ea"}
+              fontSize={"16px"}
+            >
+              {tab}
+            </Tab>
+          ))}
+        </Tablist>
+        {periodComponents[selectedPeriodIndex]}
+        <div
+          style={{
+            fontSize: "24px",
+            fontWeight: 600,
+            marginBottom: "16px",
+            backgroundColor: "#384351",
+            display: "inline-block",
+            padding: "10px 20px",
+            borderRadius: "10px",
+          }}
+        >
+          라인별 환경
+        </div>
+        <Tablist
+          marginBottom={16}
+          flexBasis={240}
+          marginRight={24}
+          marginLeft={3}
+        >
+          {lineTabs.map((tab, index) => (
+            <Tab
+              aria-controls={`panel-${tab}`}
+              isSelected={index + 1 == selectedLine}
+              key={tab}
+              onSelect={() => {
+                setSelectedLine(index + 1);
+              }}
+              color={"#e6e5ea"}
+              fontSize={"16px"}
+            >
+              {tab}
+            </Tab>
+          ))}
+        </Tablist>
+        {lineComponent}
+        <div style={{ position: "relative" }}>
+          <div style={{ display: "flex" }}>
             <div
               style={{
                 fontSize: "24px",
@@ -225,6 +228,13 @@ function Statistics() {
             >
               라인별 수확량
             </div>
+            <SimulationOpenButton
+              onClick={() => {
+                setIsSimulationModalVisible(true);
+              }}
+            >
+              시뮬레이션
+            </SimulationOpenButton>
           </div>
           <div
             style={{
@@ -267,13 +277,21 @@ function Statistics() {
               </div>
             ))}
           </div>
+          {isSimulationModalVisible && (
+            <SimulationModalOverlay>
+              <SimulationModal>
+                <SimulationStartButton>시작</SimulationStartButton>
+                <CloseButton src={close} onClick={() => {setIsSimulationModalVisible(false)}} />
+              </SimulationModal>
+            </SimulationModalOverlay>
+          )}
         </div>
-      </DashboardBox>
-    </>
+      </div>
+    </StatisticsBox>
   );
 }
 
-const DashboardBox = styled.div`
+const StatisticsBox = styled.div`
   overflow: auto;
   width: calc(100% - 70px);
   height: 100%;
@@ -299,5 +317,75 @@ const Tree = styled.div`
   border-radius: 5px;
   font-size: 24px;
   font-weight: 600;
+`;
+
+const SimulationOpenButton = styled.div`
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  background-color: #20ade4;
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin-left: 16px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #1b94c7;
+  }
+
+  &:active {
+    background-color: #176b94;
+  }
+`;
+
+const SimulationModalOverlay = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+`;
+
+const SimulationModal = styled.div`
+  position: relative;
+  width: 80%;
+  height: 90%;
+  background-color: #68615b;
+  border-radius: 8px;
+`;
+
+const SimulationStartButton = styled.button`
+  width: 180px;
+  height: 50px;
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  margin: 10px 0 0 10px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #1b94c7;
+  }
+
+  &:active {
+    background-color: #176b94;
+  }
+`;
+
+const CloseButton = styled.img`
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 20px;
+  height: 20px;
+
+  &:active {
+    opacity: 0.5;
+  }
 `;
 export default Statistics;

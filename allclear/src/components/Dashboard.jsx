@@ -123,102 +123,100 @@ function Dashboard() {
   };
 
   return (
-    <>
-      <DashboardContainer>
-        <DashboardBox>
-          <TitleContainer>
-            <Title>대시보드</Title>
-          </TitleContainer>
-          <DashboardContents>
-            <Content1 ref={contentRef} height={contentSize.height * 0.8}>
-              <ContentTitle1>온도</ContentTitle1>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: "80%",
-                }}
-              >
-                <TemperatureImg src={temperature} />
-                <Temperature>{dashboardData.temperature}</Temperature>
-                <Celsius>(℃)</Celsius>
-              </div>
-            </Content1>
-            <Content1 ref={contentRef} height={contentSize.height * 0.8}>
-              <ContentTitle1>습도</ContentTitle1>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: "80%",
-                }}
-              >
-                <HumidityImg src={humidity} />
-                <Temperature>{dashboardData.humidity}</Temperature>
-                <Celsius>(％)</Celsius>
-              </div>
-            </Content1>
-            <Content1 ref={contentRef} height={contentSize.height * 0.8}>
-              <ContentTitle1>조도</ContentTitle1>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: "80%",
-                }}
-              >
-                <LightImg src={light} />
-                <Temperature>{dashboardData.light}</Temperature>
-                <Celsius>(㏓)</Celsius>
-              </div>
-            </Content1>
-            <Content2 ref={contentRef2} height={contentSize2.height / 1.3}>
-              <ContentTitle2>공기 질 현황표</ContentTitle2>
-              <PieChart
-                colors={[
-                  "#FF5B72",
-                  "#23ADE5",
-                  "#FF9142",
-                  "#23D3B5",
-                  "#3C4856",
-                  "#6872E1",
-                ]}
-                margin={{ top: 30, bottom: 10, left: 10, right: 10 }}
-                height={500}
-                series={[
-                  {
-                    data: [
-                      { label: "CO", value: dashboardData.co },
-                      { label: "CO2", value: dashboardData.co2 },
-                      { label: "Alcohol", value: dashboardData.alcohol },
-                      { label: "Venzene", value: dashboardData.venzene },
-                      { label: "NH4", value: dashboardData.nh4 },
-                      { label: "Aceton", value: dashboardData.aceton },
-                    ],
-                    innerRadius: 70,
-                    outerRadius: 130,
-                  },
-                ]}
-                slotProps={{
-                  legend: {
-                    direction: "row",
-                    position: { vertical: "bottom", horizontal: "middle" },
-                    labelStyle: { fill: `#e6e5ea` },
-                  },
-                }}
-              />
-            </Content2>
-            <Content3 ref={contentRef2} height={contentSize2.height / 1.3}>
-              <ContentTitle3>화재 감지</ContentTitle3>
-              {detectFire()}
-            </Content3>
-          </DashboardContents>
-        </DashboardBox>
-      </DashboardContainer>
-    </>
+    <DashboardContainer>
+      <DashboardBox>
+        <TitleContainer>
+          <Title>대시보드</Title>
+        </TitleContainer>
+        <DashboardContents>
+          <Content1 ref={contentRef} height={contentSize.height * 0.8}>
+            <ContentTitle1>온도</ContentTitle1>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "80%",
+              }}
+            >
+              <TemperatureImg src={temperature} />
+              <Temperature>{dashboardData.temperature}</Temperature>
+              <Celsius>(℃)</Celsius>
+            </div>
+          </Content1>
+          <Content1 ref={contentRef} height={contentSize.height * 0.8}>
+            <ContentTitle1>습도</ContentTitle1>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "80%",
+              }}
+            >
+              <HumidityImg src={humidity} />
+              <Temperature>{dashboardData.humidity}</Temperature>
+              <Celsius>(％)</Celsius>
+            </div>
+          </Content1>
+          <Content1 ref={contentRef} height={contentSize.height * 0.8}>
+            <ContentTitle1>조도</ContentTitle1>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "80%",
+              }}
+            >
+              <LightImg src={light} />
+              <Temperature>{dashboardData.light}</Temperature>
+              <Celsius>(㏓)</Celsius>
+            </div>
+          </Content1>
+          <Content2 ref={contentRef2} height={contentSize2.height / 1.3}>
+            <ContentTitle2>공기 질 현황표</ContentTitle2>
+            <PieChart
+              colors={[
+                "#FF5B72",
+                "#23ADE5",
+                "#FF9142",
+                "#23D3B5",
+                "#3C4856",
+                "#6872E1",
+              ]}
+              margin={{ top: 30, bottom: 10, left: 10, right: 10 }}
+              height={500}
+              series={[
+                {
+                  data: [
+                    { label: "CO", value: dashboardData.co },
+                    { label: "CO2", value: dashboardData.co2 },
+                    { label: "Alcohol", value: dashboardData.alcohol },
+                    { label: "Venzene", value: dashboardData.venzene },
+                    { label: "NH4", value: dashboardData.nh4 },
+                    { label: "Aceton", value: dashboardData.aceton },
+                  ],
+                  innerRadius: 70,
+                  outerRadius: 130,
+                },
+              ]}
+              slotProps={{
+                legend: {
+                  direction: "row",
+                  position: { vertical: "bottom", horizontal: "middle" },
+                  labelStyle: { fill: `#e6e5ea` },
+                },
+              }}
+            />
+          </Content2>
+          <Content3 ref={contentRef2} height={contentSize2.height / 1.3}>
+            <ContentTitle3>화재 감지</ContentTitle3>
+            {detectFire()}
+          </Content3>
+        </DashboardContents>
+      </DashboardBox>
+    </DashboardContainer>
   );
 }
 
