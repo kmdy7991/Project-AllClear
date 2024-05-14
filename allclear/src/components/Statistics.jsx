@@ -8,7 +8,6 @@ import styled from "styled-components";
 import Line from "./line/Line";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { selectedLineAtom } from "../recoil/statistics/statistics";
-import { getTreeData } from "../apis/statistic/statisticData";
 import close from "../assets/close.png";
 
 function Statistics() {
@@ -30,63 +29,60 @@ function Statistics() {
     codeUrl: "Simul/build.wasm",
   });
   // API 연동 데이터
-  // const [treeData, setTreeData] = useState([]);
-
-  // 더미데이터
-  const treeData = [
+  const [treeData, setTreeData] = useState([
     {
-      lineNumber: 1,
-      tree: [
-        { treeNumber: 1, yield: 44 },
-        { treeNumber: 2, yield: 52 },
-        { treeNumber: 3, yield: 54 },
-        { treeNumber: 4, yield: 48 },
-        { treeNumber: 5, yield: 62 },
-        { treeNumber: 6, yield: 67 },
-        { treeNumber: 7, yield: 56 },
-        { treeNumber: 8, yield: 52 },
+      lineNumber: "",
+      treeList: [
+        { treeNumber: "", yield: "" },
+        { treeNumber: "", yield: "" },
+        { treeNumber: "", yield: "" },
+        { treeNumber: "", yield: "" },
+        { treeNumber: "", yield: "" },
+        { treeNumber: "", yield: "" },
+        { treeNumber: "", yield: "" },
+        { treeNumber: "", yield: "" },
       ],
     },
     {
-      lineNumber: 2,
-      tree: [
-        { treeNumber: 1, yield: 44 },
-        { treeNumber: 2, yield: 52 },
-        { treeNumber: 3, yield: 54 },
-        { treeNumber: 4, yield: 48 },
-        { treeNumber: 5, yield: 62 },
-        { treeNumber: 6, yield: 67 },
-        { treeNumber: 7, yield: 56 },
-        { treeNumber: 8, yield: 52 },
+      lineNumber: "",
+      treeList: [
+        { treeNumber: "", yield: "" },
+        { treeNumber: "", yield: "" },
+        { treeNumber: "", yield: "" },
+        { treeNumber: "", yield: "" },
+        { treeNumber: "", yield: "" },
+        { treeNumber: "", yield: "" },
+        { treeNumber: "", yield: "" },
+        { treeNumber: "", yield: "" },
       ],
     },
     {
-      lineNumber: 3,
-      tree: [
-        { treeNumber: 1, yield: 44 },
-        { treeNumber: 2, yield: 52 },
-        { treeNumber: 3, yield: 54 },
-        { treeNumber: 4, yield: 48 },
-        { treeNumber: 5, yield: 62 },
-        { treeNumber: 6, yield: 67 },
-        { treeNumber: 7, yield: 56 },
-        { treeNumber: 8, yield: 52 },
+      lineNumber: "",
+      treeList: [
+        { treeNumber: "", yield: "" },
+        { treeNumber: "", yield: "" },
+        { treeNumber: "", yield: "" },
+        { treeNumber: "", yield: "" },
+        { treeNumber: "", yield: "" },
+        { treeNumber: "", yield: "" },
+        { treeNumber: "", yield: "" },
+        { treeNumber: "", yield: "" },
       ],
     },
     {
-      lineNumber: 4,
-      tree: [
-        { treeNumber: 1, yield: 44 },
-        { treeNumber: 2, yield: 52 },
-        { treeNumber: 3, yield: 54 },
-        { treeNumber: 4, yield: 48 },
-        { treeNumber: 5, yield: 62 },
-        { treeNumber: 6, yield: 67 },
-        { treeNumber: 7, yield: 56 },
-        { treeNumber: 8, yield: 52 },
+      lineNumber: "",
+      treeList: [
+        { treeNumber: "", yield: "" },
+        { treeNumber: "", yield: "" },
+        { treeNumber: "", yield: "" },
+        { treeNumber: "", yield: "" },
+        { treeNumber: "", yield: "" },
+        { treeNumber: "", yield: "" },
+        { treeNumber: "", yield: "" },
+        { treeNumber: "", yield: "" },
       ],
     },
-  ];
+  ]);
 
   const StartButton = () => {
     sendMessage("SimulationManager", "StartAllSimulations");
@@ -109,7 +105,7 @@ function Statistics() {
   const fetchSSE = () => {
     console.log("fetchSSE 실행");
     const eventSource = new EventSource(
-      "http://192.168.31.206:3022/api/connection/connect"
+      "http://192.168.31.169:3024/api/connection/connect/tree"
     );
 
     eventSource.addEventListener("open", () => {
@@ -117,33 +113,18 @@ function Statistics() {
     });
 
     eventSource.addEventListener("tree", (e) => {
-      console.log(e.data);
-      setTreeData(JSON.parse(e.data));
+      console.log(JSON.parse(e.data));
+      setTreeData(JSON.parse(e.data).data);
     });
 
     eventSource.addEventListener("hourmessage", (e) => {
       // console.log(e.data);
     });
-
-    // eventSource.onerror = (e) => {
-    //   console.log(e.target.readyState);
-    //   eventSource.close();
-    //   if (e.target.readyState === EventSource.CLOSED) {
-    //     console.log("sse CLOSED");
-    //   }
-    // };
   };
 
   useEffect(() => {
     setSelectedLine(1);
-    getTreeData(
-      ({ data }) => {
-        setTreeData(data);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    fetchSSE();
   }, []);
 
   return (
@@ -273,7 +254,7 @@ function Statistics() {
                     overflow: "hidden",
                   }}
                 >
-                  {line.tree.map((tree, index) => (
+                  {line.treeList.map((tree, index) => (
                     <Tree
                       key={index}
                       style={{

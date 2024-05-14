@@ -21,11 +21,4 @@ const getLineData = async (lineNumber, success, fail) => {
     .catch(fail);
 };
 
-const getTreeData = async (success, fail) => {
-  await axios
-    .get(`http://1.1.1.1:1111/api/state-service/tree`)
-    .then(success)
-    .catch(fail);
-};
-
-export { getHourlyData, getDailyData, getLineData, getTreeData };
+export { getHourlyData, getDailyData, getLineData };
