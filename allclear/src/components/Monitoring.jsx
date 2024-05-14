@@ -17,6 +17,16 @@ function Monitoring() {
   useEffect(() => {
     fetchSSE();
     fetchSSE2();
+
+    const handleKeyDown = (event) => {
+      console.log(`Key pressed: ${event.key}`);
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
   }, []);
 
   useEffect(() => {
@@ -62,10 +72,35 @@ function Monitoring() {
       setActiveData(JSON.parse(e.data));
     });
   };
-
+  const dispatchKeyboardEvent = (key, keyCode, code) => {
+    const event = new KeyboardEvent("keydown", {
+      key: key.toLowerCase(),
+      keyCode: keyCode,
+      code: code,
+      which: keyCode,
+      bubbles: true, // 이벤트가 버블링 되도록 설정
+      cancelable: true, // 이벤트가 취소 가능하도록 설정
+    });
+    console.log(`Dispatching event: ${key}`);
+    document.dispatchEvent(event);
+  };
   return (
     <>
-      <p>시뮬 화면</p>
+      <button onClick={() => dispatchKeyboardEvent("s", 83, "KeyS")}>물</button>
+      <button onClick={() => sendMessage("LightManager", "ToggleAllLights")}>
+        불 켜기/끄기
+      </button>
+      <button onClick={() => sendMessage("FanManager", "ToggleAllFans")}>
+        선풍기
+      </button>
+      <div>
+        <button>1</button>
+        <button>1</button>
+        <button>1</button>
+        <button>1</button>
+        <button>1</button>
+        <button>1</button>
+      </div>
       <div
         style={{
           display: "flex",
