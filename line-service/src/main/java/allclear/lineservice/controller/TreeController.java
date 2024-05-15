@@ -41,9 +41,6 @@ public class TreeController {
     @PostMapping("/api/state-service/tree/simulation")
     public ResponseEntity<String> postTreeDataSimulation(@RequestBody Map<String, Object> map) {
         String result = treeService.postTreeDataSimulation(map);
-
-        // sse 이벤트 호출
-        treeService.getAllTreeData();
         return ResponseEntity.ok(result);
     }
 

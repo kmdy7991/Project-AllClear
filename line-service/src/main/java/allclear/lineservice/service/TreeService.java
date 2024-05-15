@@ -48,17 +48,6 @@ public class TreeService {
 
         treeAllResponseDto.setData(treeResponseList);
 
-        // 연결된 모든 sse에 전송
-        emitters.forEach(emitter -> {
-            try {
-                emitter.send(SseEmitter.event()
-                        .name("tree")
-                        .data(treeAllResponseDto));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
-
         return treeAllResponseDto;
     }
 
@@ -72,9 +61,38 @@ public class TreeService {
     public String postTreeDataSimulation(Map<String, Object> map) {
         TreeInsertRequestDto treeInsertRequestDto = new TreeInsertRequestDto();
 
+        TreeAllResponseDto treeAllResponseDto = new TreeAllResponseDto();
+        List<TreeResponseDto> treeResponseList = new ArrayList<>();
+
+        // 시뮬 끝난 결과를 웹에 보내주기 위해 json 형식으로 전처리하는 코드
+        for (int lineNum = 0; lineNum < 4; lineNum++) {
+            treeResponseList.add(new TreeResponseDto());
+            treeResponseList.get(lineNum).setLineNumber(lineNum + 1);
+            treeResponseList.get(lineNum).setTreeList(new ArrayList<>());
+            for (int i = 1; i <= 8; i++) {
+                int treeNumber = i + (lineNum * 8);
+                String treeNum = "M" + (i + ((lineNum) * 8));
+                treeResponseList.get(lineNum).getTreeList().add(new TreeListResponseDto(treeNumber, map.get(treeNum).toString()));
+            }
+        }
+
+        treeAllResponseDto.setData(treeResponseList);
+
+        // 연결된 모든 sse에 전송
+        emitters.forEach(emitter -> {
+            try {
+                emitter.send(SseEmitter.event()
+                        .name("tree")
+                        .data(treeAllResponseDto));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
         for (int line = 1; line <= 4; line++) {
             for (int i = 1; i <= 8; i++) {
                 String treeNum = "M" + (i + ((line - 1) * 8));
+
                 treeInsertRequestDto.setTreeNum(i);
                 treeInsertRequestDto.setYield((Integer) map.get(treeNum));
                 treeInsertRequestDto.setLinePk(line);
@@ -84,6 +102,7 @@ public class TreeService {
                 treeRepository.save(tree);
             }
         }
+
         return "성공";
     }
 

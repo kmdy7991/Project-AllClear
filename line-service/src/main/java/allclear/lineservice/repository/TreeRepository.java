@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface TreeRepository extends JpaRepository<Tree, Long> {
-    @Query(value = "SELECT t.tree_date, t.tree_num, sum(t.yield) as t.yield, l.line_number " +
+    @Query(value = "SELECT t.tree_date, t.tree_num, sum(t.yield) as yield, l.line_number " +
             "FROM tree t, line l " +
             "WHERE l.line_number = t.line_pk " +
             "GROUP BY t.line_pk, t.tree_num " +
