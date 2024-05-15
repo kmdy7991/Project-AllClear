@@ -1,6 +1,6 @@
 import React, { useCallback, useRef, useState, useEffect } from "react";
 import { Unity, useUnityContext } from "react-unity-webgl";
-
+import VideoStream from "./VideoStream";
 function Monitoring() {
   const { unityProvider, sendMessage } = useUnityContext({
     loaderUrl: "Build/Downloads.loader.js",
@@ -17,16 +17,6 @@ function Monitoring() {
   useEffect(() => {
     fetchSSE();
     fetchSSE2();
-
-    const handleKeyDown = (event) => {
-      console.log(`Key pressed: ${event.key}`);
-    };
-
-    document.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
   }, []);
 
   useEffect(() => {
@@ -72,34 +62,48 @@ function Monitoring() {
       setActiveData(JSON.parse(e.data));
     });
   };
-  const dispatchKeyboardEvent = (key, keyCode, code) => {
-    const event = new KeyboardEvent("keydown", {
-      key: key.toLowerCase(),
-      keyCode: keyCode,
-      code: code,
-      which: keyCode,
-      bubbles: true, // 이벤트가 버블링 되도록 설정
-      cancelable: true, // 이벤트가 취소 가능하도록 설정
-    });
-    console.log(`Dispatching event: ${key}`);
-    document.dispatchEvent(event);
+
+  const sendToggleWateringMessage = () => {
+    sendMessage("WaterManager", "ToggleAllcoolers", "");
   };
+
+  const sendToggleFanMessage = () => {
+    sendMessage("FanManager", "ToggleAllFans", "");
+  };
+
+  const switchCamera = (index) => {
+    sendMessage("CameraController", "SwitchCameraFromReact", index.toString());
+  };
+
   return (
     <>
-      <button onClick={() => dispatchKeyboardEvent("s", 83, "KeyS")}>물</button>
-      <button onClick={() => sendMessage("LightManager", "ToggleAllLights")}>
-        불 켜기/끄기
-      </button>
-      <button onClick={() => sendMessage("FanManager", "ToggleAllFans")}>
-        선풍기
-      </button>
-      <div>
-        <button>1</button>
-        <button>1</button>
-        <button>1</button>
-        <button>1</button>
-        <button>1</button>
-        <button>1</button>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <button onClick={sendToggleWateringMessage}>물</button>
+        <button onClick={() => sendMessage("LightManager", "ToggleAllLights")}>
+          불 켜기/끄기
+        </button>
+        <button onClick={sendToggleFanMessage}>선풍기</button>
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <button onClick={() => switchCamera(0)}>카메라 1</button>
+        <button onClick={() => switchCamera(1)}>카메라 2</button>
+        <button onClick={() => switchCamera(2)}>카메라 3</button>
+        <button onClick={() => switchCamera(3)}>카메라 4</button>
+        <button onClick={() => switchCamera(4)}>카메라 5</button>
+        <button onClick={() => switchCamera(5)}>카메라 6</button>
       </div>
       <div
         style={{
@@ -117,6 +121,7 @@ function Monitoring() {
           unityProvider={unityProvider}
         />
       </div>
+      <div>{/* <VideoStream style={{}} /> */}</div>
     </>
   );
 }
