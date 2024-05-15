@@ -15,7 +15,7 @@ function Monitoring() {
   const [alarmData, setAlarmData] = useState(null);
 
   useEffect(() => {
-    fetchSSE();
+    // fetchSSE();
     fetchSSE2();
   }, []);
 
@@ -46,22 +46,22 @@ function Monitoring() {
     });
   };
 
-  // 재식 SSE
-  const fetchSSE = async () => {
-    const eventSource = new EventSource(
-      "http://192.168.31.213:8081/api/unity/connect"
-      // "http://192.168.219.92:8081/api/unity/connect"
-    );
-    eventSource.onopen = () => {
-      console.log("sse OPENED");
-    };
+  // // 재식 SSE
+  // const fetchSSE = async () => {
+  //   const eventSource = new EventSource(
+  //     "http://192.168.31.213:8081/api/unity/connect"
+  //     // "http://192.168.219.92:8081/api/unity/connect"
+  //   );
+  //   eventSource.onopen = () => {
+  //     console.log("sse OPENED");
+  //   };
 
-    // 수확(이름 바꿔야 됨 secondmessage)
-    eventSource.addEventListener("harvesting", (e) => {
-      console.log(e.data);
-      setActiveData(JSON.parse(e.data));
-    });
-  };
+  //   // 수확(이름 바꿔야 됨 secondmessage)
+  //   eventSource.addEventListener("harvesting", (e) => {
+  //     console.log(e.data);
+  //     setActiveData(JSON.parse(e.data));
+  //   });
+  // };
 
   const sendToggleWateringMessage = () => {
     sendMessage("WaterManager", "ToggleAllcoolers", "");
