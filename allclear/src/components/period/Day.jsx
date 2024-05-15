@@ -203,7 +203,12 @@ function Day() {
             slotProps={{
               legend: { labelStyle: { fill: `#e6e5ea` } },
             }}
-          />
+          >
+            <ChartsReferenceLine
+              y={0}
+              lineStyle={{ stroke: "#e6e5ea", strokeWidth: 1.5 }}
+            />
+          </BarChart>
         </div>
         <div style={{ backgroundColor: "#273444", marginBottom: 30 }}>
           <BarChart
@@ -250,7 +255,12 @@ function Day() {
             slotProps={{
               legend: { labelStyle: { fill: `#e6e5ea` } },
             }}
-          />
+          >
+            <ChartsReferenceLine
+              y={0}
+              lineStyle={{ stroke: "#e6e5ea", strokeWidth: 1.5 }}
+            />
+          </BarChart>
         </div>
         <div style={{ backgroundColor: "#273444", marginBottom: 30 }}>
           <BarChart
@@ -265,8 +275,8 @@ function Day() {
             xAxis={[{ scaleType: "band", data: hourlyCheckAt }]}
             yAxis={[
               {
-                min: -5000,
-                max: 5000,
+                min: -10000,
+                max: 10000,
                 colorMap: {
                   type: "piecewise",
                   thresholds: [0],
@@ -297,7 +307,12 @@ function Day() {
             slotProps={{
               legend: { labelStyle: { fill: `#e6e5ea` } },
             }}
-          />
+          >
+            <ChartsReferenceLine
+              y={0}
+              lineStyle={{ stroke: "#e6e5ea", strokeWidth: 1.5 }}
+            />
+          </BarChart>
         </div>
       </DashboardContents>
     </div>

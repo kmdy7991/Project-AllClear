@@ -91,9 +91,9 @@ function Statistics() {
   const changeTreeColor = (yieldAmount) => {
     if (yieldAmount == undefined || yieldAmount == null) {
       return "#D1180B";
-    } else if (yieldAmount < 45) {
+    } else if (yieldAmount < 19) {
       return "#D1180B";
-    } else if (yieldAmount < 55) {
+    } else if (yieldAmount < 23) {
       return "#FFBF00";
     } else {
       return "#2DB400";
@@ -105,7 +105,7 @@ function Statistics() {
   const fetchSSE = () => {
     console.log("fetchSSE 실행");
     const eventSource = new EventSource(
-      "http://192.168.31.169:3024/api/connection/connect/tree"
+      "http://192.168.219.172:3024/api/connection/connect/tree"
     );
 
     eventSource.addEventListener("open", () => {

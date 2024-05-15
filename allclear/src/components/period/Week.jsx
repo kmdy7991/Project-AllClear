@@ -200,7 +200,12 @@ function Week() {
             slotProps={{
               legend: { labelStyle: { fill: `#e6e5ea` } },
             }}
-          />
+          >
+            <ChartsReferenceLine
+              y={0}
+              lineStyle={{ stroke: "#e6e5ea", strokeWidth: 1.5 }}
+            />
+          </BarChart>
         </div>
         <div style={{ backgroundColor: "#273444", marginBottom: 30 }}>
           <BarChart
@@ -247,23 +252,28 @@ function Week() {
             slotProps={{
               legend: { labelStyle: { fill: `#e6e5ea` } },
             }}
-          />
+          >
+            <ChartsReferenceLine
+              y={0}
+              lineStyle={{ stroke: "#e6e5ea", strokeWidth: 1.5 }}
+            />
+          </BarChart>
         </div>
         <div style={{ backgroundColor: "#273444", marginBottom: 30 }}>
           <BarChart
             width={460}
             height={300}
-            colors={["#F6C863"]}
+            colors={["#4A5ED8"]}
             series={[
-              { data: lightCompare, label: "조도(℃)" },
+              { data: lightCompare, label: "습도(℃)" },
               // { data: hourlyHumidity, label: "습도" },
               // { data: hourlyLight, label: "조도" },
             ]}
             xAxis={[{ scaleType: "band", data: dailyCheckAt }]}
             yAxis={[
               {
-                min: -5000,
-                max: 5000,
+                min: -10000,
+                max: 10000,
                 colorMap: {
                   type: "piecewise",
                   thresholds: [0],
@@ -294,7 +304,12 @@ function Week() {
             slotProps={{
               legend: { labelStyle: { fill: `#e6e5ea` } },
             }}
-          />
+          >
+            <ChartsReferenceLine
+              y={0}
+              lineStyle={{ stroke: "#e6e5ea", strokeWidth: 1.5 }}
+            />
+          </BarChart>
         </div>
       </DashboardContents>
     </div>
