@@ -42,7 +42,7 @@ function Week() {
               // { data: dailyHumidity, label: "습도" },
               // { data: dailyLight, label: "조도" },
             ]}
-            yAxis={[{ min: 18, max: 28 }]}
+            yAxis={[{ min: 19, max: 28 }]}
             xAxis={[{ scaleType: "point", data: dailyCheckAt }]}
             sx={{
               [`& .${axisClasses.directionX} .${axisClasses.tickLabel}`]: {
@@ -68,7 +68,7 @@ function Week() {
             slotProps={{ legend: { labelStyle: { fill: `#e6e5ea` } } }}
           >
             <ChartsReferenceLine
-              y={23}
+              y={23.5}
               lineStyle={{ stroke: "#e6e5ea", strokeWidth: 1 }}
             />
           </LineChart>
@@ -213,7 +213,7 @@ function Week() {
             height={300}
             colors={["#4A5ED8"]}
             series={[
-              { data: humidityCompare, label: "습도(℃)" },
+              { data: humidityCompare, label: "습도(％)" },
               // { data: hourlyHumidity, label: "습도" },
               // { data: hourlyLight, label: "조도" },
             ]}
@@ -263,9 +263,9 @@ function Week() {
           <BarChart
             width={460}
             height={300}
-            colors={["#4A5ED8"]}
+            colors={["#F6C863"]}
             series={[
-              { data: lightCompare, label: "습도(℃)" },
+              { data: lightCompare, label: "조도(㏓)" },
               // { data: hourlyHumidity, label: "습도" },
               // { data: hourlyLight, label: "조도" },
             ]}

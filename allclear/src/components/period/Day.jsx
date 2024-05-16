@@ -216,7 +216,7 @@ function Day() {
             height={300}
             colors={["#4A5ED8"]}
             series={[
-              { data: humidityCompare, label: "습도(℃)" },
+              { data: humidityCompare, label: "습도(％)" },
               // { data: hourlyHumidity, label: "습도" },
               // { data: hourlyLight, label: "조도" },
             ]}
@@ -268,7 +268,7 @@ function Day() {
             height={300}
             colors={["#F6C863"]}
             series={[
-              { data: lightCompare, label: "조도(℃)" },
+              { data: lightCompare, label: "조도(㏓)" },
               // { data: hourlyHumidity, label: "습도" },
               // { data: hourlyLight, label: "조도" },
             ]}
