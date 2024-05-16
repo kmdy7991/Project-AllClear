@@ -6,7 +6,7 @@ export default function Test() {
     const canvas = document.getElementById("canvas");
     if (canvas) {
       loadPlayer({
-        url: `ws://${window.location.host}/api/stream`, // url 수정해야됨
+        url: `ws://43.200.5.209:5002/api/stream`, // url 수정해야됨
         canvas: canvas,
         onDisconnect: () => console.log("Connection lost!"),
       });

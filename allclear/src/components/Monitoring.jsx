@@ -115,7 +115,7 @@ function Monitoring() {
       >
         <Unity
           style={{
-            width: "70%", // 너비 70%
+            width: "80%", // 너비 70%
             height: "70%", // 높이 70%
           }}
           unityProvider={unityProvider}
