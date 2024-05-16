@@ -73,7 +73,7 @@ function Monitoring() {
     sendMessage("FanManager", "ToggleAllFans", "");
   };
 
-  const [activeCamera, setActiveCamera] = useState(null);
+  const [activeCamera, setActiveCamera] = useState(0);
 
   const switchCamera = (index) => {
     sendMessage("CameraController", "SwitchCameraFromReact", index.toString());
