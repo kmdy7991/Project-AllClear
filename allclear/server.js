@@ -7,7 +7,7 @@ const server = http.createServer(app);
 
 const { proxy, scriptUrl } = rtspRelay(app, server);
 
-app.ws("/api/stream", proxy({ url: "rtsp://43.200.5.209:8554/mystream" })); // rtsp주소(여기에 젯슨나노) 바꿔야함, 그리고 클라이언트 주소도 바꿔야할듯(굳이?)
+app.ws("/api/stream", proxy({ url: "rtsp://43.200.5.209:5002/mystream" })); // rtsp주소(여기에 젯슨나노) 바꿔야함, 그리고 클라이언트 주소도 바꿔야할듯(굳이?)
 
 app.get("/", (req, res) =>
   res.send(`
@@ -22,6 +22,6 @@ app.get("/", (req, res) =>
   `)
 );
 
-server.listen(80, () => {
-  console.log("Server is listening on port 80");
+server.listen(5002, () => {
+  console.log("Server is listening on port 5002");
 });
