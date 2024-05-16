@@ -1,6 +1,8 @@
 import React, { useCallback, useRef, useState, useEffect } from "react";
 import { Unity, useUnityContext } from "react-unity-webgl";
 import VideoStream from "./VideoStream";
+import styled from "styled-components";
+
 function Monitoring() {
   const { unityProvider, sendMessage } = useUnityContext({
     loaderUrl: "Build/Downloads.loader.js",
@@ -71,8 +73,25 @@ function Monitoring() {
     sendMessage("FanManager", "ToggleAllFans", "");
   };
 
+  const [activeCamera, setActiveCamera] = useState(null);
+
   const switchCamera = (index) => {
     sendMessage("CameraController", "SwitchCameraFromReact", index.toString());
+    setActiveCamera(index);
+  };
+
+  const [functionButtonStates, setFunctionButtonStates] = useState([
+    false,
+    true,
+    false,
+  ]);
+
+  const toggleFunction = (index) => {
+    setFunctionButtonStates((prevStates) => {
+      const newStates = [...prevStates];
+      newStates[index] = !newStates[index];
+      return newStates;
+    });
   };
 
   return (
@@ -80,46 +99,90 @@ function Monitoring() {
       <div
         style={{
           display: "flex",
+          flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
+          height: "100%",
+          // 전체 뷰포트 높이
         }}
       >
-        <button onClick={sendToggleWateringMessage}>물</button>
-        <button onClick={() => sendMessage("LightManager", "ToggleAllLights")}>
-          불 켜기/끄기
-        </button>
-        <button onClick={sendToggleFanMessage}>선풍기</button>
-      </div>
-
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <button onClick={() => switchCamera(0)}>카메라 1</button>
-        <button onClick={() => switchCamera(1)}>카메라 2</button>
-        <button onClick={() => switchCamera(2)}>카메라 3</button>
-        <button onClick={() => switchCamera(3)}>카메라 4</button>
-        <button onClick={() => switchCamera(4)}>카메라 5</button>
-        <button onClick={() => switchCamera(5)}>카메라 6</button>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh", // 전체 뷰포트 높이
-        }}
-      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-evenly",
+            alignItems: "center",
+            width: "80%",
+          }}
+        >
+          <FunctionButton
+            style={{
+              borderLeft: "1.5px solid #e6e5ea",
+              borderTopLeftRadius: "8px",
+              backgroundColor: functionButtonStates[0] ? "#20ade4" : "#384351",
+            }}
+            onClick={() => {
+              toggleFunction(0);
+              sendToggleWateringMessage();
+            }}
+          >
+            물 ON/OFF
+          </FunctionButton>
+          <FunctionButton
+            style={{
+              backgroundColor: functionButtonStates[1] ? "#20ade4" : "#384351",
+            }}
+            onClick={() => {
+              toggleFunction(1);
+              sendMessage("LightManager", "ToggleAllLights");
+            }}
+          >
+            불 ON/OFF
+          </FunctionButton>
+          <FunctionButton
+            style={{
+              borderTopRightRadius: "8px",
+              backgroundColor: functionButtonStates[2] ? "#20ade4" : "#384351",
+            }}
+            onClick={() => {
+              toggleFunction(2);
+              sendToggleFanMessage();
+            }}
+          >
+            선풍기 ON/OFF
+          </FunctionButton>
+        </div>
         <Unity
           style={{
             width: "80%", // 너비 70%
             height: "70%", // 높이 70%
+            border: "1.5px solid #e6e5ea",
           }}
           unityProvider={unityProvider}
         />
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-evenly",
+            alignItems: "center",
+            width: "80%",
+          }}
+        >
+          {[0, 1, 2, 3, 4, 5].map((index) => (
+            <CameraButton
+              key={index}
+              style={{
+                borderLeft: index === 0 ? "1.5px solid #e6e5ea" : "none",
+                borderRight: index < 6 ? "1.5px solid #e6e5ea" : "none",
+                borderBottomLeftRadius: index === 0 ? "8px" : "none",
+                borderBottomRightRadius: index === 5 ? "8px" : "none",
+                backgroundColor: activeCamera === index ? "#20ade4" : "#384351",
+              }}
+              onClick={() => switchCamera(index)}
+            >
+              CAM {index + 1}
+            </CameraButton>
+          ))}
+        </div>
       </div>
       <div>{/* <VideoStream style={{}} /> */}</div>
     </>
@@ -127,3 +190,30 @@ function Monitoring() {
 }
 
 export default Monitoring;
+
+const FunctionButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 600;
+  width: 33.33333%;
+  height: 80px;
+  cursor: pointer;
+  background-color: #384351;
+  border-top: 1.5px solid #e6e5ea;
+  border-right: 1.5px solid #e6e5ea;
+`;
+
+const CameraButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 600;
+  width: 16.66666%;
+  height: 80px;
+  cursor: pointer;
+  background-color: #384351;
+  border-bottom: 1.5px solid #e6e5ea;
+`;
