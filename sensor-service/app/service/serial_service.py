@@ -44,4 +44,10 @@ def environment_hour_schedule():
                headers={'Content-Type': 'application/json'})
 
 
+# @schedule.scheduled_job('interval', seconds=5, id='video_streaming')
+# def environment_second_schedule():
+#     logging.info("scheduled second environment")
+#     httpx.post(url='http://192.168.31.206:3022/api/connection/transfer', data=sensor_info().model_dump_json(),
+#                headers={'Content-Type': 'application/json'})
+
 schedule.start()
