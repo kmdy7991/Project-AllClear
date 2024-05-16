@@ -12,6 +12,7 @@ import close from "../assets/close.png";
 import treeRed from "../assets/tree_red.png";
 import treeYellow from "../assets/tree_yellow.png";
 import treeGreen from "../assets/tree_green.png";
+import treeDisabled from "../assets/tree_disabled.png";
 
 function Statistics() {
   const [selectedPeriodIndex, setSelectedPeriodIndex] = useState(0);
@@ -92,8 +93,8 @@ function Statistics() {
   };
 
   const changeTreeBorderColor = (yieldAmount) => {
-    if (yieldAmount == undefined || yieldAmount == null) {
-      return "#BF2C1C";
+    if (yieldAmount == undefined || yieldAmount == null || yieldAmount == 0) {
+      return "#4A5361";
     } else if (yieldAmount < 19) {
       return "#BF2C1C";
     } else if (yieldAmount < 23) {
@@ -104,8 +105,8 @@ function Statistics() {
   };
 
   const changeTreeBackGroundColor = (yieldAmount) => {
-    if (yieldAmount == undefined || yieldAmount == null) {
-      return "#3E2624";
+    if (yieldAmount == undefined || yieldAmount == null || yieldAmount == 0) {
+      return "#242E3A";
     } else if (yieldAmount < 19) {
       return "#3E2624";
     } else if (yieldAmount < 23) {
@@ -116,7 +117,9 @@ function Statistics() {
   };
 
   const changeTreeImage = (yieldAmount) => {
-    if (yieldAmount < 19) {
+    if (yieldAmount == undefined || yieldAmount == null || yieldAmount == 0) {
+      return <TreeImage src={treeDisabled} />;
+    } else if (yieldAmount < 19) {
       return <TreeImage src={treeRed} />;
     } else if (yieldAmount < 23) {
       return <TreeImage src={treeYellow} />;
