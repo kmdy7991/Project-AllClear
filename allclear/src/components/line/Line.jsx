@@ -37,7 +37,7 @@ function Line() {
       <DashboardContents>
         <div style={{ backgroundColor: "#273444", marginBottom: 30 }}>
           <LineChart
-            width={690}
+            width={695}
             height={400}
             colors={["#2699E6"]}
             series={[{ data: ec, label: "양액 EC" }]}
@@ -74,7 +74,7 @@ function Line() {
         </div>
         <div style={{ backgroundColor: "#273444", marginBottom: 30 }}>
           <LineChart
-            width={690}
+            width={695}
             height={400}
             colors={["#03C04A"]}
             series={[{ data: ph, label: "양액 pH" }]}
@@ -111,7 +111,7 @@ function Line() {
         </div>
         <div style={{ backgroundColor: "#273444", marginBottom: 30 }}>
           <BarChart
-            width={690}
+            width={695}
             height={400}
             colors={["#2699E6"]}
             series={[
@@ -163,7 +163,7 @@ function Line() {
         </div>
         <div style={{ backgroundColor: "#273444", marginBottom: 30 }}>
           <BarChart
-            width={690}
+            width={695}
             height={400}
             colors={["#03C04A"]}
             series={[

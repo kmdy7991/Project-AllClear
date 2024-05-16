@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Tab, Tablist } from "evergreen-ui";
 import React from "react";
 import { Unity, useUnityContext } from "react-unity-webgl";
@@ -9,6 +9,9 @@ import Line from "./line/Line";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { selectedLineAtom } from "../recoil/statistics/statistics";
 import close from "../assets/close.png";
+import treeRed from "../assets/tree_red.png";
+import treeYellow from "../assets/tree_yellow.png";
+import treeGreen from "../assets/tree_green.png";
 
 function Statistics() {
   const [selectedPeriodIndex, setSelectedPeriodIndex] = useState(0);
@@ -88,15 +91,37 @@ function Statistics() {
     sendMessage("SimulationManager", "StartAllSimulations");
   };
 
-  const changeTreeColor = (yieldAmount) => {
+  const changeTreeBorderColor = (yieldAmount) => {
     if (yieldAmount == undefined || yieldAmount == null) {
-      return "#D1180B";
+      return "#BF2C1C";
     } else if (yieldAmount < 19) {
-      return "#D1180B";
+      return "#BF2C1C";
     } else if (yieldAmount < 23) {
-      return "#FFBF00";
+      return "#F9B838";
     } else {
-      return "#2DB400";
+      return "#48A62C";
+    }
+  };
+
+  const changeTreeBackGroundColor = (yieldAmount) => {
+    if (yieldAmount == undefined || yieldAmount == null) {
+      return "#3E2624";
+    } else if (yieldAmount < 19) {
+      return "#3E2624";
+    } else if (yieldAmount < 23) {
+      return "#3E3825";
+    } else {
+      return "#283A21";
+    }
+  };
+
+  const changeTreeImage = (yieldAmount) => {
+    if (yieldAmount < 19) {
+      return <TreeImage src={treeRed} />;
+    } else if (yieldAmount < 23) {
+      return <TreeImage src={treeYellow} />;
+    } else {
+      return <TreeImage src={treeGreen} />;
     }
   };
 
@@ -234,6 +259,7 @@ function Statistics() {
               flexDirection: "column",
               justifyContent: "space-between",
               width: "100%",
+              marginBottom: "20px",
             }}
           >
             {treeData.map((line, index) => (
@@ -250,6 +276,7 @@ function Statistics() {
                 <div
                   style={{
                     display: "flex",
+                    justifyContent: "space-between",
                     width: "100%",
                     overflow: "hidden",
                   }}
@@ -258,10 +285,12 @@ function Statistics() {
                     <Tree
                       key={index}
                       style={{
+                        border: `1.5px solid ${changeTreeBorderColor(tree.yield) || "#D1180B"}`,
                         backgroundColor:
-                          changeTreeColor(tree.yield) || "#D1180B",
+                          changeTreeBackGroundColor(tree.yield) || "#3E2624",
                       }}
                     >
+                      {changeTreeImage(tree.yield)}
                       {tree.yield}
                     </Tree>
                   ))}
@@ -324,14 +353,21 @@ const Title = styled.div`
 `;
 
 const Tree = styled.div`
-  line-height: 120px;
-  text-align: center;
-  width: 120px;
-  height: 120px;
-  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 130px;
+  margin: 5px;
   border-radius: 5px;
   font-size: 24px;
   font-weight: 600;
+`;
+
+const TreeImage = styled.img`
+  width: 20%;
+  object-fit: contain;
 `;
 
 const SimulationOpenButton = styled.div`
