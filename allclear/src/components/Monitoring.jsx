@@ -125,7 +125,7 @@ function Monitoring() {
               sendToggleWateringMessage();
             }}
           >
-            물 ON/OFF
+            스프링클러 ON/OFF
           </FunctionButton>
           <FunctionButton
             style={{
@@ -136,7 +136,7 @@ function Monitoring() {
               sendMessage("LightManager", "ToggleAllLights");
             }}
           >
-            불 ON/OFF
+            보광등 ON/OFF
           </FunctionButton>
           <FunctionButton
             style={{
@@ -148,7 +148,7 @@ function Monitoring() {
               sendToggleFanMessage();
             }}
           >
-            선풍기 ON/OFF
+            실링팬 ON/OFF
           </FunctionButton>
         </div>
         <Unity
