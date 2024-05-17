@@ -327,6 +327,7 @@ function Statistics() {
                       marginTop: "11px",
                       borderBottomRightRadius: "8px",
                       borderBottomLeftRadius: "8px",
+                      borderTop: "1.5px solid #e6e5ea",
                     }}
                     unityProvider={unityProvider}
                   />
@@ -419,6 +420,7 @@ const SimulationModal = styled.div`
   height: 90%;
   background-color: #68615b;
   border-radius: 8px;
+  border: 1.5px solid #e6e5ea;
 `;
 
 const SimulationStartButton = styled.button`
@@ -441,8 +443,8 @@ const SimulationStartButton = styled.button`
 
 const CloseButton = styled.img`
   position: absolute;
-  right: 10px;
-  top: 10px;
+  right: 7px;
+  top: 7px;
   width: 20px;
   height: 20px;
 
