@@ -32,9 +32,4 @@ public class HourlyEnvController {
         hourlyEnvService.setInfoHourly(sensorResponseDto);
     }
 
-//    @GetMapping(value = "/test")
-//    public ResponseEntity<String> testDailyGetMapping () {
-//        hourlyEnvService.setInfoHourly();
-//        return ResponseEntity.ok().body("success");
-//    }
 }
