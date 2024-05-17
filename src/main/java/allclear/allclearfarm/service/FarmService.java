@@ -24,12 +24,7 @@ public class FarmService {
   /** 회원가입 **/
   @Transactional
   public JoinResponseDto join(JoinRequestDto joinRequestDto) {
-    log.info("########################################################################################### joinRequestDto = {}" , joinRequestDto.toString());
-
     Optional<Farm> optionalFarm = farmRepository.findByUserId(joinRequestDto.getId());
-
-    log.info("########################################################################################### optionalFarm = {}" , optionalFarm.toString());
-
     if (optionalFarm.isPresent()) {
       throw new CustomException(FarmErrorCode.FarmIsAlreadyExist.getCode(), FarmErrorCode.FarmIsAlreadyExist.getDescription());
     }
@@ -63,7 +58,6 @@ public class FarmService {
         .name(farm.getName())
         .build();
   }
-
 
   /** farm 엔티티 찾기 : pk **/
   public Farm getFarmByPk(Long pk) {
