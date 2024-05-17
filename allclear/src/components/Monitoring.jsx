@@ -184,7 +184,7 @@ function Monitoring() {
           ))}
         </div>
       </div>
-      <div>{/* <VideoStream style={{}} /> */}</div>
+      <div>{/* <VideoStream /> */}</div>
     </>
   );
 }
