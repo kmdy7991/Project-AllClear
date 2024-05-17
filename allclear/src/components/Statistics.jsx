@@ -26,7 +26,7 @@ function Statistics() {
   const [isSimulationModalVisible, setIsSimulationModalVisible] =
     useState(false);
 
-  const { unityProvider, sendMessage } = useUnityContext({
+  const { unityProvider, sendMessage, unload } = useUnityContext({
     loaderUrl: "Simul/Downloads.loader.js",
     dataUrl: "Simul/webgl.data",
     frameworkUrl: "Simul/build.framework.js",
@@ -153,7 +153,11 @@ function Statistics() {
   useEffect(() => {
     setSelectedLine(1);
     fetchSSE();
-  }, []);
+    return () => {
+      // 컴포넌트가 언마운트될 때 Unity 인스턴스를 언로드합니다.
+      unload();
+    };
+  }, [unload]);
 
   return (
     <StatisticsBox>

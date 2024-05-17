@@ -4,7 +4,7 @@ import VideoStream from "./VideoStream";
 import styled from "styled-components";
 
 function Monitoring() {
-  const { unityProvider, sendMessage } = useUnityContext({
+  const { unityProvider, sendMessage, unload } = useUnityContext({
     loaderUrl: "Build/Downloads.loader.js",
     dataUrl: "Build/Downloads.data",
     frameworkUrl: "Build/Downloads.framework.js",
@@ -19,7 +19,11 @@ function Monitoring() {
   useEffect(() => {
     // fetchSSE();
     fetchSSE2();
-  }, []);
+    return () => {
+      // 컴포넌트가 언마운트될 때 Unity 인스턴스를 언로드합니다.
+      unload();
+    };
+  }, [unload]);
 
   useEffect(() => {
     if (activeData) {
@@ -184,7 +188,10 @@ function Monitoring() {
           ))}
         </div>
       </div>
-      <div>{/* <VideoStream style={{}} /> */}</div>
+
+      <div>
+        <VideoStream />
+      </div>
     </>
   );
 }
