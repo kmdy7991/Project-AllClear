@@ -64,13 +64,13 @@ const MainContainer = styled.div`
 `;
 
 const SidebarContainer = styled.div`
-  width: 18%;
+  width: 16%;
   height: 100%;
   border-right: 1px solid #324254;
 `;
 
 const ContentContainer = styled.div`
-  width: 82%;
+  width: 84%;
   border-left: 1px solid #324254;
 `;
 

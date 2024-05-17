@@ -101,6 +101,7 @@ const InputForm = styled.form`
 const Logo = styled.img`
   width: 80%;
   object-fit: contain;
+  margin-bottom: 20px;
 `;
 
 const Input = styled.input`
@@ -127,7 +128,7 @@ const JoinButton = styled.div`
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-  margin-bottom: 10px;
+  margin-top: 10px;
   padding: 5px;
 
   &:hover {

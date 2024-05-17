@@ -73,7 +73,7 @@ function Login() {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              marginBottom: "10px",
+              marginTop: "10px",
             }}
           >
             <LoginButton onClick={doLogin}>로그인</LoginButton>
@@ -114,6 +114,7 @@ const InputForm = styled.form`
 const Logo = styled.img`
   width: 80%;
   object-fit: contain;
+  margin-bottom: 20px;
 `;
 
 const IdInput = styled.input`

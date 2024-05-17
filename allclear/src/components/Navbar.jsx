@@ -58,7 +58,7 @@ const LogoContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 18%;
+  width: 16%;
   height: 100%;
   background-color: #20ade4;
 `;
@@ -79,7 +79,7 @@ const NavbarContent = styled.div`
 
 const Logo = styled.img`
   cursor: pointer;
-  width: 80%;
+  width: 70%;
 `;
 
 export default Navbar;
