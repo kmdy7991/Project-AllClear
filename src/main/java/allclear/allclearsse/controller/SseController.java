@@ -43,11 +43,4 @@ public class SseController {
     sseService.transfer(body);
   }
 
-//  @GetMapping("/info")
-//  public ResponseEntity<SensorResponseDto> moduleInfo(){
-//    log.info("SseController In");
-//    return ResponseEntity.ok(sseService.getModuleInfoSecond());
-//  }
-
-
 }

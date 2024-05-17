@@ -19,10 +19,6 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class SseService {
-  private final SensorServiceClient sensorServiceClient;
-  private final CircuitBreakerFactory circuitBreakerFactory;
-  private final TestUserService testUserService;
-
   private static final AtomicLong counter = new AtomicLong();
   private final List<SseEmitter> emitters = new CopyOnWriteArrayList<>();
 
@@ -44,9 +40,6 @@ public class SseService {
 
   /** 온도 습도 조도 화재, 가스 센서 정보 : 실시간 전달 : 현재코드  **/
   public void transfer(SensorResponseDto sensorResponseDto) {
-    log.info("##################################################################################################### transfer-method : DTO IN WHAT = {}", sensorResponseDto);
-    log.info("##################################################################################################### Call Time = {}", LocalDateTime.now());
-
     emitters.forEach(emitter -> {
       try {
         emitter.send(SseEmitter.event()
@@ -58,21 +51,10 @@ public class SseService {
     });
   }
 
-  /** SSE 테스트용 **/
-  public void count() {
-    long count = counter.incrementAndGet();
-    emitters.forEach(emitter -> {
-      try {
-        emitter.send(SseEmitter.event()
-            .name("message")
-            .data(count));
-      } catch (IOException e) {
-        throw new RuntimeException(e);
-      }
-    });
-  }
-
   /** 온도 습도 조도 화재, 가스 센서 정보 : 실시간 전달 : 이전코드**/
+//  private final SensorServiceClient sensorServiceClient;
+//  private final CircuitBreakerFactory circuitBreakerFactory;
+//  private final TestUserService testUserService;
 //  @Scheduled(fixedRate = 60000L) // 5분에 한번
 //  public SensorResponseDto getModuleInfoSecond() {
 //    log.info("Sse Service In");
