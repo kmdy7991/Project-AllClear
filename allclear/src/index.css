@@ -5,14 +5,18 @@
   box-sizing: border-box;
   text-decoration: none;
   list-style: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 body {
   background-color: #212e3e;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-use-select: none;
-  user-select: none;
 }
 
 ::-webkit-scrollbar {

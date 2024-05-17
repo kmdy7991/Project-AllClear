@@ -45,7 +45,12 @@ function Login() {
   return (
     <JoinContainer>
       <JoinBox>
-        <Logo src={allclear} />
+        <Logo
+          onClick={() => {
+            navigate("/login");
+          }}
+          src={allclear}
+        />
         <InputForm onSubmit={doJoin}>
           <Input
             type="text"
@@ -102,6 +107,7 @@ const Logo = styled.img`
   width: 80%;
   object-fit: contain;
   margin-bottom: 20px;
+  cursor: pointer;
 `;
 
 const Input = styled.input`
