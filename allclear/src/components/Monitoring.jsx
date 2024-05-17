@@ -93,7 +93,6 @@ function Monitoring() {
       return newStates;
     });
   };
-  // 커밋용
 
   return (
     <>
