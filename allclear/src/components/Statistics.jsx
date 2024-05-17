@@ -312,13 +312,21 @@ function Statistics() {
                 >
                   시작
                 </SimulationStartButton>
-                <div>
+                <div
+                  style={{
+                    display: "flex",
+                    height: "90%",
+                  }}
+                >
                   <Unity
                     style={{
                       display: "flex",
                       justifyContent: "center",
                       width: "100%", // 너비 70%
                       height: "100%", // 높이 70%
+                      marginTop: "11px",
+                      borderBottomRightRadius: "8px",
+                      borderBottomLeftRadius: "8px",
                     }}
                     unityProvider={unityProvider}
                   />
