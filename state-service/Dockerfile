@@ -6,4 +6,4 @@ COPY build/libs/*.jar /app
 
 EXPOSE 3024
 
-CMD ["java", "-jar", "/app/allclear-registry-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "/app/state-service-0.0.1-SNAPSHOT.jar"]
