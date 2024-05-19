@@ -1,0 +1,60 @@
+server:
+    port: 3021
+
+eureka:
+    client:
+        register-with-eureka: true
+        fetch-registry: true
+        service-url:
+            defaultZone: http://localhost:3020/eureka
+
+spring:
+    application:
+        name: gateway-service
+
+    cloud:
+        gateway:
+            globalcors:
+                add-to-simple-url-handler-mapping: true
+                corsConfigurations:
+                    '[/**]':
+                        allowedOriginPatterns: '*'
+                        allow-credentials: true
+                        allowedHeaders: '*'
+                        exposedHeaders: '*'
+                        allowedMethods:
+                            - GET
+                            - POST
+                            - PUT
+                            - DELETE
+            routes:
+                - id: sse-service
+                  uri: lb:SSE-SERVICE
+                  predicates:
+                      - Path=/sse-service/**
+                  filters:
+                      - RemoveRequestHeader=Cookie
+                      - RewritePath=/sse-service/(?<segment>.*), /$\{segment}
+
+                - id: state-service
+                  uri: lb:STATE-SERVICE
+                  predicates:
+                      - Path=/state-service/**
+                  filters:
+                      - RemoveRequestHeader=Cookie
+                      - RewritePath=/state-service/(?<segment>.*), /$\{segment}
+
+                - id: harvest-service
+                  uri: lb:HARVEST-SERVICE
+                  predicates:
+                      - Path=/harvest-service/**
+                  filters:
+                      - RemoveRequestHeader=Cookie
+                      - RewritePath=/harvest-service/(?<segment>.*), /$\{segment}
+#        - id: sensor-service
+#          uri: lb://SENSOR-SERVICE
+#          predicates:
+#            - Path=/sensor-service/**
+#          filters:
+#            - RemoveRequestHeader=Cookie
+#            - RewritePath=/sensor-service/(?<segment>.*), /$\{segment}
