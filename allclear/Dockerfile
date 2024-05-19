@@ -6,6 +6,7 @@ COPY package.json .
 
 RUN npm install --silent
 
+COPY . .
 RUN npm run build
 # RUN npm install react-scripts@3.4.1 -g --silent
 
