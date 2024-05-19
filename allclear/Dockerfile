@@ -17,7 +17,7 @@ COPY /nginx/default.conf /etc/nginx/conf.d/default.conf
 
 RUN rm -rf /usr/share/nginx/html/*
 
-COPY --from=builder front/build /usr/share/nginx/html
+COPY --from=builder front/dist /usr/share/nginx/html
 
 EXPOSE 3000
 CMD ["nginx", "-g" "daemon off;"]
