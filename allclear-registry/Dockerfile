@@ -6,4 +6,4 @@ COPY build/libs/*.jar /app
 
 EXPOSE 3020
 
-CMD ["java", "-jar", "/app/*.jar"]
+CMD ["java", "-jar", "*.jar"]
