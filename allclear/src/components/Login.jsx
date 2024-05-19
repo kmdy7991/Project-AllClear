@@ -30,19 +30,19 @@ function Login() {
   const navigate = useNavigate();
 
   const doLogin = (e) => {
-    // login(
-    //   loginData,
-    //   ({ data }) => {
-    //     setIsLoggedIn();
-    //     setLoggedInUser(data.name);
-    //     navigate("/dashboard");
-    //   },
-    //   (error) => {}
-    // );
+    login(
+      loginData,
+      ({ data }) => {
+        setIsLoggedIn();
+        setLoggedInUser(data.name);
+        navigate("/dashboard");
+      },
+      (error) => {}
+    );
 
-    setIsLoggedIn();
-    setLoggedInUser(loginData.id);
-    navigate("/dashboard");
+    // setIsLoggedIn();
+    // setLoggedInUser(loginData.id);
+    // navigate("/dashboard");
     e.preventDefault();
   };
 
