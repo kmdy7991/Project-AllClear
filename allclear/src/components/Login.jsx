@@ -30,19 +30,19 @@ function Login() {
   const navigate = useNavigate();
 
   const doLogin = (e) => {
-    login(
-      loginData,
-      ({ data }) => {
-        setIsLoggedIn();
-        setLoggedInUser(data.name);
-        navigate("/dashboard");
-      },
-      (error) => {}
-    );
+    // login(
+    //   loginData,
+    //   ({ data }) => {
+    //     setIsLoggedIn();
+    //     setLoggedInUser(data.name);
+    //     navigate("/dashboard");
+    //   },
+    //   (error) => {}
+    // );
 
-    // setIsLoggedIn();
-    // setLoggedInUser(loginData.id);
-    // navigate("/dashboard");
+    setIsLoggedIn();
+    setLoggedInUser(loginData.id);
+    navigate("/dashboard");
     e.preventDefault();
   };
 
@@ -99,9 +99,9 @@ const LoginBox = styled.div`
   align-items: center;
   justify-content: center;
   width: 20%;
-  height: 35%;
   background-color: #384351;
   border-radius: 10px;
+  padding: 20px 0;
 `;
 
 const InputForm = styled.form`
