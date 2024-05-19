@@ -17,19 +17,17 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequiredArgsConstructor
 @CrossOrigin("*")
-@RequestMapping(value = "/api/state-service/hourly")
 public class HourlyEnvController {
     private final HourlyEnvService hourlyEnvService;
 
-    @GetMapping
+    @GetMapping(value = "hourly")
     public ResponseEntity<HourlyGraphResponseDto> getHourlyData () {
         return ResponseEntity.ok(hourlyEnvService.getHourlyDataRecentTwentyFourHour());
     }
 
-    @PostMapping
+    @PostMapping(value = "hourly")
     public void setInfoHourly(@RequestBody SensorResponseDto sensorResponseDto) {
         log.info("in = {} ", sensorResponseDto);
         hourlyEnvService.setInfoHourly(sensorResponseDto);
     }
-
 }

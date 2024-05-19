@@ -14,11 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequiredArgsConstructor
 @CrossOrigin("*")
-@RequestMapping(value = "/api/state-service/daily")
 public class DailyEnvController {
   private final DailyEnvService dailyEnvService;
 
-  @GetMapping
+  @GetMapping(value = "/daily")
   public ResponseEntity<DailyGraphResponseDto> getDailyData () {
     return ResponseEntity.ok(dailyEnvService.getDailyDataRecentThirtyDays());
   }
