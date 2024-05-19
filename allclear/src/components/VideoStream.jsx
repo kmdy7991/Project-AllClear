@@ -4,7 +4,17 @@ const VideoStream = () => {
   const videoRef = useRef(null);
 
   useEffect(() => {
-    const ws = new WebSocket("ws://192.168.31.213:8765");
+    fetch("ws://192.168.31.213:8765/ws")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("GET request data:", data);
+        // Process the data as needed
+      })
+      .catch((error) => {
+        console.error("Error during GET request:", error);
+      });
+
+    const ws = new WebSocket("ws://192.168.31.213:8765/ws");
 
     ws.onmessage = (event) => {
       try {
@@ -34,10 +44,10 @@ const VideoStream = () => {
               videoRef.current.width,
               videoRef.current.height
             );
-            console.log("프레임 렌더링 완료"); // 디버깅 메시지
+            // console.log("프레임 렌더링 완료"); // 디버깅 메시지
           }
         };
-        console.log("이미지 데이터 수신: ", event.data.length, "바이트"); // 디버깅 메시지
+        // console.log("이미지 데이터 수신: ", event.data.length, "바이트"); // 디버깅 메시지
       }
     };
 
