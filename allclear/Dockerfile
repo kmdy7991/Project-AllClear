@@ -1,12 +1,11 @@
 FROM node:20.11.1 as builder
 
-WORKDIR /front
+WORKDIR /app
 
-COPY package.json .
+COPY . /app/
 
-RUN npm install --silent
+RUN npm install
 
-COPY . .
 RUN npm run build
 # RUN npm install react-scripts@3.4.1 -g --silent
 
@@ -17,7 +16,7 @@ COPY /nginx/default.conf /etc/nginx/conf.d/default.conf
 
 RUN rm -rf /usr/share/nginx/html/*
 
-COPY --from=builder front/dist /usr/share/nginx/html
+COPY --from=builder /app/dist /usr/share/nginx/html
 
 EXPOSE 3000
 CMD ["nginx", "-g" "daemon off;"]
