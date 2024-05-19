@@ -42,10 +42,9 @@ function Monitoring() {
 
   // 용준 SSE
   const fetchSSE2 = async () => {
-    const eventSource = new EventSource(
-      // "http://192.168.31.206:3022/api/connection/connect"
-      "http://192.168.35.123:3022/api/connection/connect"
-    );
+    const eventSource = new EventSource();
+    // "http://192.168.31.206:3022/api/connection/connect"
+    // "http://192.168.35.123:3022/api/connection/connect"
 
     eventSource.onopen = () => {
       console.log("sse OPENED");
@@ -55,7 +54,7 @@ function Monitoring() {
       setAlarmData(JSON.parse(e.data));
     });
 
-    eventSource.addEventListener("harvesting", (e) => {
+    eventSource.addEventListener("unityResponse", (e) => {
       console.log(e.data);
       setActiveData(JSON.parse(e.data));
     });
