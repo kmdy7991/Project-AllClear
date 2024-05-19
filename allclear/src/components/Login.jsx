@@ -99,9 +99,9 @@ const LoginBox = styled.div`
   align-items: center;
   justify-content: center;
   width: 20%;
-  height: 35%;
   background-color: #384351;
   border-radius: 10px;
+  padding: 20px 0;
 `;
 
 const InputForm = styled.form`
