@@ -24,4 +24,4 @@ eureka:
         register-with-eureka: true
         fetch-registry: true
         service-url:
-            defaultZone: http://192.168.31.42:3020/eureka
+            defaultZone: http://k10b302.p.ssafy.io:30200/eureka
