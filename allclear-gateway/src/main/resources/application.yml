@@ -6,7 +6,7 @@ eureka:
         register-with-eureka: true
         fetch-registry: true
         service-url:
-            defaultZone: http://localhost:3020/eureka
+            defaultZone: http://k10b302.p.ssafy.io:30200/eureka
 
 spring:
     application:
