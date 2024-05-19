@@ -20,32 +20,31 @@ import java.util.Map;
 @Slf4j
 @RequiredArgsConstructor
 @CrossOrigin("*")
-//@RequestMapping(value = "/api/state-service/tree")
 public class TreeController {
 
     private final TreeService treeService;
 
     // 모든 나무 수확량 가져오기
-    @GetMapping("/api/state-service/tree")
+    @GetMapping("/tree")
     public ResponseEntity<TreeAllResponseDto> getTreeData() {
         return ResponseEntity.ok(treeService.getAllTreeData());
     }
 
     // 나무 수확량 데이터 추가
-    @PostMapping("/api/state-service/tree/add")
+    @PostMapping("/tree/add")
     public ResponseEntity<String> postTreeData(@RequestBody TreeInsertRequestDto treeInsertRequestDto) {
         return ResponseEntity.ok(treeService.postTreeData(treeInsertRequestDto));
     }
 
     // 시뮬레이션 결과 저장
-    @PostMapping("/api/state-service/tree/simulation")
+    @PostMapping("/tree/simulation")
     public ResponseEntity<String> postTreeDataSimulation(@RequestBody Map<String, Object> map) {
         String result = treeService.postTreeDataSimulation(map);
         return ResponseEntity.ok(result);
     }
 
     // sse 연결
-    @GetMapping(value = "/api/connection/connect/tree", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    @GetMapping(value = "/connection/connect/tree", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public ResponseEntity<SseEmitter> sseConnect() {
         SseEmitter emitter = new SseEmitter();
         treeService.sseAdd(emitter);
