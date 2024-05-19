@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping(value = "/api/farm-service")
 @RequiredArgsConstructor
 public class FarmController {
   private final FarmService farmService;
