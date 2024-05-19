@@ -13,7 +13,7 @@ spring:
     jpa:
         show_sql: true
         hibernate:
-            ddl-auto: update #none
+            ddl-auto: none
         properties:
             dialect: dialect=org.hibernate.dialect.MySQL8Dialect
 
