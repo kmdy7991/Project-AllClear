@@ -28,13 +28,21 @@ spring:
                             - PUT
                             - DELETE
             routes:
+                - id: farm-service
+                  uri: lb:FARM-SERVICE
+                  predicates:
+                      - Path=/api/farm-service/**
+                  filters:
+                      - RemoveRequestHeader=Cookie
+                      - RewritePath=/api/farm-service/(?<segment>.*), /$\{segment}
+
                 - id: sse-service
                   uri: lb:SSE-SERVICE
                   predicates:
-                      - Path=/sse-service/**
+                      - Path=/api/connection/**
                   filters:
                       - RemoveRequestHeader=Cookie
-                      - RewritePath=/sse-service/(?<segment>.*), /$\{segment}
+                      - RewritePath=/api/connection/(?<segment>.*), /$\{segment}
 
                 - id: state-service
                   uri: lb:STATE-SERVICE
@@ -42,15 +50,15 @@ spring:
                       - Path=/state-service/**
                   filters:
                       - RemoveRequestHeader=Cookie
-                      - RewritePath=/state-service/(?<segment>.*), /$\{segment}
+                      - RewritePath=/api/state-service/(?<segment>.*), /$\{segment}
 
-                - id: harvest-service
-                  uri: lb:HARVEST-SERVICE
+                - id: line-service
+                  uri: lb:LINE-SERVICE
                   predicates:
-                      - Path=/harvest-service/**
+                      - Path=/api/line-service/**
                   filters:
                       - RemoveRequestHeader=Cookie
-                      - RewritePath=/harvest-service/(?<segment>.*), /$\{segment}
+                      - RewritePath=/api/line-service/(?<segment>.*), /$\{segment}
 #        - id: sensor-service
 #          uri: lb://SENSOR-SERVICE
 #          predicates:
