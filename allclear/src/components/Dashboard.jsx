@@ -51,7 +51,7 @@ function Dashboard() {
   const fetchSSE = () => {
     console.log("fetchSSE 실행");
     const eventSource = new EventSource(
-      "http://192.168.31.206:3022/api/connection/connect"
+      "http://k10b302.p.ssafy.io:30201/api/sse-service/connect"
     );
 
     // eventSource.onopen = () => {
