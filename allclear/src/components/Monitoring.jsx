@@ -40,7 +40,7 @@ function Monitoring() {
     }
   }, [alarmData]);
 
-  // 용준 SSE
+  // 용준 SSE ..
   const fetchSSE2 = async () => {
     const eventSource = new EventSource(
       "http://k10b302.p.ssafy.io:30202/connect"
