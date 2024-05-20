@@ -16,7 +16,7 @@ const getDailyData = async (success, fail) => {
 
 const getLineData = async (lineNumber, success, fail) => {
   await axios
-    .get(`http://k10b302.p.ssafy.io:30207line/${lineNumber}`)
+    .get(`http://k10b302.p.ssafy.io:30207/line/${lineNumber}`)
     .then(success)
     .catch(fail);
 };
