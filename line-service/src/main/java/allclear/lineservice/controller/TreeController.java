@@ -4,9 +4,12 @@ import allclear.lineservice.dto.TreeAllResponseDto;
 import allclear.lineservice.dto.TreeInsertRequestDto;
 import allclear.lineservice.dto.TreeResponseDto;
 import allclear.lineservice.service.TreeService;
+import com.sun.net.httpserver.Headers;
 import feign.Response;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.http.Header;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +43,11 @@ public class TreeController {
     @PostMapping("/tree/simulation")
     public ResponseEntity<String> postTreeDataSimulation(@RequestBody Map<String, Object> map) {
         String result = treeService.postTreeDataSimulation(map);
-        return ResponseEntity.ok(result);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccessControlMaxAge(3600L);
+        headers.setAccessControlAllowOrigin("*");
+        return ResponseEntity.ok().headers(headers).body(result);
     }
 
     // sse 연결
