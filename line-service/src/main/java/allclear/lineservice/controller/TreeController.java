@@ -47,6 +47,7 @@ public class TreeController {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccessControlMaxAge(3600L);
         headers.setAccessControlAllowOrigin("*");
+        headers.setAccessControlAllowHeaders(List.of("*"));
         return ResponseEntity.ok().headers(headers).body(result);
     }
 
