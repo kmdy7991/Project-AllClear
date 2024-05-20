@@ -133,7 +133,7 @@ function Statistics() {
   const fetchSSE = () => {
     console.log("fetchSSE 실행");
     const eventSource = new EventSource(
-      "http://192.168.31.169:3024/api/line-service/connection/connect/tree"
+      "http://k10b302.p.ssafy.io:30201/api/line-service/connection/connect/tree"
     );
 
     eventSource.addEventListener("open", () => {
