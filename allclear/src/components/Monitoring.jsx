@@ -43,7 +43,7 @@ function Monitoring() {
   // 용준 SSE
   const fetchSSE2 = async () => {
     const eventSource = new EventSource(
-      "http://192.168.35.123:3022/api/connection/connect"
+      "http://k10b302.p.ssafy.io:30202/connect"
     );
     // "http://192.168.31.206:3022/api/connection/connect"
 
