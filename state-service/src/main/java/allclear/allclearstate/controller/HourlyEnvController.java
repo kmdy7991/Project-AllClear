@@ -20,12 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class HourlyEnvController {
     private final HourlyEnvService hourlyEnvService;
 
-    @GetMapping(value = "hourly")
+    @GetMapping(value = "/hourly")
     public ResponseEntity<HourlyGraphResponseDto> getHourlyData () {
         return ResponseEntity.ok(hourlyEnvService.getHourlyDataRecentTwentyFourHour());
     }
 
-    @PostMapping(value = "hourly")
+    @PostMapping(value = "/hourly")
     public void setInfoHourly(@RequestBody SensorResponseDto sensorResponseDto) {
         log.info("in = {} ", sensorResponseDto);
         hourlyEnvService.setInfoHourly(sensorResponseDto);
