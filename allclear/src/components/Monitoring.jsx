@@ -15,7 +15,7 @@ function Monitoring() {
   const [wsData, setWsData] = useState(null);
   const [activeData, setActiveData] = useState(null);
   const [alarmData, setAlarmData] = useState(null);
-
+//.. 
   useEffect(() => {
     // fetchSSE();
     fetchSSE2();
