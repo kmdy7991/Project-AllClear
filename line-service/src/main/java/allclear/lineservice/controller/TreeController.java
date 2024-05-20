@@ -19,7 +19,7 @@ import java.util.Map;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-@CrossOrigin("*")
+@CrossOrigin(allowedHeaders = "*", originPatterns = "*", allowCredentials = "true")
 public class TreeController {
 
     private final TreeService treeService;
