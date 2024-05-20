@@ -4,7 +4,7 @@ const VideoStream = () => {
   const videoRef = useRef(null);
 
   useEffect(() => {
-    fetch("ws://192.168.31.213:8765/ws")
+    fetch("ws://k10b302.p.ssafy.io:30203/ws")
       .then((response) => response.json())
       .then((data) => {
         console.log("GET request data:", data);
@@ -14,7 +14,7 @@ const VideoStream = () => {
         console.error("Error during GET request:", error);
       });
 
-    const ws = new WebSocket("ws://192.168.31.213:8765/ws");
+    const ws = new WebSocket("ws://k10b302.p.ssafy.io:30203/ws");
 
     ws.onmessage = (event) => {
       try {
