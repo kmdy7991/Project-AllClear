@@ -13,7 +13,7 @@ import treeRed from "../assets/tree_red.png";
 import treeYellow from "../assets/tree_yellow.png";
 import treeGreen from "../assets/tree_green.png";
 import treeDisabled from "../assets/tree_disabled.png";
-
+// 커밋용
 function Statistics() {
   const [selectedPeriodIndex, setSelectedPeriodIndex] = useState(0);
   const [periodTabs] = useState(["일간", "주간"]);
