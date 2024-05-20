@@ -12,11 +12,11 @@ spring:
         properties:
             dialect: dialect=org.hibernate.dialect.MySQL8Dialect
 
-        datasource:
-            driver-class-name: com.mysql.cj.jdbc.Driver
-            url: jdbc:mysql://stg-yswa-kr-practice-db-master.mariadb.database.azure.com:3306/s10p31b302
-            username: S10P31B302@stg-yswa-kr-practice-db-master.mariadb.database.azure.com
-            password: 4KocfCsPM9
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://stg-yswa-kr-practice-db-master.mariadb.database.azure.com:3306/s10p31b302
+        username: S10P31B302@stg-yswa-kr-practice-db-master.mariadb.database.azure.com
+        password: 4KocfCsPM9
 
 eureka:
     client:
