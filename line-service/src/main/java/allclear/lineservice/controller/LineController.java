@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-@CrossOrigin("*")
 public class LineController {
 
     private final LineService lineService;

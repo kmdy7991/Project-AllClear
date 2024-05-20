@@ -22,7 +22,6 @@ import java.util.Map;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-@CrossOrigin(allowedHeaders = "*", originPatterns = "*", allowCredentials = "true")
 public class TreeController {
 
     private final TreeService treeService;
@@ -44,11 +43,7 @@ public class TreeController {
     public ResponseEntity<String> postTreeDataSimulation(@RequestBody Map<String, Object> map) {
         String result = treeService.postTreeDataSimulation(map);
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setAccessControlMaxAge(3600L);
-        headers.setAccessControlAllowOrigin("*");
-        headers.setAccessControlAllowHeaders(List.of("*"));
-        return ResponseEntity.ok().headers(headers).body(result);
+        return ResponseEntity.ok(result);
     }
 
     // sse 연결
