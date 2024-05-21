@@ -59,8 +59,9 @@
 
 ## ERD
 
-erdcloud 링크 : 
+erdcloud 링크 : https://www.erdcloud.com/d/dSpuozhaMq3HKDLBp
 
+![AllClear_ERD](/uploads/76d1458c959607333fe5173866f678b3/AllClear_ERD.PNG)
 <br>
 
 ## 기능 명세서
@@ -79,7 +80,7 @@ erdcloud 링크 :
 <br>
 
 ## 🚧 서비스 아키텍쳐
-
+![AllClear_서비스아키텍처](/uploads/fb2f00ff5c0586111c198aa787b83e68/AllClear_서비스아키텍처.png)
 
 <br>
 
