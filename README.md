@@ -168,6 +168,45 @@ erdcloud 링크 : https://www.erdcloud.com/d/dSpuozhaMq3HKDLBp
 ┣ 📜
 ┗ 📜
 ```
+
+### FrontEnd
+```
+📦allclear
+┣ 📂public
+┃ ┣ 📂Build
+┃ ┗ 📂Simul
+┣ 📂src
+┃ ┣ 📂apis
+┃ ┣ 📂assets
+┃ ┣ 📂components
+┃ ┃ ┣ 📂line
+┃ ┃ ┣ 📂period
+┃ ┃ ┣ 📜Dashboard.jsx
+┃ ┃ ┣ 📜Join.jsx
+┃ ┃ ┣ 📜Login.jsx
+┃ ┃ ┣ 📜Monitoring.jsx
+┃ ┃ ┣ 📜Navbar.jsx
+┃ ┃ ┣ 📜OpenVidu.jsx
+┃ ┃ ┣ 📜Sidebar.jsx
+┃ ┃ ┣ 📜Statistics.jsx
+┃ ┃ ┗ 📜VideoStream.jsx
+┃ ┣ 📂modules
+┃ ┃ ┗ 📜useOpenVidu.jsx
+┃ ┣ 📂recoil
+┃ ┃ ┣ 📂dashboard
+┃ ┃ ┣ 📂login
+┃ ┃ ┗ 📂statistics
+┃ ┣ 📜App.jsx
+┃ ┗ 📜main.jsx
+┣ 📜package-lock.json
+┣ 📜package.json
+┣ 📜vite.config.js
+┣ 📜index.html
+┣ 📜.env
+┣ 📜.eslintrc.cjs
+┣ 📜
+┗ 📜
+```
 <br>
 
 ## 팀원 소개
