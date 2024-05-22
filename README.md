@@ -211,7 +211,7 @@ erdcloud 링크 : https://www.erdcloud.com/d/dSpuozhaMq3HKDLBp
 
 
 ## 팀원 역할
-### 박성인 : 
+### 박성인 : 팀장, Unity 시뮬레이션, FrontEnd
 ### 김진우 : 
 ### 이용준 : 
 ### 이대영 : 
