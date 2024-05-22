@@ -204,8 +204,6 @@ erdcloud 링크 : https://www.erdcloud.com/d/dSpuozhaMq3HKDLBp
 ┣ 📜index.html
 ┣ 📜.env
 ┣ 📜.eslintrc.cjs
-┣ 📜
-┗ 📜
 ```
 <br>
 
