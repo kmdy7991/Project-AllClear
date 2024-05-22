@@ -38,12 +38,13 @@
 <br>
 
 ## ✨기획 배경
-
+세계적으로 스마트팜 산업이 증가하고 있어서 3세대 스마트팜의 방향성을 알아보고자 프로젝트를 기획함.
 
 <br>
 
 ## 💡 주요 기능
-
+젯슨 나노와 AI 모델을 사용해서 on device AI로 파프리카의 수확기 판단 및 자동 수확
+아두이노에 부착된 센서를 통한 스마트팜의 환경 정보 실시간 확인
 
 <br>
 
@@ -67,12 +68,12 @@ erdcloud 링크 : https://www.erdcloud.com/d/dSpuozhaMq3HKDLBp
 ## 기능 명세서
 
 <br>
-노션 링크 : 
+노션 링크 : https://dented-art-9c8.notion.site/12df40fc3e2e494aa0a3555370c28923?pvs=74
 
 <br>
 
 ## API 명세서
-노션 링크 : 
+노션 링크 : https://dented-art-9c8.notion.site/API-fc1e66ac80274fe883e71f7b9e7fb990
 
 
 
@@ -212,7 +213,7 @@ erdcloud 링크 : https://www.erdcloud.com/d/dSpuozhaMq3HKDLBp
 
 ## 팀원 역할
 ### 박성인 : 팀장, Unity 시뮬레이션, FrontEnd
-### 김진우 : 
+### 김진우 : BackEnd, AI
 ### 이용준 : 
 ### 이대영 : 
 ### 최재식 : 
