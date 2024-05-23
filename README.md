@@ -53,15 +53,9 @@
 - 기능설명
 <br>
 <p align="center">
-  <video width="200" controls>
-    <source src="/uploads/7fa1a115ee95637cab8d6e9449ca7571/녹화_2024_05_17_14_16_44_184.mp4" type="video/mp4">
-  </video>
-  <video width="200" controls>
-    <source src="/uploads/6746c0ebf96592fdbf01347ab7fa61fc/녹화_2024_05_17_14_22_22_830.mp4" type="video/mp4">
-  </video>
-  <video width="200" controls>
-    <source src="/uploads/a446428124e56dc6fbd91d687fada981/녹화_2024_05_17_16_18_38_602.mp4" type="video/mp4">
-  </video>
+  <img src="docs/images/camera_control.gif" width="200" />
+  <img src="docs/images/control_state.gif" width="200" />
+  <img src="docs/images/highspeed_simul.gif" width="200" />
 </p>
 
 <br>
