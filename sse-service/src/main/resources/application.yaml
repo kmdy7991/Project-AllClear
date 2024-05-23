@@ -1,5 +1,5 @@
 server:
-    port: 3022
+    port: ${SSE_PORT}
 
 spring:
     application:
@@ -14,9 +14,9 @@ spring:
 
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://stg-yswa-kr-practice-db-master.mariadb.database.azure.com:3306/s10p31b302
-        username: S10P31B302@stg-yswa-kr-practice-db-master.mariadb.database.azure.com
-        password: 4KocfCsPM9
+        url: ${DB_URL}
+        username: ${DB_USER}
+        password: ${DB_PW}
 
 #eureka
 eureka:
@@ -24,4 +24,4 @@ eureka:
         register-with-eureka: true
         fetch-registry: true
         service-url:
-            defaultZone: http://k10b302.p.ssafy.io:30200/eureka
+            defaultZone: ${EUREKA_URL}

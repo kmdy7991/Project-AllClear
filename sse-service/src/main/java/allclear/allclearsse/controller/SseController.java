@@ -18,7 +18,6 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-@CrossOrigin("*")
 public class SseController {
   private final SseService sseService;
 
