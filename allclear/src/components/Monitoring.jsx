@@ -24,7 +24,7 @@ function Monitoring() {
       unload();
     };
   }, [unload]);
-
+  //..
   useEffect(() => {
     if (activeData) {
       const activationData = JSON.stringify(activeData);
