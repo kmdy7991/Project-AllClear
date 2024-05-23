@@ -77,8 +77,8 @@
 <br>
 
 <p align="center">
-  <img src="docs/images/Object_Tracking_pre.gif"/>
-  <img src="docs/images/Object_Tracking_nxt.gif"/>
+  <img src="docs/images/Object_Tracking_pre.gif" width="40%" />
+  <img src="docs/images/Object_Tracking_nxt.gif" width="40%" />
 </p>
 <p>파프리카 객체를 인식하고 수확 가능 여부를 판단</p>
 <p>카메라가 움직여도 처음 인식한 객체만 추적할 수 있도록 Object Tracking 적용</p>
