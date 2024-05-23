@@ -52,12 +52,14 @@
 
 - 기능설명
 <br>
+
+
 <p align="center">
   <img src="docs/images/camera_control.gif" width="300" height="200" />
   <img src="docs/images/control_state.gif" width="300" height="200" />
   <img src="docs/images/highspeed_simul.gif" width="300" height="200" />
 </p>
-
+<p>Webgl을 통해 유니티 시뮬레이션을 웹화면에서 버튼을 통해 Control 가능합니다</p>
 <br>
 
 ## 📝 설계 문서
