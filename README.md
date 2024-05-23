@@ -53,9 +53,9 @@
 - 기능설명
 <br>
 <p align="center">
-  <img src="docs/images/camera_control.gif" width="400" height="387" />
-  <img src="docs/images/control_state.gif" width="400" height="387" />
-  <img src="docs/images/highspeed_simul.gif" width="400" height="387" />
+  <img src="docs/images/camera_control.gif" width="300" height="200" />
+  <img src="docs/images/control_state.gif" width="300" height="200" />
+  <img src="docs/images/highspeed_simul.gif" width="300" height="200" />
 </p>
 
 <br>
