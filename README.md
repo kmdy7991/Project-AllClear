@@ -87,10 +87,49 @@
 <p>Webgl 라이브러리를 활용하여 유니티 시뮬레이션을 웹화면에서 버튼을 통해 Control 가능합니다</p>
 <br>
 
-## 페이지
+## 홈페이지 화면
 
-- 기능 설명
+- 대시보드
   <br>
+
+<p align="center">
+  <img src="docs/images/dashboard.png" />
+</p>
+
+- 수확 모니터링
+  <br>
+
+<p align="center">
+  <img src="docs/images/monitoring.png" />
+</p>
+
+- 통계
+  <br>
+
+<p align="center">
+  <img src="docs/images/statistics.png" />
+</p>
+
+- 라인별 통계
+  <br>
+
+<p align="center">
+  <img src="docs/images/statistics_line.png" />
+</p>
+
+- 수확 시뮬레이션
+  <br>
+
+<p align="center">
+  <img src="docs/images/harvesting_simulation.png" />
+</p>
+
+- 수확 시뮬레이션 결과
+  <br>
+
+<p align="center">
+  <img src="docs/images/harvesting.png" />
+</p>
 
 ## 📝 설계 문서
 
