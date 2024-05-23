@@ -23,14 +23,12 @@
 <br>
 <br>
 
-## ✨프로젝트 소개
+## ✨프로젝트 진행 기간
 
 삼성 청년 SW 아카데미 10기 2학기 자율 프로젝트 팀 B302
 
 | 프로젝트 기간 | 2024.04.08 ~ 2024.05.24 (총 7주) |
 | ------------- | -------------------------------- |
-
-작업 노션 :
 
 <br>
 
@@ -87,7 +85,7 @@
 <p>Webgl 라이브러리를 활용하여 유니티 시뮬레이션을 웹화면에서 버튼을 통해 Control 가능합니다</p>
 <br>
 
-## 홈페이지 화면
+## 서비스 화면
 
 - 대시보드
   <br>
@@ -131,7 +129,7 @@
   <img src="docs/images/harvesting.png" />
 </p>
 
-## 📝 설계 문서
+
 
 <br>
 
@@ -141,19 +139,19 @@ erdcloud 링크 : https://www.erdcloud.com/d/dSpuozhaMq3HKDLBp
 
 ![AllClear_ERD](/uploads/76d1458c959607333fe5173866f678b3/AllClear_ERD.PNG)
 <br>
-
-## 기능 명세서
-
-<br>
-노션 링크 : https://dented-art-9c8.notion.site/12df40fc3e2e494aa0a3555370c28923?pvs=74
-
 <br>
 
-## API 명세서
 
-노션 링크 : https://dented-art-9c8.notion.site/API-fc1e66ac80274fe883e71f7b9e7fb990
+## 📝 설계 문서
+
+#### 기능 명세서
+- 노션 링크 : https://dented-art-9c8.notion.site/12df40fc3e2e494aa0a3555370c28923?pvs=74
+
+#### API 명세서
+- 노션 링크 : https://dented-art-9c8.notion.site/API-fc1e66ac80274fe883e71f7b9e7fb990
 
 <br>
+
 
 ## 🚧 서비스 아키텍쳐
 
@@ -253,6 +251,7 @@ erdcloud 링크 : https://www.erdcloud.com/d/dSpuozhaMq3HKDLBp
 </div>
 </details>
 
+<br>
 <details  style="margin-left: 5px;">
 <summary><b>FrontEnd</b></summary>
 <div>
@@ -297,9 +296,7 @@ erdcloud 링크 : https://www.erdcloud.com/d/dSpuozhaMq3HKDLBp
 </details>
 <br>
 
-## 팀원 소개
-
-## 팀원 역할
+## 팀 구성
 
 ### 박성인 : 팀장, Unity 시뮬레이션, FrontEnd
 
@@ -312,3 +309,17 @@ erdcloud 링크 : https://www.erdcloud.com/d/dSpuozhaMq3HKDLBp
 ### 최재식 : BackEnd, Jetson nano
 
 ### 이재문 : FrontEnd leader, UI/UX
+
+
+
+| 이름 | 역할 |
+| --- | --- |
+| 박성인 (팀장) | - 팀장, Unity 시뮬레이션, FrontEnd<br>|
+| 김진우 | - BackEnd, AI<br> |
+| 이용준 | - BackEnd, Entity 설계<br>  |
+| 이대영 |- BackEnd leader, Infra 구축, 프로젝트 관리<br>|
+| 최재식 | - BackEnd, Jetson nano<br> |
+| 이재문 | - FrontEnd leader, UI/UX<br> |
+
+<br>
+
