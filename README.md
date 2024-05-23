@@ -212,6 +212,8 @@ erdcloud 링크 : https://www.erdcloud.com/d/dSpuozhaMq3HKDLBp
 ┃   ┗ 📜requirements.txt
 
 ```
+</div>
+</details>
 
 <br>
 
@@ -248,6 +250,8 @@ erdcloud 링크 : https://www.erdcloud.com/d/dSpuozhaMq3HKDLBp
 ┃ ┃ ┗ 📜TestUserService
 ┃ ┗ 📜SseServiceApplication
 ```
+</div>
+</details>
 
 <details  style="margin-left: 5px;">
 <summary><b>FrontEnd</b></summary>
