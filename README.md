@@ -163,31 +163,26 @@ erdcloud 링크 : https://www.erdcloud.com/d/dSpuozhaMq3HKDLBp
 
 ## 🛠 기술 스택
 
-### ☑Backend
+### ☑Backend & AI
 
-- **Java** :
-- **Spring Boot** :
-- **JPA** :
-- **DB:**
-- **IntelliJ** :
+- **Java** : 17
+- **Spring Boot** : 3.2.5
+- **JPA** : 3.25
+- **Python** : 3.9.13
+- **FastAPI** : 0.110.2
+- **MySQL(Maira DB)** : 8.0.34
+- **YOLO** : v8
 
 ### ☑Frontend
 
-- **Node.js** :
-- **TypeScript** :
-- **React** :
-- **Recoil** :
-- **Axios** :
-- **Vscode** :
+- **Node.js** : 20.11.1
+- **React** : 18.2.0
+- **Recoil** : 0.77
+- **Axios** : 1.6.8
 
-### ☑Server
+### ☑Infra
 
-- **AWS EC2**
-  - 서버 사양
-
-### ☑Service
-
-- **서비스....** : 버전....
+- **Spring Eureka** : 0.11.10
 
 ### ☑협업 툴
 
