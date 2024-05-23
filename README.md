@@ -72,10 +72,9 @@
 
 <br>
 
-## 기능1
+## 시뮬레이션
 
-- 기능설명
-  <br>
+<br>
 
 <p align="center">
   <img src="docs/images/camera_control.gif" width="300" height="200" />
@@ -93,6 +92,7 @@
 <p align="center">
   <img src="docs/images/dashboard.png" />
 </p>
+<p>아두이노의 센서로 수집한 실시간 환경 정보를 확인할 수 있다.</p><br>
 
 - 수확 모니터링
   <br>
@@ -100,6 +100,8 @@
 <p align="center">
   <img src="docs/images/monitoring.png" />
 </p>
+<p>실제 기계의 동작을 유니티로 확인할 수 있음</p>
+<p>버튼으로 다양한 각도로 확인하거나 스마트팜 환경 변경 가능</p><br>
 
 - 통계
   <br>
@@ -107,6 +109,7 @@
 <p align="center">
   <img src="docs/images/statistics.png" />
 </p>
+<p>DB에 저장된 환경 정보를 일간, 주간으로 확인 가능</p><br>
 
 - 라인별 통계
   <br>
@@ -114,6 +117,7 @@
 <p align="center">
   <img src="docs/images/statistics_line.png" />
 </p>
+<p>각 라인별로 토양 산성 농도와 양액 투여량 확인 가능</p><br>
 
 - 수확 시뮬레이션
   <br>
@@ -121,6 +125,7 @@
 <p align="center">
   <img src="docs/images/harvesting_simulation.png" />
 </p>
+<p>시뮬레이션을 통해 수확량 통계</p><br>
 
 - 수확 시뮬레이션 결과
   <br>
@@ -128,10 +133,7 @@
 <p align="center">
   <img src="docs/images/harvesting.png" />
 </p>
-
-
-
-<br>
+<p>시뮬레이션으로 통계낸 수확량을 각 라인의 나무별로 확인 가능</p><br>
 
 ## ERD
 
@@ -298,23 +300,9 @@ erdcloud 링크 : https://www.erdcloud.com/d/dSpuozhaMq3HKDLBp
 
 ## 팀 구성
 
-### 박성인 : 팀장, Unity 시뮬레이션, FrontEnd
-
-### 김진우 : BackEnd, AI
-
-### 이용준 : BackEnd, Entity 설계
-
-### 이대영 : BackEnd leader, Infra 구축, 프로젝트 관리
-
-### 최재식 : BackEnd, Jetson nano
-
-### 이재문 : FrontEnd leader, UI/UX
-
-
-
 | 이름 | 역할 |
 | --- | --- |
-| 박성인 (팀장) | - 팀장, Unity 시뮬레이션, FrontEnd<br>|
+| 박성인 (팀장) | - Unity 시뮬레이션, FrontEnd<br>|
 | 김진우 | - BackEnd, AI<br> |
 | 이용준 | - BackEnd, Entity 설계<br>  |
 | 이대영 |- BackEnd leader, Infra 구축, 프로젝트 관리<br>|
