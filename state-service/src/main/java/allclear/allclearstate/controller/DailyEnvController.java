@@ -13,19 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-@CrossOrigin("*")
 public class DailyEnvController {
-  private final DailyEnvService dailyEnvService;
+    private final DailyEnvService dailyEnvService;
 
-  @GetMapping(value = "/daily")
-  public ResponseEntity<DailyGraphResponseDto> getDailyData () {
-    return ResponseEntity.ok(dailyEnvService.getDailyDataRecentThirtyDays());
-  }
-
-  @GetMapping(value = "/test")
-  public ResponseEntity<String> testDailyGetMapping () {
-    dailyEnvService.setInfoDaily();
-    return ResponseEntity.ok().body("success");
-  }
+    @GetMapping(value = "/daily")
+    public ResponseEntity<DailyGraphResponseDto> getDailyData() {
+        return ResponseEntity.ok(dailyEnvService.getDailyDataRecentThirtyDays());
+    }
 
 }
