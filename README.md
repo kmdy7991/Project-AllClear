@@ -165,13 +165,14 @@ erdcloud 링크 : https://www.erdcloud.com/d/dSpuozhaMq3HKDLBp
 
 ### ☑Backend & AI
 
-- **Java** : 17
+- **Java** : 17.0.9
 - **Spring Boot** : 3.2.5
 - **JPA** : 3.25
 - **Python** : 3.9.13
 - **FastAPI** : 0.110.2
 - **MySQL(Maira DB)** : 8.0.34
 - **YOLO** : v8
+- **Spring Eureka** : 0.11.10
 
 ### ☑Frontend
 
@@ -182,7 +183,7 @@ erdcloud 링크 : https://www.erdcloud.com/d/dSpuozhaMq3HKDLBp
 
 ### ☑Infra
 
-- **Spring Eureka** : 0.11.10
+
 
 ### ☑협업 툴
 
@@ -196,51 +197,56 @@ erdcloud 링크 : https://www.erdcloud.com/d/dSpuozhaMq3HKDLBp
 
 ## 📂 파일 구조
 
-### Python
+<details  style="margin-left: 5px;">
+<summary><b>Python(Jetson nano)</b></summary>
+<div>
 
 ```
 📦python
-┣ 📂
-┃ ┗ 📜
-┣ 📂
-┣ 📜
-┣ 📜
-┣ 📜
-┗ 📜
+┣ 📂pjt
+┃ ┗ 📂websocket
+┃   ┗ 📂app
+┃   ┗ 📜best.pt
+┃   ┗ 📜main.py
+┃   ┗ 📜dockerfile
+┃   ┗ 📜requirements.txt
+
 ```
 
 <br>
 
-### BackEnd
+<details  style="margin-left: 5px;">
+<summary><b>BackEnd(SSE-service)</b></summary>
+<div>
 
 ```
-📦backend
-┣ 📂
-┣ 📂
-┣ 📂
-┣ 📂
-┣ 📂
-┃ ┣ 📂
-┃ ┃ ┣ 📂
-┃ ┃ ┃ ┗ 📂
-┃ ┃ ┃   ┣ 📂
-┃ ┃ ┃   ┃ ┣ 📂
-┃ ┃ ┃   ┃ ┣ 📂
-┃ ┃ ┃   ┃ ┣ 📂
-┃ ┃ ┃   ┃ ┗ 📂
-┃ ┃ ┃   ┣ 📂
-┃ ┃ ┃   ┣ 📂
-┃ ┃ ┃   ┗ 📜
-┃ ┃ ┗ 📂
-┃ ┗ 📂
-┣ 📜
-┣ 📜
-┣ 📜
-┣ 📜
-┣ 📜
-┣ 📜
-┣ 📜
-┗ 📜
+📦allclear
+┣ 📂allclearsse
+┃ ┣ 📂client
+┃ ┃ ┗ 📜SensorServiceClient
+┃ ┣ 📂config
+┃ ┃ ┗ 📜Resilience4JConfiguration
+┃ ┣ 📂controller
+┃ ┃ ┣ 📜SseController
+┃ ┃ ┣ 📜TestController
+┃ ┃ ┗ 📜TestUserController
+┃ ┣ 📂domain
+┃ ┃ ┣ 📜DailyEnv
+┃ ┃ ┣ 📜Farm
+┃ ┃ ┣ 📜HourlyEnv
+┃ ┃ ┗ 📜Yield
+┃ ┣ 📂dto
+┃ ┃ ┣ 📜FarmRequestDto
+┃ ┃ ┣ 📜FarmResponseDto
+┃ ┃ ┗ 📜SensorResponseDto
+┃ ┣ 📂repository
+┃ ┃ ┣ 📜SseDailyEnvRepository
+┃ ┃ ┣ 📜SseHourlyEnvRepository
+┃ ┃ ┗ 📜TestUserRepository
+┃ ┣ 📂service
+┃ ┃ ┣ 📜SseService
+┃ ┃ ┗ 📜TestUserService
+┃ ┗ 📜SseServiceApplication
 ```
 
 <details  style="margin-left: 5px;">
@@ -295,10 +301,10 @@ erdcloud 링크 : https://www.erdcloud.com/d/dSpuozhaMq3HKDLBp
 
 ### 김진우 : BackEnd, AI
 
-### 이용준 :
+### 이용준 : BackEnd, Entity 설계
 
-### 이대영 :
+### 이대영 : BackEnd leader, Infra 구축, 프로젝트 관리
 
-### 최재식 :
+### 최재식 : BackEnd, Jetson nano
 
-### 이재문 :
+### 이재문 : FrontEnd leader, UI/UX
