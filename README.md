@@ -53,10 +53,20 @@
 - 기능설명
 <br>
 <p align="center">
-  <img src="docs/images/camera_control.mp4" width="25%" />
-  <img src="docs/images/control_state.mp4" width="25%" />
-  <img src="docs/images/highspeed_simul.mp4" width="25%" />
+  <video width="25%" controls>
+    <source src="docs/images/camera_control.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <video width="25%" controls>
+    <source src="docs/images/control_state.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <video width="25%" controls>
+    <source src="docs/images/highspeed_simul.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
 </p>
+
 
 <br>
 
