@@ -16,12 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin("*")
 @RequiredArgsConstructor
 public class FarmController {
   private final FarmService farmService;
 
-  @GetMapping
+  @GetMapping("/")
   public ResponseEntity<Farm> getFarmByPk(Long pk) {
     Farm farm = farmService.getFarmByPk(pk);
     return ResponseEntity.ok(farm);
