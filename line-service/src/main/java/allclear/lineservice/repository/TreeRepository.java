@@ -13,7 +13,7 @@ public interface TreeRepository extends JpaRepository<Tree, Long> {
             "FROM tree t, line l " +
             "WHERE l.line_number = t.line_pk " +
             "GROUP BY t.line_pk, t.tree_num " +
-            "ORDER BY l.line_number",
-            nativeQuery = true)
+            "ORDER BY l.line_number"
+            , nativeQuery = true)
     List<Object[]> findAllTreeDataByLineNumber();
 }
