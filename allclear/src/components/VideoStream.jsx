@@ -4,7 +4,7 @@ const VideoStream = () => {
   const videoRef = useRef(null);
 
   useEffect(() => {
-    fetch("/api/ws")
+    fetch("/ws")
       .then((response) => response.json())
       .then((data) => {
         console.log("GET request data:", data);
@@ -14,7 +14,7 @@ const VideoStream = () => {
         console.error("Error during GET request:", error);
       });
 
-    const ws = new WebSocket("/api/ws");
+    const ws = new WebSocket("/ws");
 
     ws.onmessage = (event) => {
       try {
