@@ -14,7 +14,7 @@ const VideoStream = () => {
         console.error("Error during GET request:", error);
       });
 
-    const ws = new WebSocket("ws://k10b302.p.ssafy.io:30203/ws");
+    const ws = new WebSocket("/api/ws");
 
     ws.onmessage = (event) => {
       try {
