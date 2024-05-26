@@ -4,7 +4,7 @@ const VideoStream = () => {
   const videoRef = useRef(null);
 
   useEffect(() => {
-    fetch("ws://k10b302.p.ssafy.io:30203/ws")
+    fetch("/api/ws")
       .then((response) => response.json())
       .then((data) => {
         console.log("GET request data:", data);
