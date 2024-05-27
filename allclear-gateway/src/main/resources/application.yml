@@ -58,4 +58,4 @@ spring:
                       - Path=/api/line-service/**
                   filters:
                       - RemoveRequestHeader=Cookie
-                      - RewritePath==${REWRITE_LINE}
+                      - RewritePath=${REWRITE_LINE}
