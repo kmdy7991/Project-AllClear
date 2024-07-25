@@ -218,7 +218,7 @@ erdcloud 링크 : https://www.erdcloud.com/d/dSpuozhaMq3HKDLBp
 ## 🚧 서비스 아키텍쳐
 
 <p align="center">
-  <img src="docs/images/allclear-architecture.PNG" />
+  <img src="docs/images/allclear-architecture.png" />
 </p>
 
 <br>
