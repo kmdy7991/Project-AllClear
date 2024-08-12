@@ -197,9 +197,7 @@
 
 ## ERD
 
-erdcloud 링크 : https://www.erdcloud.com/d/dSpuozhaMq3HKDLBp
-
-![AllClear_ERD](/uploads/76d1458c959607333fe5173866f678b3/AllClear_ERD.PNG)
+![AllClear_ERD](/docs/images/AllClear_ERD.PNG)
 <br>
 <br>
 
